@@ -17,7 +17,6 @@ const date = useState("date", () => new Date());
 const interval = useState<NodeJS.Timer | null>("interval", () => null);
 
 onMounted(() => {
-  console.log("onMounted");
   interval.value = setInterval(() => {
     date.value = new Date();
   });
@@ -25,7 +24,6 @@ onMounted(() => {
 
 onUnmounted(() => {
   clearInterval(interval.value);
-  console.log(_.VERSION);
 });
 </script>
 
