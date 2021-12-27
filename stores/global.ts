@@ -1,16 +1,11 @@
 import _ from "lodash";
 import { acceptHMRUpdate, defineStore } from "pinia";
-import { v4 as uuidv4 } from "uuid";
 import { strRamdom } from "~~/helpers/functions";
 
 export const useGlobal = defineStore({
   id: "global",
 
   state: (): IState => {
-    if (process.client) {
-      const store = JSON.parse(localStorage.getItem("globalStore"));
-      if (store) return store;
-    }
     return {
       selectedTaskId: null,
       logs: [],
@@ -301,7 +296,7 @@ export const useGlobal = defineStore({
     setUserPointsByTask(userId?: string, taskId?: string) {
       if (userId && taskId) {
         const log: IPointLog = {
-          id: uuidv4(),
+          id: strRamdom(20),
           userId,
           taskId,
           createdAt: new Date().toISOString(),
@@ -310,6 +305,12 @@ export const useGlobal = defineStore({
       }
 
       this.selectedTaskId = null;
+    },
+    loadLocalStorage() {
+      if (process.client) {
+        const store = JSON.parse(localStorage.getItem("globalStore"));
+        if (store) this.$state = store;
+      }
     },
   },
 });
