@@ -2,8 +2,7 @@ import { PiniaPluginContext } from "pinia";
 
 function MyPiniaPlugin({ store }: PiniaPluginContext) {
   store.$subscribe((mutation) => {
-    localStorage.setItem("globalStore", JSON.stringify(store));
-    console.log(`[🍍 ${mutation.storeId}]: ${mutation.type}.`);
+    localStorage.setItem("globalStore", JSON.stringify(store.$state));
   });
 
   return { creationTime: new Date() };
