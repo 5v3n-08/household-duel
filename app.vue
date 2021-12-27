@@ -9,5 +9,5 @@ import { useGlobal } from "./stores/global";
 
 const globalStore = useGlobal();
 
-onBeforeMount(() => globalStore.loadLocalStorage());
+onMounted(() => globalStore.loadLocalStorage());
 </script>
