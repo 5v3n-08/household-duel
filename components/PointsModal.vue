@@ -16,14 +16,17 @@
 
 <script setup lang="ts">
 import { useGlobal } from "~~/stores/global";
+import { useTasks } from "~~/stores/tasks";
 
-const globalState = useGlobal();
-const task = computed(() => globalState.selectedTask);
+const globalStore = useGlobal();
+const tasksStore = useTasks();
+
+const task = computed(() => tasksStore.selectedTask);
 
 const onCancel = () => {
-  globalState.setUserPointsByTask(null, null);
+  globalStore.setUserPointsByTask(null, null);
 };
 
 const onSelectUser = (id: string) =>
-  globalState.setUserPointsByTask(id, task.value.id);
+  globalStore.setUserPointsByTask(id, task.value.id);
 </script>

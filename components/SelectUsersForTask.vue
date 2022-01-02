@@ -21,11 +21,11 @@
 </template>
 
 <script setup lang="ts">
-import { useGlobal } from "~~/stores/global";
+import { useUsers } from "~~/stores/users";
 
-const globalState = useGlobal();
+const usersStore = useUsers();
 const emit = defineEmits(["onSelectUser"]);
-const users = computed(() => globalState.users);
+const users = computed(() => usersStore.users);
 
 const onUserClick = (id: string) => emit("onSelectUser", id);
 </script>

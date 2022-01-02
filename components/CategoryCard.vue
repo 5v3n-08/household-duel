@@ -24,8 +24,10 @@
 
 <script setup lang="ts">
 import { useGlobal } from "~~/stores/global";
+import { useTasks } from "~~/stores/tasks";
 
-const globalState = useGlobal();
+const tasksStore = useTasks();
+const globalStore = useGlobal();
 const props = defineProps({
   category: {
     type: String,
@@ -34,10 +36,10 @@ const props = defineProps({
 });
 
 const tasks = computed(() =>
-  globalState.tasks.filter((task) => task.category === props.category)
+  tasksStore.tasks.filter((task) => task.category === props.category)
 );
 
 const onTaskClick = (id: string) => {
-  globalState.setSelectedTaskId(id);
+  globalStore.setSelectedTaskId(id);
 };
 </script>

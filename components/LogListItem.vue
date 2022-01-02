@@ -25,8 +25,13 @@
 
 <script setup lang="ts">
 import { useGlobal } from "~~/stores/global";
+import { useTasks } from "~~/stores/tasks";
+import { useUsers } from "~~/stores/users";
 
-const globalState = useGlobal();
+const globalStore = useGlobal();
+const usersStore = useUsers();
+const tasksStore = useTasks();
+
 const props = defineProps({
   logId: {
     type: String,
@@ -35,12 +40,12 @@ const props = defineProps({
 });
 
 const log = computed(() =>
-  globalState.logs.find((log) => log.id == props.logId)
+  globalStore.logs.find((log) => log.id == props.logId)
 );
 const user = computed(() =>
-  globalState.users.find((user) => user.id === log.value.userId)
+  usersStore.users.find((user) => user.id === log.value.userId)
 );
 const task = computed(() =>
-  globalState.tasks.find((task) => task.id === log.value.taskId)
+  tasksStore.tasks.find((task) => task.id === log.value.taskId)
 );
 </script>
