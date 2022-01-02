@@ -1,7 +1,13 @@
 <template>
   <div class="text-center">
     <div class="text-xs">
-      {{ date.toLocaleDateString("de") }}
+      {{
+        date.toLocaleDateString("de", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+        })
+      }}
     </div>
     <div class="text-white">
       {{
