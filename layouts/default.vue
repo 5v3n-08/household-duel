@@ -1,5 +1,5 @@
 <template>
-  <div class="w-screen bg-cyan-900 text-stone-100">
+  <div class="w-screen">
     <ui-header class="sticky top-0" />
     <slot />
   </div>
