@@ -43,6 +43,7 @@
 
 <script>
 export default {
+  name: "LayoutDefault",
   setup() {
     useMeta({
       title: "ioBroker Dashboard",
