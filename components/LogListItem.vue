@@ -1,5 +1,5 @@
 <template>
-  <div class="border-y border-cyan-800 py-1 px-5">
+  <div v-if="user && task" class="border-y border-cyan-800 py-1 px-5">
     <div class="flex justify-between items-center">
       <div>
         <div class="font-bold">{{ user.name }}</div>
