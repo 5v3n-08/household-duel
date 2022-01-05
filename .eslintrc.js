@@ -1,19 +1,18 @@
 module.exports = {
   root: true,
   env: {
-    node: true,
     browser: true,
+    node: true
   },
   extends: [
-    'plugin:@typescript-eslint/recommended',
+    '@nuxtjs/eslint-config-typescript',
     'plugin:nuxt/recommended',
     'prettier'
   ],
+  plugins: [
+  ],
+  // add your custom rules here
   rules: {
-    "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
-    "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
-  },
-  globals: {
-    $nuxt: true,
-  },
-};
+    "vue/require-default-prop": "off"
+  }
+}

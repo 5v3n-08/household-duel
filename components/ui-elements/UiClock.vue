@@ -18,9 +18,8 @@
 </template>
 
 <script setup lang="ts">
-import _ from "lodash";
 const date = useState("date", () => new Date());
-const interval = useState<NodeJS.Timer | null>("interval", () => null);
+const interval = useState<number | null>("interval", () => null);
 
 onMounted(() => {
   interval.value = setInterval(() => {
@@ -32,5 +31,3 @@ onUnmounted(() => {
   clearInterval(interval.value);
 });
 </script>
-
-<style scoped></style>

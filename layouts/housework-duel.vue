@@ -17,7 +17,7 @@
           <div class="flex justify-center items-center mt-10 mb-5">
             <ui-button @click="onResetClick">Zurücksetzen</ui-button>
           </div>
-          <template v-slot:buttons>
+          <template #buttons>
             <ui-button @click="isModalOpen = false">Abbrechen</ui-button>
           </template>
         </ui-modal>
@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { useGlobal } from "~~/stores/global";
+import { useGlobal } from "~~/stores/housework/global";
 
 const globalStore = useGlobal();
 const isModalOpen = useState("isModalOpen", () => false);
@@ -38,5 +38,3 @@ const onResetClick = () => {
   isModalOpen.value = false;
 };
 </script>
-
-<style scoped></style>
