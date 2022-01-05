@@ -1,17 +1,16 @@
 <template>
   <div class="h-screen w-screen">
     <div class="pt-5 pb-5 mx-5 flex flex-row">
-      <categories class="h-min" />
-      <user-overview class="ml-3 w-1/3" />
+      <HouseworkCategories class="h-min" />
+      <HouseworkUserOverview class="ml-3 w-1/3" />
     </div>
 
-    <points-modal />
+    <HouseworkPointsModal />
   </div>
 </template>
 
-<script>
-export default {
-  name: "HouseworkDuel",
+<script lang="ts">
+export default defineNuxtComponent({
   layout: "housework-duel",
-};
+});
 </script>

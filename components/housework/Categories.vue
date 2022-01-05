@@ -1,6 +1,6 @@
 <template>
   <div class="inline-grid grid-cols-2 gap-4 w-full">
-    <category-card
+    <HouseworkCategoryCard
       v-for="item in tasksStore.categories"
       :key="item"
       :category="item"

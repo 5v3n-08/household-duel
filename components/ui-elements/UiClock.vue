@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 const date = useState("date", () => new Date());
-const interval = useState<number | null>("interval", () => null);
+const interval = useState<NodeJS.Timer | null>("interval", () => null);
 
 onMounted(() => {
   interval.value = setInterval(() => {

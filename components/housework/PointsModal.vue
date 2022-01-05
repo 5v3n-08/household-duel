@@ -6,7 +6,10 @@
       + {{ task.points }} Punkte
     </p>
 
-    <select-users-for-task class="m-4" @on-select-user="onSelectUser" />
+    <housework-select-users-for-task
+      class="m-4"
+      @on-select-user="onSelectUser"
+    />
 
     <template #buttons>
       <ui-button @click="onCancel">Abbrechen</ui-button>
