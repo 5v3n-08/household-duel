@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="w-full">
     <label class="block text-gray-500 font-bold pl-1 mb-1" for="inline-full-name">
       {{ label }}
     </label>
