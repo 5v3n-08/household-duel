@@ -1,6 +1,7 @@
-const baseUrl = process.env.baseUrl;
-export const API = {
-  authentication: {
-    oauth: "/api/v1/authentication/oauth",
-  },
-};
+export const API = baseUrl => (
+    {
+      authentication: {
+        oauth: `${baseUrl}/api/v1/authentication/oauth`
+      }
+    }
+)

@@ -26,13 +26,14 @@ export default defineComponent({ layout: "blank" });
 </script>
 
 <script setup lang="ts">
+console.log(API(process.env.API_HOST).authentication.oauth);
 const email = useState("email", () => "");
 const password = useState("password", () => "");
 // const config = useRuntimeConfig();
 
 const onLoginClick = () => {
   // console.log(API.authentication.oauth);
-  const { pending, data, error } = useFetch(API.authentication.oauth, {
+  const { pending, data, error } = useFetch(API(process.env.API_HOST).authentication.oauth, {
     method: "POST",
     body: { driver: "username", username: email.value, password: password.value },
   });
