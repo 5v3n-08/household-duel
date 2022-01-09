@@ -1,5 +1,5 @@
 <template>
-  <div class="w-screen">
+  <div class="w-screen main-body">
     <ui-header-custom class="sticky top-0">
       <template #center>
         <div class="text-center">
