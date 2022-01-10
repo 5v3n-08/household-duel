@@ -29,6 +29,13 @@
               </div>
             </div>
           </div>
+          <div class="mr-2">
+              <NuxtLink
+                to="/login"
+                class="bg-blue-800 text-white px-3 py-2 rounded-md text-sm font-medium"
+                >Login
+              </NuxtLink>
+          </div>
         </div>
       </div>
     </nav>
