@@ -17,10 +17,7 @@ export const useTasks = defineStore({
     },
     selectedTask(state): ITask | undefined {
       const globalStore = useGlobal();
-      return (
-        state.tasks.find((task) => task.id === globalStore.selectedTaskId) ??
-        undefined
-      );
+      return state.tasks.find((task) => task.id === globalStore.selectedTaskId) ?? undefined;
     },
   },
   actions: {},
@@ -46,8 +43,7 @@ const defaultTasks = [
   {
     id: strRamdom(20),
     name: "Müll rausbringen",
-    description:
-      "Beinhaltet alle Mülleimer und das nachfüllen der neuen leeren Müllbeutel.",
+    description: "Beinhaltet alle Mülleimer und das nachfüllen der neuen leeren Müllbeutel.",
     category: "Allgemein",
     points: 5,
   },
@@ -61,8 +57,7 @@ const defaultTasks = [
   {
     id: strRamdom(20),
     name: "Einkaufen",
-    description:
-      "Gilt nur wenn diese Person alleine einkaufen war und für den kompletten Haushalt eingekauft hat.",
+    description: "Gilt nur wenn diese Person alleine einkaufen war und für den kompletten Haushalt eingekauft hat.",
     category: "Allgemein",
     points: 10,
   },
@@ -76,32 +71,28 @@ const defaultTasks = [
   {
     id: strRamdom(20),
     name: "Sport machen",
-    description:
-      "Dieses gilt nur wenn mindesten 30 Minuten Sport gemacht wurde.",
+    description: "Dieses gilt nur wenn mindesten 30 Minuten Sport gemacht wurde.",
     category: "Allgemein",
     points: 10,
   },
   {
     id: strRamdom(20),
     name: "+ 2 Punkte",
-    description:
-      "Gibt manuell Punkte für ein Ereignis Muss mit anderen Personen abgesprochen werden.",
+    description: "Gibt manuell Punkte für ein Ereignis Muss mit anderen Personen abgesprochen werden.",
     category: "Allgemein",
     points: 2,
   },
   {
     id: strRamdom(20),
     name: "+ 5 Punkte",
-    description:
-      "Gibt manuell Punkte für ein Ereignis Muss mit anderen Personen abgesprochen werden.",
+    description: "Gibt manuell Punkte für ein Ereignis Muss mit anderen Personen abgesprochen werden.",
     category: "Allgemein",
     points: 5,
   },
   {
     id: strRamdom(20),
     name: "+ 10 Punkte",
-    description:
-      "Gibt manuell Punkte für ein Ereignis Muss mit anderen Personen abgesprochen werden.",
+    description: "Gibt manuell Punkte für ein Ereignis Muss mit anderen Personen abgesprochen werden.",
     category: "Allgemein",
     points: 10,
   },
@@ -109,8 +100,7 @@ const defaultTasks = [
   {
     id: strRamdom(20),
     name: "Katzen füttern",
-    description:
-      "Das Katzenfüttern beinhaltet BEIDE Näpfe mit Nassfutter oder Trokenfutter zu befüllen.",
+    description: "Das Katzenfüttern beinhaltet BEIDE Näpfe mit Nassfutter oder Trokenfutter zu befüllen.",
     category: "Haustiere",
     points: 5,
   },
@@ -147,8 +137,7 @@ const defaultTasks = [
   {
     id: strRamdom(20),
     name: "Futterplätze sauber machen",
-    description:
-      "Dazu gehören die Katzen (Fensterbank) und der Hunde (Flur) Platz",
+    description: "Dazu gehören die Katzen (Fensterbank) und der Hunde (Flur) Platz",
     category: "Haustiere",
     points: 10,
   },
@@ -167,8 +156,7 @@ const defaultTasks = [
   {
     id: strRamdom(20),
     name: "Essen kochen",
-    description:
-      "Gilt nur wenn wirklich gekocht wurde und keine 'Pizza' gemacht wurde",
+    description: "Gilt nur wenn wirklich gekocht wurde und keine 'Pizza' gemacht wurde",
     category: "Küche",
     points: 10,
   },
