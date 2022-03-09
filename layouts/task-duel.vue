@@ -28,13 +28,13 @@
 </template>
 
 <script setup lang="ts">
-import { useGlobal } from "~~/stores/housework/global";
+import { useTaskDuel } from "~~/stores/housework/global";
 
-const globalStore = useGlobal();
+const taskDuelStore = useTaskDuel();
 const isModalOpen = useState("isModalOpen", () => false);
 
 const onResetClick = () => {
-  globalStore.reset();
+  taskDuelStore.reset();
   isModalOpen.value = false;
 };
 </script>

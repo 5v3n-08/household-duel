@@ -15,11 +15,11 @@
 </template>
 
 <script setup lang="ts">
-import { useGlobal } from "~~/stores/housework/global";
-import { useTasks } from "~~/stores/housework/tasks";
+import { useTaskDuel } from "~~/stores/taskduel/global";
+import { useTasks } from "~~/stores/taskduel/tasks";
 
 const tasksStore = useTasks();
-const globalStore = useGlobal();
+const taskDuelStore = useTaskDuel();
 const props = defineProps({
   category: {
     type: String,
@@ -32,6 +32,6 @@ const tasks = computed(() =>
 );
 
 const onTaskClick = (id: string) => {
-  globalStore.setSelectedTaskId(id);
+  taskDuelStore.setSelectedTaskId(id);
 };
 </script>

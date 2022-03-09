@@ -22,7 +22,7 @@
             :rules="[validateRequired]"
           />
         </div>
-        <v-alert border="start" color="error" class="ma-2"> I'm an alert with a start border and error color </v-alert>
+        <v-alert border="start" color="error" class="ma-2"> {{ error2 }}</v-alert>
         <div class="mt-5 flex justify-center">
           <v-progress-circular v-if="isLoading" indeterminate color="primary"></v-progress-circular>
           <v-btn v-else color="primary" @click="onLoginClick">Anmelden</v-btn>
@@ -32,12 +32,18 @@
             Noch keinen Account?
           </button>
         </div>
+          <p v-if="pending">Fetching mountains...</p>
+          <p v-else-if="error">An error occurred :(</p>
+          <div v-else>
+            <h1>Nuxt Mountains</h1>
+          </div>
       </v-card-text>
     </v-card>
   </div>
 </template>
 
 <script lang="ts">
+import _ from "lodash";
 import { API } from "~~/helpers/api";
 import { validateRequired } from "~~/helpers/validation";
 
@@ -48,18 +54,48 @@ export default defineComponent({ layout: "blank" });
 const email = useState("email", () => "");
 const password = useState("password", () => "");
 const isLoading = ref(false);
+const hasError = reactive({ msg: null })
+const pending = ref(false);
+const error2 = ref();
 // const reqError = ref<string | null>(null);
 
 const onLoginClick = async () => {
   isLoading.value = true;
-  const { data, error } = await useBackend(API.authentication.oauth, {
+  const { pending, data, error } = await useBackend(API.authentication.oauth, {
     driver: "username",
     username: email.value,
     password: password.value,
   });
-  // if (error) console.log(error);
+  // console.log(pending);
+  console.log(error.value.data.message);
+  if (error)  {
+    // console.log(error);
+    hasError.msg = _.get(error, 'value.data.message');
+  }
   isLoading.value = false;
 };
+
+// const onLoginClick2 = async () => {
+//   isLoading.value = true;
+//   const { data } = await useBackend<IFetchError>(API.authentication.oauth, {
+//     driver: "username",
+//     username: email.value,
+//     password: password.value,
+//   })
+
+//   isLoading.value = false;
+// }
+
+// interface IFetchError {
+//   value: {
+//     data: {
+//       message: string;
+//     }
+//   },
+//   data: {
+//     message: string;
+//   }
+// }
 </script>
 
 <style scoped>

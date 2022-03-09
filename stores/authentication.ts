@@ -1,5 +1,10 @@
 import { acceptHMRUpdate, defineStore } from "pinia";
 
+interface IState {
+  isAuthenticated: boolean;
+}
+
+
 export const useAuthentication = defineStore({
   id: "authentication",
 
@@ -14,8 +19,4 @@ export const useAuthentication = defineStore({
 
 if (import.meta.hot) {
   import.meta.hot.accept(acceptHMRUpdate(useAuthentication, import.meta.hot));
-}
-
-interface IState {
-  isAuthenticated: boolean;
 }
