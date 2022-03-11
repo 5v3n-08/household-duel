@@ -1,5 +1,5 @@
 <template>
-  <div class="border-y border-cyan-800 py-1 px-5">
+  <div v-if="user && task" class="border-y border-cyan-800 py-1 px-5">
     <div class="flex justify-between items-center">
       <div>
         <div class="font-bold">{{ user.name }}</div>
@@ -24,9 +24,14 @@
 </template>
 
 <script setup lang="ts">
-import { useGlobal } from "~~/stores/global";
+import { useGlobal } from "~~/stores/housework/global";
+import { useTasks } from "~~/stores/housework/tasks";
+import { useUsers } from "~~/stores/housework/users";
 
-const globalState = useGlobal();
+const globalStore = useGlobal();
+const usersStore = useUsers();
+const tasksStore = useTasks();
+
 const props = defineProps({
   logId: {
     type: String,
@@ -35,12 +40,12 @@ const props = defineProps({
 });
 
 const log = computed(() =>
-  globalState.logs.find((log) => log.id == props.logId)
+  globalStore.logs.find((log) => log.id === props.logId)
 );
 const user = computed(() =>
-  globalState.users.find((user) => user.id === log.value.userId)
+  usersStore.users.find((user) => user.id === log.value.userId)
 );
 const task = computed(() =>
-  globalState.tasks.find((task) => task.id === log.value.taskId)
+  tasksStore.tasks.find((task) => task.id === log.value.taskId)
 );
 </script>

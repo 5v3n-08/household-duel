@@ -1,13 +1,13 @@
 <template>
-  <div class="main-body w-screen">
+  <div class="w-screen">
     <NuxtPage />
   </div>
 </template>
 
 <script setup lang="ts">
-import { useGlobal } from "./stores/global";
+// import { useGlobal } from "./stores/housework/global";
 
-const globalStore = useGlobal();
+// const globalStore = useGlobal();
 
-onMounted(() => globalStore.loadLocalStorage());
+// onMounted(() => globalStore.loadLocalStorage());
 </script>

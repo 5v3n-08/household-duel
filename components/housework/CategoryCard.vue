@@ -4,16 +4,8 @@
     <div class="grid gap-2 grid-cols-2 mt-2">
       <div
         v-for="task in tasks"
-        class="
-          bg-cyan-800
-          hover:bg-cyan-700
-          cursor-pointer
-          flex
-          items-center
-          justify-center
-          p-2
-          rounded
-        "
+        :key="task.id"
+        class="bg-cyan-800 hover:bg-cyan-700 cursor-pointer flex items-center justify-center p-2 rounded"
         @click="onTaskClick(task.id)"
       >
         {{ task.name }}
@@ -23,9 +15,11 @@
 </template>
 
 <script setup lang="ts">
-import { useGlobal } from "~~/stores/global";
+import { useTaskDuel } from "~~/stores/taskduel/global";
+import { useTasks } from "~~/stores/taskduel/tasks";
 
-const globalState = useGlobal();
+const tasksStore = useTasks();
+const taskDuelStore = useTaskDuel();
 const props = defineProps({
   category: {
     type: String,
@@ -34,10 +28,10 @@ const props = defineProps({
 });
 
 const tasks = computed(() =>
-  globalState.tasks.filter((task) => task.category === props.category)
+  tasksStore.tasks.filter((task) => task.category === props.category)
 );
 
 const onTaskClick = (id: string) => {
-  globalState.setSelectedTaskId(id);
+  taskDuelStore.setSelectedTaskId(id);
 };
 </script>

@@ -6,24 +6,30 @@
       + {{ task.points }} Punkte
     </p>
 
-    <select-users-for-task class="m-4" @on-select-user="onSelectUser" />
+    <housework-select-users-for-task
+      class="m-4"
+      @on-select-user="onSelectUser"
+    />
 
-    <template v-slot:buttons>
+    <template #buttons>
       <ui-button @click="onCancel">Abbrechen</ui-button>
     </template>
   </ui-modal>
 </template>
 
 <script setup lang="ts">
-import { useGlobal } from "~~/stores/global";
+import { useGlobal } from "~~/stores/housework/global";
+import { useTasks } from "~~/stores/housework/tasks";
 
-const globalState = useGlobal();
-const task = computed(() => globalState.selectedTask);
+const globalStore = useGlobal();
+const tasksStore = useTasks();
+
+const task = computed(() => tasksStore.selectedTask);
 
 const onCancel = () => {
-  globalState.setUserPointsByTask(null, null);
+  globalStore.setUserPointsByTask(null, null);
 };
 
 const onSelectUser = (id: string) =>
-  globalState.setUserPointsByTask(id, task.value.id);
+  globalStore.setUserPointsByTask(id, task.value.id);
 </script>

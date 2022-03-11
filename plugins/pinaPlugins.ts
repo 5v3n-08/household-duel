@@ -1,11 +1,10 @@
 import { PiniaPluginContext } from "pinia";
 
 function MyPiniaPlugin({ store }: PiniaPluginContext) {
-  store.$subscribe((mutation) => {
-    localStorage.setItem("globalStore", JSON.stringify(store.$state));
-  });
-
-  return { creationTime: new Date() };
+  // store.$subscribe((mutation) => {
+  //   localStorage.setItem("globalStore", JSON.stringify(store.$state));
+  // });
+  // return { creationTime: new Date() };
 }
 
 const myPlugin = ({ pinia }) => {
