@@ -18,18 +18,18 @@
 </template>
 
 <script setup lang="ts">
-import { useGlobal } from "~~/stores/housework/global";
-import { useTasks } from "~~/stores/housework/tasks";
+import { useTaskDuel } from "~~/stores/taskduel/global";
+import { useTasks } from "~~/stores/taskduel/tasks";
 
-const globalStore = useGlobal();
+const taskDuelStore = useTaskDuel();
 const tasksStore = useTasks();
 
 const task = computed(() => tasksStore.selectedTask);
 
 const onCancel = () => {
-  globalStore.setUserPointsByTask(null, null);
+  taskDuelStore.setUserPointsByTask(null, null);
 };
 
 const onSelectUser = (id: string) =>
-  globalStore.setUserPointsByTask(id, task.value.id);
+taskDuelStore.setUserPointsByTask(id, task.value.id);
 </script>

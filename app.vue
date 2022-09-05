@@ -5,9 +5,9 @@
 </template>
 
 <script setup lang="ts">
-// import { useGlobal } from "./stores/housework/global";
+// import { useTaskDuel } from "./stores/taskuel/global";
 
-// const globalStore = useGlobal();
+// const taskDuelStore = useTaskDuel();
 
-// onMounted(() => globalStore.loadLocalStorage());
+// onMounted(() => taskDuelStore.loadLocalStorage());
 </script>

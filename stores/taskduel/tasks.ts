@@ -1,6 +1,6 @@
-import { useGlobal } from "./global";
 import _ from "lodash";
 import { acceptHMRUpdate, defineStore } from "pinia";
+import { useTaskDuel } from "./global";
 import { strRamdom } from "~~/helpers/functions";
 
 export const useTasks = defineStore({
@@ -16,8 +16,8 @@ export const useTasks = defineStore({
       return _.uniq(state.tasks.map((task) => task.category));
     },
     selectedTask(state): ITask | undefined {
-      const globalStore = useGlobal();
-      return state.tasks.find((task) => task.id === globalStore.selectedTaskId) ?? undefined;
+      const taskduelStore = useTaskDuel();
+      return state.tasks.find((task) => task.id === taskduelStore.selectedTaskId) ?? undefined;
     },
   },
   actions: {},

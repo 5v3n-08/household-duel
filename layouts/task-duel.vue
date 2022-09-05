@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTaskDuel } from "~~/stores/housework/global";
+import { useTaskDuel } from "~~/stores/taskduel/global";
 
 const taskDuelStore = useTaskDuel();
 const isModalOpen = useState("isModalOpen", () => false);

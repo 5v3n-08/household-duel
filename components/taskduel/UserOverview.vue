@@ -25,12 +25,12 @@
 
 <script setup lang="ts">
 import _ from "lodash";
-import { useGlobal } from "~~/stores/housework/global";
+import { useTaskDuel } from "~~/stores/taskduel/global";
 
-const globalState = useGlobal();
+const taskDuelStore = useTaskDuel();
 
 const logs = computed(() =>
-  _.orderBy(globalState.logs, (log) => log.createdAt, "desc")
+  _.orderBy(taskDuelStore.logs, (log) => log.createdAt, "desc")
 );
-const points = computed(() => globalState.points);
+const points = computed(() => taskDuelStore.points);
 </script>

@@ -24,11 +24,11 @@
 </template>
 
 <script setup lang="ts">
-import { useGlobal } from "~~/stores/housework/global";
-import { useTasks } from "~~/stores/housework/tasks";
-import { useUsers } from "~~/stores/housework/users";
+import { useTaskDuel } from "~~/stores/taskduel/global";
+import { useTasks } from "~~/stores/taskduel/tasks";
+import { useUsers } from "~~/stores/taskduel/users";
 
-const globalStore = useGlobal();
+const taskDuelStore = useTaskDuel();
 const usersStore = useUsers();
 const tasksStore = useTasks();
 
@@ -40,7 +40,7 @@ const props = defineProps({
 });
 
 const log = computed(() =>
-  globalStore.logs.find((log) => log.id === props.logId)
+taskDuelStore.logs.find((log) => log.id === props.logId)
 );
 const user = computed(() =>
   usersStore.users.find((user) => user.id === log.value.userId)

@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { useUsers } from "~~/stores/housework/users";
+import { useUsers } from "~~/stores/taskduel/users";
 
 const usersStore = useUsers();
 const emit = defineEmits(["onSelectUser"]);
