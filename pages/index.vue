@@ -4,7 +4,8 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="tsx">
+  export default {}
   definePageMeta({
     name: "LandingPage",
     layout: "default"

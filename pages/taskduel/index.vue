@@ -10,6 +10,7 @@
 </template>
 
 <script lang="ts">
+  export default {}
   definePageMeta({
     layout: "task-duel",
   });

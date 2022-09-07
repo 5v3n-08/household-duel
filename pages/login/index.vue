@@ -42,17 +42,14 @@
   </div>
 </template>
 
-<script lang="ts">
-import _ from "lodash";
-import { API } from "~~/helpers/api";
-// import { validateRequired } from "~~/helpers/validation";
-
-definePageMeta({
+<script lang="tsx">
+  import _ from "lodash";
+  import { API } from "~~/helpers/api";
+  // import { validateRequired } from "~~/helpers/validation";
+  export default {}
+  definePageMeta({
     layout: "blank",
-});
-</script>
-
-<script setup lang="ts">
+  });
 const email = useState("email", () => "");
 const password = useState("password", () => "");
 const isLoading = ref(false);
