@@ -4,8 +4,9 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "LandingPage",
-};
+<script lang="ts">
+  definePageMeta({
+    name: "LandingPage",
+    layout: "default"
+  });
 </script>

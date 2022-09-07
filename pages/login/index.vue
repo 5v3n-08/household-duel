@@ -25,7 +25,7 @@
         <v-alert border="start" color="error" class="ma-2"> {{ error2 }}</v-alert>
         <div class="mt-5 flex justify-center">
           <v-progress-circular v-if="isLoading" indeterminate color="primary"></v-progress-circular>
-          <v-btn v-else color="primary" @click="onLoginClick">Anmelden</v-btn>
+          <v-btn v-else color="primary" @click="onLoginClick()">Anmelden</v-btn>
         </div>
         <div class="mt-1 flex justify-center">
           <button :disabled="isLoading" class="mt-3 text-sm text-center font-bold hover:text-queen-blue-800">
@@ -33,7 +33,7 @@
           </button>
         </div>
           <p v-if="pending">Fetching mountains...</p>
-          <p v-else-if="error">An error occurred :(</p>
+          <p v-else-if="error2">An error occurred :(</p>
           <div v-else>
             <h1>Nuxt Mountains</h1>
           </div>
@@ -45,9 +45,11 @@
 <script lang="ts">
 import _ from "lodash";
 import { API } from "~~/helpers/api";
-import { validateRequired } from "~~/helpers/validation";
+// import { validateRequired } from "~~/helpers/validation";
 
-export default defineComponent({ layout: "blank" });
+definePageMeta({
+    layout: "blank",
+});
 </script>
 
 <script setup lang="ts">
@@ -67,7 +69,7 @@ const onLoginClick = async () => {
     password: password.value,
   });
   // console.log(pending);
-  console.log(error.value.data.message);
+  // console.log(error.value.data.message);
   if (error)  {
     // console.log(error);
     hasError.msg = _.get(error, 'value.data.message');

@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { UseFetchOptions } from "nuxt3/dist/app/composables/fetch";
+import { UseFetchOptions } from "nuxt/dist/app/composables/fetch";
 
 enum EHttpMethods {
   GET = "get",
@@ -9,7 +9,7 @@ enum EHttpMethods {
   PUT = "put",
 }
 
-export const useBackend = (url: string, data?: { [key: string]: any }, method?: EHttpMethods, options?: UseFetchOptions<unknown>) => {
+export const useBackend = <T>(url: string, data?: { [key: string]: any }, method?: EHttpMethods, options?: UseFetchOptions<unknown>) => {
   const config = useRuntimeConfig();
 
   if (!config.baseUrl || (_.isString(config.baseUrl) && config.baseUrl.length <= 0)) {
@@ -19,7 +19,7 @@ export const useBackend = (url: string, data?: { [key: string]: any }, method?: 
   let _method = method ?? EHttpMethods.GET;
   if (!method && !_.isEmpty(data)) _method = EHttpMethods.POST;
 
-  return useFetch(`${config.baseUrl}${url}`, {
+  return useFetch<T>(`${config.baseUrl}${url}`, {
     body: data,
     method: _method,
     ...{ options },

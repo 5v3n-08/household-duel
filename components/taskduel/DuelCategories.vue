@@ -1,6 +1,6 @@
 <template>
   <div class="inline-grid grid-cols-2 gap-4 w-full">
-    <HouseworkCategoryCard
+    <TaskduelCategoryCard
       v-for="item in tasksStore.categories"
       :key="item"
       :category="item"
@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTasks } from "~~/stores/housework/tasks";
+import { useTasks } from "~~/stores/taskduel/tasks";
 
 const tasksStore = useTasks();
 </script>
