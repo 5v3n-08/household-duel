@@ -47,7 +47,9 @@ import _ from "lodash";
 import { API } from "~~/helpers/api";
 // import { validateRequired } from "~~/helpers/validation";
 
-export default defineComponent({ layout: "blank" });
+definePageMeta({
+    layout: "blank",
+});
 </script>
 
 <script setup lang="ts">

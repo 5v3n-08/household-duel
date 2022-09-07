@@ -1,13 +1,5 @@
 <template>
-  <div class="w-screen">
+  <NuxtLayout>
     <NuxtPage />
-  </div>
+  </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-// import { useTaskDuel } from "./stores/taskuel/global";
-
-// const taskDuelStore = useTaskDuel();
-
-// onMounted(() => taskDuelStore.loadLocalStorage());
-</script>

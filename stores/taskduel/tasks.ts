@@ -1,7 +1,7 @@
 import _ from "lodash";
-import { acceptHMRUpdate, defineStore } from "pinia";
 import { useTaskDuel } from "./global";
 import { strRamdom } from "~~/helpers/functions";
+import { acceptHMRUpdate, defineStore } from "pinia";
 
 export const useTasks = defineStore({
   id: "tasks",

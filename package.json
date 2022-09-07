@@ -1,14 +1,16 @@
 {
   "private": true,
   "scripts": {
-    "dev": "nuxi dev",
-    "build": "nuxi build",
-    "start": "node .output/server/index.mjs",
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
     "prepare": "husky install",
-    "postinstall2": "bash vuetify-monkey-patch.sh",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
     "lint": "npm run lint:js && npm run lint:style",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
-    "lint:style": "stylelint \"**/*.{vue,css}\" --ignore-path .gitignore"
+    "lint:style": "stylelint \"**/*.{vue,css}\" --ignore-path .gitignore",
+    "test": "./node_modules/.bin/cypress run"
   },
   "lint-staged": {
     "*.{js,vue}": "eslint",
@@ -18,6 +20,7 @@
     "@babel/eslint-parser": "^7.18.9",
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
+    "@fortawesome/fontawesome-free": "^6.2.0",
     "@nuxt/types": "^2.15.8",
     "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/eslint-config-typescript": "^11.0.0",
@@ -25,12 +28,11 @@
     "@nuxtjs/stylelint-module": "^4.1.0",
     "@types/lodash": "^4.14.184",
     "@types/uuid": "^8.3.4",
-    "autoprefixer": "^10.4.8",
+    "cypress": "^10.7.0",
     "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-nuxt": "^4.0.0",
     "eslint-plugin-vue": "^9.4.0",
-    "fibers": "^5.0.3",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "nuxt": "3.0.0-rc.9",
@@ -38,17 +40,18 @@
     "postcss-html": "^1.5.0",
     "prettier": "^2.7.1",
     "sass": "^1.54.8",
-    "sass-loader": "^13.0.2",
     "stylelint": "^14.11.0",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-recommended-vue": "^1.4.0",
     "stylelint-config-standard": "^28.0.0",
     "stylelint-config-standard-scss": "^5.0.0",
-    "tailwindcss": "^3.1.8"
+    "tailwindcss": "^3.1.8",
+    "vuetify": "^3.0.0-beta.10"
   },
   "dependencies": {
+    "@mdi/font": "^2.8.94",
     "@pinia/nuxt": "^0.4.1",
-    "husky": "^8.0.1",
+    "@vueuse/core": "^9.1.1",
     "lodash": "^4.17.21",
     "pinia": "^2.0.21",
     "uuid": "^8.3.2"

@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <housework-log-list-item
+    <taskduel-log-list-item
       v-for="log in logs"
       :key="log.id"
       :log-id="log.id"

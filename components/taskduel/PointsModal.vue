@@ -6,7 +6,7 @@
       + {{ task.points }} Punkte
     </p>
 
-    <housework-select-users-for-task
+    <TaskduelSelectUsersForTask
       class="m-4"
       @on-select-user="onSelectUser"
     />

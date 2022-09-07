@@ -1,5 +1,5 @@
-import { acceptHMRUpdate, defineStore } from "pinia";
 import { strRamdom } from "~~/helpers/functions";
+import { acceptHMRUpdate, defineStore } from "pinia";
 
 export const useUsers = defineStore({
   id: "users",

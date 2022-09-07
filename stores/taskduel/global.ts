@@ -1,9 +1,9 @@
 
 import _ from "lodash";
-import { acceptHMRUpdate, defineStore } from "pinia";
 import { useUsers } from "./users";
 import { useTasks } from "./tasks";
 import { strRamdom } from "~~/helpers/functions";
+import { acceptHMRUpdate, defineStore } from "pinia";
 
 interface IPointLog {
   id: string;

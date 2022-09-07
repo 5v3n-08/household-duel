@@ -1,25 +1,38 @@
-import { defineNuxtConfig } from "nuxt";
+import { defineNuxtConfig } from 'nuxt'
 
-// https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
+// https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  css: ["@/assets/styles/main.css"],
-  // css: ["@/assets/styles/main.css", "vuetify/lib/styles/main.sass"],
-  buildModules: ["@pinia/nuxt", "@nuxtjs/stylelint-module"],
-  build: {
-    transpile: ["vuetify"],
-    postcss: {
-      postcssOptions: {
-        plugins: {
-          tailwindcss: {},
-          autoprefixer: {},
+    css: ['@/assets/styles/main.css', 'vuetify/lib/styles/main.sass', '@mdi/font/css/materialdesignicons.min.css'],
+    build: {
+      transpile: ['vuetify'],
+      postcss: {
+        postcssOptions: {
+          plugins: {
+            tailwindcss: {}
+          },
         },
       },
     },
-  },
-  publicRuntimeConfig: {
-    baseUrl: process.env.API_HOST,
-  },
-  typescript: {
-    shim: false
-  }
-});
+    modules: [
+      // ...
+      [
+        '@pinia/nuxt',
+        {
+          autoImports: [
+            // automatically imports `defineStore`
+            'defineStore', // import { defineStore } from 'pinia'
+            // automatically imports `defineStore` as `definePiniaStore`
+            ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
+          ],
+        },
+      ],
+    ],
+    vite: {
+      define: {
+        'process.env.DEBUG': false,
+      },
+    },
+    typescript: {
+      shim: false
+    }
+})
