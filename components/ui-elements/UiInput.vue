@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <label class="block text-gray-500 font-bold pl-1 mb-1" for="inline-full-name">
+    <label v-if="!labelInInput" class="block text-gray-500 font-bold pl-1 mb-1" for="inline-full-name">
       {{ label }}
     </label>
 
@@ -9,45 +9,49 @@
       :type="type ?? 'text'"
       :value="modelValue"
       :disabled="disabled"
+      :placeholder="labelInInput ? label : undefined"
       @input="onInput"
-    />
-    <div v-if="error" class="text-sm text-red-700 mt-1">{{ error }}</div>
+    >
+    <div v-if="error" class="text-sm text-red-700 mt-1">
+      {{ error }}
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import _ from "lodash";
-import { TValidateResult } from "~~/helpers/validation";
+import _ from 'lodash'
+import { TValidateResult } from '~~/helpers/validation'
 
-type TInputTypes = "text" | "password" | "email";
+type TInputTypes = 'text' | 'password' | 'email';
 interface IEmits {
-  (event: "update:modelValue", value: string): void;
+  (event: 'update:modelValue', value: string): void;
 }
 interface IProps {
   modelValue: string;
   type?: TInputTypes;
   label?: string;
+  labelInInput?: boolean;
   rules?: ((v: string) => TValidateResult)[];
   disabled?: boolean;
 }
 
-const emit = defineEmits<IEmits>();
-const props = defineProps<IProps>();
+const emit = defineEmits<IEmits>()
+const props = defineProps<IProps>()
 
-const error = ref<string | null>(null);
+const error = ref<string | null>(null)
 
 const onInput = (e: Event) => {
-  const value = (e.target as HTMLInputElement).value;
-  validate(value);
-  emit("update:modelValue", value);
-};
+  const value = (e.target as HTMLInputElement).value
+  validate(value)
+  emit('update:modelValue', value)
+}
 
 const validate = (value: string) => {
   if (props.rules?.length > 0) {
     props.rules.forEach((fn) => {
-      const result = fn(value);
-      _.isString(result) ? (error.value = result) : (error.value = null);
-    });
+      const result = fn(value)
+      _.isString(result) ? (error.value = result) : (error.value = null)
+    })
   }
-};
+}
 </script>
