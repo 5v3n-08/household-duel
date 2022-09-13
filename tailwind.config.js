@@ -1,16 +1,15 @@
 module.exports = {
-  mode: "jit",
+  mode: 'jit',
   content: [
-    "./components/**/*.{js,vue,ts}",
-    "./layouts/**/*.vue",
-    "./pages/**/*.vue",
-    "./plugins/**/*.{js,ts}",
-    "./nuxt.config.{js,ts}",
+    './components/**/*.{js,vue,ts}',
+    './layouts/**/*.vue',
+    './pages/**/*.vue',
+    './plugins/**/*.{js,ts}'
   ],
   theme: {
     extend: {
       colors: {
-        "queen-blue": {
+        'queen-blue': {
           100: '#5B96C2',
           200: '#4C8CBD',
           300: '#4282B3',
@@ -19,9 +18,9 @@ module.exports = {
           600: '#33658A',
           700: '#2C5777',
           800: '#274C68',
-          900: '#224159',
+          900: '#224159'
         },
-        "charcoal": {
+        charcoal: {
           100: '#4F7892',
           200: '#476D85',
           300: '#406277',
@@ -30,10 +29,12 @@ module.exports = {
           600: '#2B4150',
           700: '#243642',
           800: '#1D2B35',
-          900: '#162027',
+          900: '#162027'
         },
+        themeBackground: 'var(--background)',
+        themeText: 'var(--text)'
       }
-    },
+    }
   },
-  plugins: [],
+  plugins: []
 }
