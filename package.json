@@ -29,7 +29,7 @@
     "@types/lodash": "^4.14.184",
     "@types/uuid": "^8.3.4",
     "cypress": "^10.7.0",
-    "eslint": "^8.23.0",
+    "eslint": "^8.23.1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-nuxt": "^4.0.0",
     "eslint-plugin-vue": "^9.4.0",
