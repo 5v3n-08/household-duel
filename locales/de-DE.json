@@ -1,0 +1,15 @@
+{
+  "welcome": "Willkommen",
+  "login": {
+    "button": "Login",
+    "title": "Loggen Sie sich in ihren Account ein",
+    "username": "Benutzername oder Email",
+    "password": "Passwort",
+    "noAccount": "Du hast keinen Account?",
+    "forgotPassword": "Passwort vergessen?",
+    "description": {
+      "title": "Hier beginnt dein zuhause",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    }
+  }
+}

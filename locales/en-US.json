@@ -1,0 +1,15 @@
+{
+  "welcome": "Welcome",
+  "login": {
+    "button": "Login",
+    "title": "Login to your account",
+    "username": "Username or Email",
+    "password": "Password",
+    "noAccount": "Don't have an account?",
+    "forgotPassword": "Forgot password?",
+    "description": {
+      "title": "Your home starts here",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    }
+  }
+}

@@ -2,11 +2,10 @@ import { defineNuxtConfig } from 'nuxt'
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  css: ['@/assets/styles/main.css', 'vuetify/lib/styles/main.sass', '@mdi/font/css/materialdesignicons.min.css'],
+  css: ['@/assets/styles/main.css', 'vuetify/lib/styles/main.sass'],
   build: {
     transpile: ['vuetify']
   },
-  buildModules: ['@nuxtjs/tailwindcss'],
   modules: [
     // ...
     [
@@ -19,12 +18,37 @@ export default defineNuxtConfig({
           ['defineStore', 'definePiniaStore'] // import { defineStore as definePiniaStore } from 'pinia'
         ]
       }
-    ]
+    ],
+    '@nuxtjs/i18n',
+    '@nuxtjs/tailwindcss'
   ],
   vite: {
     define: {
       'process.env.DEBUG': false
     }
+  },
+  head () {
+    // needed for SEO metadata @nuxtjs/i18n plugin
+    return this.$nuxtI18nHead({ addSeoAttributes: true })
+  },
+  i18n: {
+    locales: [
+      {
+        code: 'en',
+        file: 'en-US.json'
+      },
+      {
+        code: 'de',
+        file: 'de-DE.json'
+      }
+    ],
+    defaultLocale: 'en',
+    vueI18n: {
+      legacy: false,
+      locale: 'en'
+    },
+    lazy: true,
+    langDir: 'locales/'
   },
   typescript: {
     shim: false
@@ -35,7 +59,8 @@ export default defineNuxtConfig({
     // Keys within public, will be also exposed to the client-side
     public: {
       apiBase: '/api',
-      baseUrl: ''
+      baseUrl: '',
+      projectName: 'OurProjects-Cloud'
     }
   },
   loadingIndicator: {
