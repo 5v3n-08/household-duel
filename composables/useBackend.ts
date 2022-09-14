@@ -33,10 +33,15 @@ enum EHttpMethods {
 export interface ILoginError {
   message: string;
 }
+export interface ILoginData {
+  driver: string;
+  username: string;
+  password: string;
+}
 
-export const useBackend = async <T>(
+export const useBackend = async <T, IData>(
   url: string,
-  data?: { [key: string]: any },
+  data?: IData,
   method?: EHttpMethods,
   options?: UseFetchOptions<unknown>
 ) => {
@@ -50,28 +55,29 @@ export const useBackend = async <T>(
   let _method = method ?? EHttpMethods.GET
   if (!method && !_.isEmpty(data)) { _method = EHttpMethods.POST }
 
-  return await useFetch<T>(`${config.public.baseUrl}${config.public.apiBase}/${url}`, {
-    body: data,
-    method: _method,
-    // eslint-disable-next-line require-await
-    async onRequestError ({ request, options, error }) {
-      // Log error
-      console.log('[fetch request error]', request, error.message)
-    },
-    // eslint-disable-next-line require-await
-    async onResponse ({ request, response, options }) {
-      // Log response
-      console.log('[fetch response]', request, response.status, JSON.stringify(response.body))
-    },
-    // eslint-disable-next-line require-await
-    async onResponseError ({ request, response, options }) {
-      // Log error
-      console.log('[fetch response error]', request, response.status, JSON.stringify(response.body))
-    },
-    ...{ options }
-  }).catch((error) => {
-    // console.log('test error');
-    console.log('catch error => ' + error)
-    globalStore.setError(error.message, error.statusCode)
-  })
+  return await useAsyncData<T>(url, () => $fetch<T>(`${config.public.baseUrl}${config.public.apiBase}/${url}`))
+  // return await useFetch<T>(`${config.public.baseUrl}${config.public.apiBase}/${url}`, {
+  //   body: data,
+  //   method: _method,
+  //   // eslint-disable-next-line require-await
+  //   async onRequestError ({ request, options, error }) {
+  //     // Log error
+  //     console.log('[fetch request error]', request, error.message)
+  //   },
+  //   // eslint-disable-next-line require-await
+  //   async onResponse ({ request, response, options }) {
+  //     // Log response
+  //     console.log('[fetch response]', request, response.status, JSON.stringify(response.body))
+  //   },
+  //   // eslint-disable-next-line require-await
+  //   async onResponseError ({ request, response, options }) {
+  //     // Log error
+  //     console.log('[fetch response error]', request, response.status, JSON.stringify(response.body))
+  //   },
+  //   ...{ options }
+  // }).catch((error) => {
+  //   // console.log('test error');
+  //   console.log('catch error => ' + error)
+  //   globalStore.setError(error.message, error.statusCode)
+  // })
 }
