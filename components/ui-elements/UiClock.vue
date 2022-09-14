@@ -18,16 +18,16 @@
 </template>
 
 <script setup lang="ts">
-const date = useState("date", () => new Date());
-const interval = useState<NodeJS.Timer | null>("interval", () => null);
+const date = useState('date', () => new Date())
+const interval = useState<NodeJS.Timer | null>('interval', () => null)
 
 onMounted(() => {
   interval.value = setInterval(() => {
-    date.value = new Date();
-  });
-});
+    date.value = new Date()
+  })
+})
 
 onUnmounted(() => {
-  clearInterval(interval.value);
-});
+  clearInterval(interval.value)
+})
 </script>

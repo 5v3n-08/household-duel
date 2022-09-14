@@ -23,14 +23,13 @@
       <div
         class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
         aria-hidden="true"
-      ></div>
+      />
 
       <!-- This element is to trick the browser into centering the modal contents. -->
       <span
         class="hidden sm:inline-block sm:align-middle sm:h-screen"
         aria-hidden="true"
-        >&#8203;</span
-      >
+      >&#8203;</span>
 
       <!--
       Modal panel, show/hide based on modal state.
@@ -73,8 +72,8 @@
 defineProps({
   isOpen: {
     type: Boolean,
-    require: true,
+    require: true
   },
-  title: String,
-});
+  title: String
+})
 </script>

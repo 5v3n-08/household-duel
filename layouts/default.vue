@@ -9,7 +9,7 @@
                 class="h-8 w-8"
                 src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
                 alt="Workflow"
-              />
+              >
             </div>
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline space-x-4">
@@ -18,23 +18,26 @@
                   to="/"
                   class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
                   aria-current="page"
-                  >Dashboard
+                >
+                  Dashboard
                 </NuxtLink>
 
                 <NuxtLink
                   to="/taskduel"
                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >Task Duel
+                >
+                  Task Duel
                 </NuxtLink>
               </div>
             </div>
           </div>
           <div class="mr-2">
-              <NuxtLink
-                to="/login"
-                class="bg-blue-800 text-white px-3 py-2 rounded-md text-sm font-medium"
-                >Login
-              </NuxtLink>
+            <NuxtLink
+              to="/login"
+              class="bg-blue-800 text-white px-3 py-2 rounded-md text-sm font-medium"
+            >
+              Login
+            </NuxtLink>
           </div>
         </div>
       </div>
@@ -50,23 +53,23 @@
 
 <script>
 export default {
-  name: "LayoutDefault",
-  setup() {
+  name: 'LayoutDefault',
+  setup () {
     useMeta({
-      title: "ioBroker Dashboard",
+      title: 'ioBroker Dashboard',
       meta: [
         {
-          name: "viewport",
-          content: "width=device-width, initial-scale=1, maximum-scale=1",
-        },
+          name: 'viewport',
+          content: 'width=device-width, initial-scale=1, maximum-scale=1'
+        }
       ],
       bodyAttrs: {
-        class: "h-full",
+        class: 'h-full'
       },
       htmlAttrs: {
-        class: "h-full bg-gray-100",
-      },
-    });
-  },
-};
+        class: 'h-full bg-gray-100'
+      }
+    })
+  }
+}
 </script>

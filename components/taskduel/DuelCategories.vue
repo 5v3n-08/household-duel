@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTasks } from "~~/stores/taskduel/tasks";
+import { useTasks } from '~~/stores/taskduel/tasks'
 
-const tasksStore = useTasks();
+const tasksStore = useTasks()
 </script>

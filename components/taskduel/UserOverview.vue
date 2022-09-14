@@ -9,8 +9,12 @@
         :key="point.name"
         class="border border-cyan-600 rounded p-5 text-center bg-cyan-700"
       >
-        <div class="font-bold text-lg">{{ point.name }}</div>
-        <div class="text-sm">{{ point.points }} Punkte</div>
+        <div class="font-bold text-lg">
+          {{ point.name }}
+        </div>
+        <div class="text-sm">
+          {{ point.points }} Punkte
+        </div>
       </div>
     </div>
 
@@ -24,13 +28,13 @@
 </template>
 
 <script setup lang="ts">
-import _ from "lodash";
-import { useTaskDuel } from "~~/stores/taskduel/global";
+import _ from 'lodash'
+import { useTaskDuel } from '~~/stores/taskduel/global'
 
-const taskDuelStore = useTaskDuel();
+const taskDuelStore = useTaskDuel()
 
 const logs = computed(() =>
-  _.orderBy(taskDuelStore.logs, (log) => log.createdAt, "desc")
-);
-const points = computed(() => taskDuelStore.points);
+  _.orderBy(taskDuelStore.logs, log => log.createdAt, 'desc')
+)
+const points = computed(() => taskDuelStore.points)
 </script>
