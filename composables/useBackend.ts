@@ -32,6 +32,7 @@ enum EHttpMethods {
 
 export interface ILoginError {
   message: string;
+  data: string;
 }
 export interface ILoginData {
   driver: string;
@@ -39,7 +40,7 @@ export interface ILoginData {
   password: string;
 }
 
-export const useBackend = async <T, IData>(
+export const useBackend = async <IData>(
   url: string,
   data?: IData,
   method?: EHttpMethods,
@@ -55,7 +56,31 @@ export const useBackend = async <T, IData>(
   let _method = method ?? EHttpMethods.GET
   if (!method && !_.isEmpty(data)) { _method = EHttpMethods.POST }
 
-  return await useAsyncData<T>(url, () => $fetch<T>(`${config.public.baseUrl}${config.public.apiBase}/${url}`))
+  // return await useAsyncData<IData>(url, () => $fetch<IData>(`${config.public.baseUrl}${config.public.apiBase}/${url}`, {
+  //   body: data,
+  //   method: _method,
+  //   ...{ options },
+  // }).catch(error => error.data))
+  return await useFetch<IData>(`${config.public.baseUrl}${config.public.apiBase}/${url}`, {
+    body: data,
+    method: _method,
+    ...{ options },
+    async onRequestError ({ request, options, error }) {
+      // Handle the request errors
+      console.log('[fetch request error]', request, error.message)
+    },
+    onResponse ({ request, response, options }) {
+      // Process the response data
+      console.log('[fetch response]', request, response.status, response._data)
+      return response._data
+    },
+    async onResponseError ({ request, response, options }) {
+      // Handle the response errors
+      globalStore.setError(response._data.message, response._data.statusCode)
+      console.log('[fetch response error]', request, response.status, response._data)
+      return response._data
+    }
+  })
   // return await useFetch<T>(`${config.public.baseUrl}${config.public.apiBase}/${url}`, {
   //   body: data,
   //   method: _method,

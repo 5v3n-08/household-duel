@@ -3,7 +3,7 @@ import { defineStore, acceptHMRUpdate } from 'pinia'
 interface IState {
   error: {
     msg: string | null;
-    code: number;
+    code: number | null;
   } | null,
   counter: number,
   name: string,
@@ -14,7 +14,10 @@ export const useGlobalStore = defineStore('globalStore', {
 
   state: (): IState => {
     return {
-      error: null,
+      error: {
+        msg: null,
+        code: null
+      },
       counter: 10,
       name: 'Eduardo',
       isAdmin: true

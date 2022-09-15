@@ -17,8 +17,8 @@
                     <p class="mb-4 text-center">
                       {{ $t('login.title') }}
                     </p>
-                    <v-alert v-if="hasError.msg" border="start" color="error" class="mt-3 mb-3">
-                      {{ hasError.msg }}
+                    <v-alert v-if="globalStore.getError.msg" border="start" color="error" class="mt-3 mb-3">
+                      {{ globalStore.getError.msg }}
                     </v-alert>
                     <div class="mb-4">
                       <ui-input
@@ -34,7 +34,9 @@
                     </div>
                     <div class="text-center pt-1 mb-12 pb-1">
                       {{ isLoading }}
-                      <v-progress-circular v-if="isLoading" indeterminate color="primary" />
+                      <v-progress-circular
+                        v-if="isLoading" :size="70" :width="7" indeterminate color="primary"
+                      />
                       <button
                         class="inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
                         type="button" data-mdb-ripple="true" data-mdb-ripple-color="light"
@@ -82,6 +84,7 @@
 
 <script setup lang="tsx">
 import _ from 'lodash'
+import { tsExternalModuleReference } from '@babel/types'
 import { ILoginData, ILoginError, useBackend } from '~~/composables/useBackend'
 import { API } from '~~/helpers/api'
 import { useGlobalStore } from '~~/stores/global'
@@ -100,23 +103,27 @@ const config = useRuntimeConfig()
 const globalStore = useGlobalStore()
 // const reqError = ref<string | null>(null);
 
+const { pending, data, error, refresh } = await useBackend<ILoginData>(API.authentication.oauth, {
+  driver: 'username',
+  username: email.value,
+  password: password.value
+})
+
 const onLoginClick = async () => {
+  console.log('test')
   isLoading.value = true
-  const { pending, data, error } = await useBackend<ILoginError, ILoginData>(API.authentication.oauth, {
-    driver: 'username',
-    username: email.value,
-    password: password.value
+  refresh().then(() => {
+    console.log(pending.value)
+    console.log(data.value)
+    console.log(error.value)
   })
-  console.log(pending.value)
-  console.log(data)
-  console.log(error.value)
-  // console.log(error.value.data.message)
-  // console.log(error.value.data.message);
   // if (error.value?.data?.message) {
   //   console.log('err found')
   //   hasError.msg = _.get(error, 'value.data.message')
   // }
-  isLoading.value = false
+  setTimeout(() => {
+    isLoading.value = false
+  }, 5000)
 }
 </script>
 
