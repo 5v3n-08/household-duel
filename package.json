@@ -54,7 +54,7 @@
     "@vueuse/core": "^9.2.0",
     "lodash": "^4.17.21",
     "pinia": "^2.0.21",
-    "pinia-orm": "^1.0.0-rc.6",
+    "pinia-orm": "^1.0.0",
     "uuid": "^9.0.0"
   }
 }
