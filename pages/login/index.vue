@@ -33,26 +33,24 @@
                       />
                     </div>
                     <div class="text-center pt-1 mb-12 pb-1">
-                      {{ isLoading }}
+                      {{ !email }}
+                      {{ !password }}
                       <v-progress-circular
                         v-if="isLoading" :size="70" :width="7" indeterminate color="primary"
                       />
-                      <button
-                        class="inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
-                        type="button" data-mdb-ripple="true" data-mdb-ripple-color="light"
-                        style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)"
-                        @click="onLoginClick()"
-                      >
+                      <ui-button :disabled="!password || !email" @click="onLoginClick()">
                         {{ $t('login.button') }}
-                      </button>
+                      </ui-button>
                       <a class="text-gray-500" href="#">Forgot password?</a>
                     </div>
+                    <div class="bg-sky-700 aspect-square" />
                     <div class="flex items-center justify-between pb-6">
                       <p class="mb-0 mr-2">
                         {{ $t('login.noAccount') }}
                       </p>
                       <ui-button
-                        type="button" custom-class="text-red-900" data-mdb-ripple="true"
+                        type="button" class="text-red-900" data-mdb-ripple="true"
+                        style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)"
                         data-mdb-ripple-color="light" :disabled="isLoading"
                       >
                         {{ $t('login.backToHome') }}
@@ -84,7 +82,6 @@
 
 <script setup lang="tsx">
 import _ from 'lodash'
-import { tsExternalModuleReference } from '@babel/types'
 import { ILoginData, ILoginError, useBackend } from '~~/composables/useBackend'
 import { API } from '~~/helpers/api'
 import { useGlobalStore } from '~~/stores/global'
@@ -103,13 +100,14 @@ const config = useRuntimeConfig()
 const globalStore = useGlobalStore()
 // const reqError = ref<string | null>(null);
 
-const { pending, data, error, refresh } = await useBackend<ILoginData>(API.authentication.oauth, {
-  driver: 'username',
-  username: email.value,
-  password: password.value
-})
+type ILoginDataAndError = ILoginData | ILoginError;
 
 const onLoginClick = async () => {
+  const { pending, data, error, refresh } = await useBackend<ILoginDataAndError>(API.authentication.oauth, {
+    driver: 'username',
+    username: email.value,
+    password: password.value
+  })
   console.log('test')
   isLoading.value = true
   refresh().then(() => {

@@ -32,7 +32,9 @@ enum EHttpMethods {
 
 export interface ILoginError {
   message: string;
-  data: string;
+  path: string;
+  stack: string;
+  statusCode: number;
 }
 export interface ILoginData {
   driver: string;
@@ -71,13 +73,20 @@ export const useBackend = async <IData>(
     },
     onResponse ({ request, response, options }) {
       // Process the response data
-      console.log('[fetch response]', request, response.status, response._data)
+      console.log('[fetch response]', request, response._data)
       return response._data
     },
     async onResponseError ({ request, response, options }) {
       // Handle the response errors
-      globalStore.setError(response._data.message, response._data.statusCode)
-      console.log('[fetch response error]', request, response.status, response._data)
+      // Validation error
+      if (response._data?.statusCode === 400 || response._data?.statusCode === 401) {
+        Toast.fire({
+          html: response._data.message.replace(';', '<br />'),
+          icon: 'error'
+        })
+      }
+      // globalStore.setError(response._data.message, response._data.statusCode)
+      console.log('[fetch response error]', request, response)
       return response._data
     }
   })
