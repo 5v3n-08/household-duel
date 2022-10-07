@@ -2,7 +2,7 @@ import _ from 'lodash'
 import { UseFetchOptions } from 'nuxt/dist/app/composables/fetch'
 import { useGlobalStore } from '~~/stores/global'
 
-enum EHttpMethods {
+export enum EHttpMethods {
   GET = 'get',
   POST = 'post',
   PATCH = 'patch',
@@ -10,62 +10,39 @@ enum EHttpMethods {
   PUT = 'put'
 }
 
-// export const useBackend = <T>(url: string, data?: { [key: string]: any }, method?: EHttpMethods, options?: UseFetchOptions<unknown>) => {
-//   const config = useRuntimeConfig();
-
-//   if (!config.public.baseUrl || (_.isString(config.public.baseUrl) && config.public.baseUrl.length <= 0)) {
-//     throw new Error("Please define NUXT_PUBLIC_BASE_URL in your .env file");
-//   }
-//   if (!config.public.apiBase || (_.isString(config.public.apiBase) && config.public.apiBase.length <= 0)) {
-//     throw new Error("Please define NUXT_PUBLIC_API_BASE in your .env file");
-//   }
-
-//   let _method = method ?? EHttpMethods.GET;
-//   if (!method && !_.isEmpty(data)) _method = EHttpMethods.POST;
-
-//   return $fetch<T>(`${config.public.baseUrl}${config.public.apiBase}/${url}`, {
-//     body: data,
-//     method: _method,
-//     ...{ options },
-//   });
-// };
-
 export interface ILoginError {
   message: string;
   path: string;
   stack: string;
   statusCode: number;
 }
-export interface ILoginData {
-  driver: string;
-  username: string;
-  password: string;
-}
 
-export const useBackend = async <IData>(
+export const useBackend = async <ReturnData>(
   url: string,
-  data?: IData,
-  method?: EHttpMethods,
+  data?: any,
+  method?: EHttpMethods | 'post',
   options?: UseFetchOptions<unknown>
 ) => {
   const config = useRuntimeConfig()
   const globalStore = useGlobalStore()
 
-  if (!config.baseUrl || (_.isString(config.baseUrl) && config.baseUrl.length <= 0)) {
-    throw new Error('Please define a baseUrl in your .env file!')
+  if (!config.apiBaseUrl || (_.isString(config.apiBaseUrl) && config.apiBaseUrl.length <= 0)) {
+    throw new Error('Please define a NUXT_PUBLIC_API_BASE_URL in your .env file!')
+  }
+  if (!config.apiBasePath || (_.isString(config.apiBasePath) && config.apiBasePath.length <= 0)) {
+    throw new Error('Please define a NUXT_PUBLIC_API_BASE_PATH in your .env file!')
   }
 
   let _method = method ?? EHttpMethods.GET
   if (!method && !_.isEmpty(data)) { _method = EHttpMethods.POST }
 
-  // return await useAsyncData<IData>(url, () => $fetch<IData>(`${config.public.baseUrl}${config.public.apiBase}/${url}`, {
-  //   body: data,
-  //   method: _method,
-  //   ...{ options },
-  // }).catch(error => error.data))
-  return await useFetch<IData>(`${config.public.baseUrl}${config.public.apiBase}/${url}`, {
+  return await useFetch<ReturnData, ILoginError>(url, {
     body: data,
     method: _method,
+    baseURL: `${config.public.apiBaseUrl}${config.public.apiBasePath}`,
+    headers: {
+      PROJECT: 'OURPROJECTS-CLOUD'
+    },
     ...{ options },
     async onRequestError ({ request, options, error }) {
       // Handle the request errors
@@ -79,39 +56,17 @@ export const useBackend = async <IData>(
     async onResponseError ({ request, response, options }) {
       // Handle the response errors
       // Validation error
-      if (response._data?.statusCode === 400 || response._data?.statusCode === 401) {
+      const data: ILoginError = response._data
+      if (data.statusCode === 400 || data.statusCode === 401) {
         Toast.fire({
-          html: response._data.message.replace(';', '<br />'),
+          html: data.message.replace(';', '<br />'),
           icon: 'error'
         })
       }
       // globalStore.setError(response._data.message, response._data.statusCode)
       console.log('[fetch response error]', request, response)
+      // globalStore.setError(error.message, error.statusCode)
       return response._data
     }
   })
-  // return await useFetch<T>(`${config.public.baseUrl}${config.public.apiBase}/${url}`, {
-  //   body: data,
-  //   method: _method,
-  //   // eslint-disable-next-line require-await
-  //   async onRequestError ({ request, options, error }) {
-  //     // Log error
-  //     console.log('[fetch request error]', request, error.message)
-  //   },
-  //   // eslint-disable-next-line require-await
-  //   async onResponse ({ request, response, options }) {
-  //     // Log response
-  //     console.log('[fetch response]', request, response.status, JSON.stringify(response.body))
-  //   },
-  //   // eslint-disable-next-line require-await
-  //   async onResponseError ({ request, response, options }) {
-  //     // Log error
-  //     console.log('[fetch response error]', request, response.status, JSON.stringify(response.body))
-  //   },
-  //   ...{ options }
-  // }).catch((error) => {
-  //   // console.log('test error');
-  //   console.log('catch error => ' + error)
-  //   globalStore.setError(error.message, error.statusCode)
-  // })
 }

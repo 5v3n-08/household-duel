@@ -4,14 +4,14 @@
       {{ label }}
     </label>
 
-    <input
-      class="bg-gray-200 appearance-none border-2 border-gray-900 rounded w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-gray-300 focus:!border-cyan-800"
-      :type="type ?? 'text'"
-      :value="modelValue"
+    <v-text-field
       :disabled="disabled"
+      :type="type ?? 'text'"
       :placeholder="labelInInput ? label : undefined"
+      :loading="loading"
+      :value="modelValue"
       @input="onInput"
-    >
+    />
     <div v-if="error" class="text-sm text-red-700 mt-1">
       {{ error }}
     </div>
@@ -33,6 +33,7 @@ interface IProps {
   labelInInput?: boolean;
   rules?: ((v: string) => TValidateResult)[];
   disabled?: boolean;
+  loading?: boolean;
 }
 
 const emit = defineEmits<IEmits>()

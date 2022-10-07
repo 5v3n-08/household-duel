@@ -1,13 +1,11 @@
 <template>
-  <button
-    type="button"
-    class="px-6 py-2.5 transition duration-150 rounded-md ease-in-out mb-3 text-white bg-blue-900 focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg hover:bg-blue-600 hover:text-white hover:shadow-lg"
-    :class="addClass"
-    :style="addStyle"
-    :disabled="disabled"
+  <v-btn
+    color="primary"
+    class="mt-5"
+    v-bind="props"
   >
     <slot />
-  </button>
+  </v-btn>
 </template>
 
 <script setup lang="ts">
@@ -17,7 +15,6 @@ interface IProps {
   fullLength?: boolean;
   uppercase?: boolean;
   colored?: boolean;
-  disabled?: boolean;
 }
 const props = defineProps<IProps>()
 const addClass = ref('')

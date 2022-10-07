@@ -12,6 +12,7 @@
 <script lang="ts">
 export default {}
 definePageMeta({
-  layout: 'task-duel'
+  layout: 'task-duel',
+  middleware: 'auth'
 })
 </script>

@@ -11,7 +11,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     directives,
     theme: {
       defaultTheme: 'light',
-      themes: { light }
+      themes: { light, dark }
     },
     icons: {
       defaultSet: 'mdi',
@@ -29,14 +29,29 @@ export default defineNuxtPlugin((nuxtApp) => {
 const light: ThemeDefinition = {
   dark: false,
   colors: {
-    background: '#FFFFFF',
-    primary: '#2C5777',
-    surface: '#FFFFFF',
-    secondary: '#03DAC6',
-    error: '#B00020',
+    background: '#fffbeb',
+    primary: '#3f51b5',
+    secondary: '#b0bec5',
+    accent: '#8c9eff',
+    error: '#b71c1c',
     info: '#2196F3',
     success: '#4CAF50',
-    warning: '#FB8C00'
+    warning: '#FFC107'
+  },
+  variables: {}
+}
+
+const dark: ThemeDefinition = {
+  dark: true,
+  colors: {
+    background: '#fffbeb',
+    primary: '#90caf9',
+    secondary: '#424242',
+    accent: '#82B1FF',
+    error: '#FF5252',
+    info: '#2196F3',
+    success: '#4CAF50',
+    warning: '#FFC107'
   },
   variables: {}
 }

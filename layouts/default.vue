@@ -33,10 +33,18 @@
           </div>
           <div class="mr-2">
             <NuxtLink
+              v-if="!authentication.isAuthenticated"
               to="/login"
               class="bg-blue-800 text-white px-3 py-2 rounded-md text-sm font-medium"
             >
               Login
+            </NuxtLink>
+            <NuxtLink
+              v-if="authentication.isAuthenticated"
+              to="/logout"
+              class="bg-blue-800 text-white px-3 py-2 rounded-md text-sm font-medium"
+            >
+              Logout
             </NuxtLink>
           </div>
         </div>
@@ -51,25 +59,23 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'LayoutDefault',
-  setup () {
-    useMeta({
-      title: 'ioBroker Dashboard',
-      meta: [
-        {
-          name: 'viewport',
-          content: 'width=device-width, initial-scale=1, maximum-scale=1'
-        }
-      ],
-      bodyAttrs: {
-        class: 'h-full'
-      },
-      htmlAttrs: {
-        class: 'h-full bg-gray-100'
-      }
-    })
+<script setup lang="tsx">
+import { useAuthentication } from '~~/stores/authentication'
+const config = useRuntimeConfig()
+const authentication = useAuthentication()
+const title = config.public.projectName ?? 'OurProjects'
+useHead({
+  titleTemplate: title => `${title}`,
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
+  charset: 'utf-8',
+  meta: [
+    { name: 'description', content: 'Automate your life, your home and your special routines' }
+  ],
+  bodyAttrs: {
+    class: 'h-full'
+  },
+  htmlAttrs: {
+    class: 'h-full bg-gray-100'
   }
-}
+})
 </script>

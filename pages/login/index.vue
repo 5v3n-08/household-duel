@@ -13,6 +13,15 @@
                       {{ config.public.projectName }}
                     </h4>
                   </div>
+                  <v-alert color="error">
+                    {{ authentication.isAuthenticated }}
+                  </v-alert>
+                  {{ config.public.demouser.username }}
+                  <v-alert color="error">
+                    {{ authentication.getUserToken }}
+                  </v-alert>
+                  {{ config.public.development }}
+                  {{ JSON.stringify(currentUser, null, 2) }}
                   <form>
                     <p class="mb-4 text-center">
                       {{ $t('login.title') }}
@@ -22,28 +31,22 @@
                     </v-alert>
                     <div class="mb-4">
                       <ui-input
-                        v-model="email" :disabled="isLoading" class="mb-2" :label="$t('login.username')"
+                        v-model="email" :disabled="isLoading" :loading="isLoading" class="mb-2" :label="$t('login.username')"
                         label-in-input type="email" :rules="[validateRequired]"
                       />
                     </div>
                     <div class="mb-4">
                       <ui-input
                         v-model="password" class="mt-2" :label="$t('login.password')" label-in-input
-                        :disabled="isLoading" type="password" :rules="[validateRequired]"
+                        :disabled="isLoading" :loading="isLoading" type="password" :rules="[validateRequired]"
                       />
                     </div>
                     <div class="text-center pt-1 mb-12 pb-1">
-                      {{ !email }}
-                      {{ !password }}
-                      <v-progress-circular
-                        v-if="isLoading" :size="70" :width="7" indeterminate color="primary"
-                      />
-                      <ui-button :disabled="!password || !email" @click="onLoginClick()">
+                      <ui-button :disabled="!password || !email" block @click="onLoginClick()">
                         {{ $t('login.button') }}
                       </ui-button>
                       <a class="text-gray-500" href="#">Forgot password?</a>
                     </div>
-                    <div class="bg-sky-700 aspect-square" />
                     <div class="flex items-center justify-between pb-6">
                       <p class="mb-0 mr-2">
                         {{ $t('login.noAccount') }}
@@ -82,47 +85,67 @@
 
 <script setup lang="tsx">
 import _ from 'lodash'
-import { ILoginData, ILoginError, useBackend } from '~~/composables/useBackend'
+import { ILoginError, useBackend } from '~~/composables/useBackend'
 import { API } from '~~/helpers/api'
 import { useGlobalStore } from '~~/stores/global'
 
 import { validateRequired } from '~~/helpers/validation'
+import { useAuthentication } from '~~/stores/authentication'
+import { useAuth } from '~~/composables/auth/useAuth'
+import { useAuthUser } from '~~/composables/auth/useAuthUser'
+interface ILoginData {
+  driver: string;
+  username: string;
+  password: string;
+}
+interface ILoginReturnData {
+  token?: string;
+}
 const { locale } = useI18n()
 definePageMeta({
   layout: 'blank'
 })
-const email = useState('email', () => '')
-const password = useState('password', () => '')
+const email = ref('')
+const password = ref('')
 const isLoading = ref(false)
 const hasError = reactive({ msg: null })
 let error2 = ref()
 const config = useRuntimeConfig()
 const globalStore = useGlobalStore()
-// const reqError = ref<string | null>(null);
-
-type ILoginDataAndError = ILoginData | ILoginError;
+const authentication = useAuthentication()
+const { login } = useAuth()
+const currentUser = useAuthUser()
 
 const onLoginClick = async () => {
-  const { pending, data, error, refresh } = await useBackend<ILoginDataAndError>(API.authentication.oauth, {
-    driver: 'username',
-    username: email.value,
-    password: password.value
-  })
-  console.log('test')
   isLoading.value = true
-  refresh().then(() => {
-    console.log(pending.value)
-    console.log(data.value)
-    console.log(error.value)
-  })
-  // if (error.value?.data?.message) {
-  //   console.log('err found')
-  //   hasError.msg = _.get(error, 'value.data.message')
+  // await login(email.value, password.value, true)
+  // const { pending, data, error, refresh } = await useBackend<ILoginReturnData>(`${API.authentication.oauth}`,
+  //   {
+  //     driver: 'username',
+  //     username: email.value,
+  //     password: password.value
+  //   },
+  //   EHttpMethods.POST
+  // )
+
+  // if (data.value?.token) {
+  //   console.log('user successful authenticated with token => ' + data.value.token)
+  //   authentication.userAuthenticated({ token: data.value.token })
+  //   return navigateTo('/dashboard')
   // }
   setTimeout(() => {
     isLoading.value = false
-  }, 5000)
+    navigateTo('/dashboard')
+  }, 2000)
 }
+onMounted(() => {
+  console.log('mounted')
+  console.log(config.public.demouser.username + ' => ' + config.public.demouser.password)
+  console.log(email.value + ' => ' + password.value)
+  email.value = config.public.development ? config.public.demouser.username : null
+  password.value = config.public.development ? config.public.demouser.password : null
+  console.log(email.value + ' => ' + password.value)
+})
 </script>
 
 <style scoped>

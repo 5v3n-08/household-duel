@@ -24,7 +24,7 @@ export default defineNuxtConfig({
   ],
   vite: {
     define: {
-      'process.env.DEBUG': false
+      'process.env.DEBUG': true
     }
   },
   head () {
@@ -58,9 +58,14 @@ export default defineNuxtConfig({
     apiSecret: '123',
     // Keys within public, will be also exposed to the client-side
     public: {
-      apiBase: '/api',
-      baseUrl: '',
-      projectName: 'OurProjects-Cloud'
+      development: process.env.NODE_ENV !== 'production',
+      apiBaseUrl: '',
+      apiBasePath: '/api',
+      projectName: 'OurProjects-Cloud',
+      demouser: {
+        username: '',
+        password: ''
+      }
     }
   },
   loadingIndicator: {
