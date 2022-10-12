@@ -57,7 +57,7 @@
     "lodash": "^4.17.21",
     "pinia": "^2.0.22",
     "pinia-orm": "^1.0.3",
-    "sweetalert2": "^11.4.34",
+    "sweetalert2": "^11.5.1",
     "uuid": "^9.0.0"
   }
 }
