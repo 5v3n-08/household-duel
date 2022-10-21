@@ -2,6 +2,10 @@
   // https://v3.nuxtjs.org/concepts/typescript
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
-    "types": ["@nuxt/types", "@pinia/nuxt", "@nuxtjs/i18n"]
+    "types": [
+      "@nuxt/types",
+      "@pinia/nuxt",
+      "@nuxtjs/i18n"
+    ]
   }
 }

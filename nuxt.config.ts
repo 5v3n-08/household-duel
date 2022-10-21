@@ -2,12 +2,15 @@ import { defineNuxtConfig } from 'nuxt'
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  css: ['@/assets/styles/main.css', 'vuetify/lib/styles/main.sass'],
+  ssr: false,
+  css: ['@/assets/styles/main.css', 'vuetify/lib/styles/main.sass', '@/assets/styles/scss/index.scss'],
   build: {
     transpile: ['vuetify']
   },
   modules: [
-    // ...
+    // Webfontloader not working at the moment
+    // error: serialize is not defined
+    // ['nuxt-webfontloader', { proxyHeaders: false }],
     [
       '@pinia/nuxt',
       {
@@ -20,13 +23,51 @@ export default defineNuxtConfig({
       }
     ],
     '@nuxtjs/i18n',
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@vueuse/nuxt'
   ],
+  // nuxt configurations
+  typescript: {
+    shim: false
+  },
+  runtimeConfig: {
+    // The private keys which are only available within server-side
+    apiSecret: '123',
+    // Keys within public, will be also exposed to the client-side
+    public: {
+      development: process.env.NODE_ENV !== 'production',
+      apiBaseUrl: '',
+      apiBasePath: '/api',
+      projectName: 'OurProjects-Cloud',
+      demouser: {
+        username: '',
+        password: ''
+      },
+      serviceUserToken: ''
+    }
+  },
   vite: {
     define: {
       'process.env.DEBUG': true
     }
   },
+  loadingIndicator: {
+    name: 'rotating-plane',
+    color: 'blue',
+    background: 'red'
+  },
+  loading: {
+    color: 'DodgerBlue',
+    height: '10px'
+  },
+  // plugin configs
+  // Webfontloader not working at the moment
+  // error: serialize is not defined
+  // webfontloader: {
+  //   google: {
+  //     families: ['Inter:100,200,300,400,500,600,700&display=swap'] // Loads Lato font with weights 400 and 700
+  //   }
+  // },
   head () {
     // needed for SEO metadata @nuxtjs/i18n plugin
     return this.$nuxtI18nHead({ addSeoAttributes: true })
@@ -49,32 +90,5 @@ export default defineNuxtConfig({
     },
     lazy: true,
     langDir: 'locales/'
-  },
-  typescript: {
-    shim: false
-  },
-  runtimeConfig: {
-    // The private keys which are only available within server-side
-    apiSecret: '123',
-    // Keys within public, will be also exposed to the client-side
-    public: {
-      development: process.env.NODE_ENV !== 'production',
-      apiBaseUrl: '',
-      apiBasePath: '/api',
-      projectName: 'OurProjects-Cloud',
-      demouser: {
-        username: '',
-        password: ''
-      }
-    }
-  },
-  loadingIndicator: {
-    name: 'rotating-plane',
-    color: 'blue',
-    background: 'red'
-  },
-  loading: {
-    color: 'DodgerBlue',
-    height: '10px'
   }
 })

@@ -19,7 +19,7 @@
                   class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
                   aria-current="page"
                 >
-                  Dashboard
+                  Home
                 </NuxtLink>
 
                 <NuxtLink
@@ -35,14 +35,21 @@
             <NuxtLink
               v-if="!authentication.isAuthenticated"
               to="/login"
-              class="bg-blue-800 text-white px-3 py-2 rounded-md text-sm font-medium"
+              class="bg-blue-800 text-white px-3 py-2 rounded-md text-sm font-medium ml-2"
             >
               Login
             </NuxtLink>
             <NuxtLink
               v-if="authentication.isAuthenticated"
+              to="/dashboard"
+              class="bg-blue-800 text-white px-3 py-2 rounded-md text-sm font-medium ml-2"
+            >
+              Dashboard
+            </NuxtLink>
+            <NuxtLink
+              v-if="authentication.isAuthenticated"
               to="/logout"
-              class="bg-blue-800 text-white px-3 py-2 rounded-md text-sm font-medium"
+              class="bg-blue-800 text-white px-3 py-2 rounded-md text-sm font-medium ml-2"
             >
               Logout
             </NuxtLink>

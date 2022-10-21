@@ -2,16 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-.main-body {
-  @apply bg-cyan-900 text-stone-100;
-}
-
-.theme-light {
-  --background: #f8f8f8;
-  --text: #313131;
-}
-
-.theme-dark {
-  --background: #313131;
-  --text: #f8f8f8;
-}

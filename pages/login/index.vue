@@ -13,22 +13,10 @@
                       {{ config.public.projectName }}
                     </h4>
                   </div>
-                  <v-alert color="error">
-                    {{ authentication.isAuthenticated }}
-                  </v-alert>
-                  {{ config.public.demouser.username }}
-                  <v-alert color="error">
-                    {{ authentication.getUserToken }}
-                  </v-alert>
-                  {{ config.public.development }}
-                  {{ JSON.stringify(currentUser, null, 2) }}
                   <form>
                     <p class="mb-4 text-center">
                       {{ $t('login.title') }}
                     </p>
-                    <v-alert v-if="globalStore.getError.msg" border="start" color="error" class="mt-3 mb-3">
-                      {{ globalStore.getError.msg }}
-                    </v-alert>
                     <div class="mb-4">
                       <ui-input
                         v-model="email" :disabled="isLoading" :loading="isLoading" class="mb-2" :label="$t('login.username')"
@@ -54,7 +42,7 @@
                       <ui-button
                         type="button" class="text-red-900" data-mdb-ripple="true"
                         style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)"
-                        data-mdb-ripple-color="light" :disabled="isLoading"
+                        data-mdb-ripple-color="light" :disabled="isLoading" @click="navigateTo('/')"
                       >
                         {{ $t('login.backToHome') }}
                       </ui-button>
@@ -85,66 +73,33 @@
 
 <script setup lang="tsx">
 import _ from 'lodash'
-import { ILoginError, useBackend } from '~~/composables/useBackend'
-import { API } from '~~/helpers/api'
-import { useGlobalStore } from '~~/stores/global'
 
 import { validateRequired } from '~~/helpers/validation'
 import { useAuthentication } from '~~/stores/authentication'
-import { useAuth } from '~~/composables/auth/useAuth'
-import { useAuthUser } from '~~/composables/auth/useAuthUser'
-interface ILoginData {
-  driver: string;
-  username: string;
-  password: string;
-}
-interface ILoginReturnData {
-  token?: string;
-}
 const { locale } = useI18n()
 definePageMeta({
-  layout: 'blank'
+  layout: 'blank',
+  middleware: 'guest-only'
 })
 const email = ref('')
 const password = ref('')
 const isLoading = ref(false)
-const hasError = reactive({ msg: null })
-let error2 = ref()
 const config = useRuntimeConfig()
-const globalStore = useGlobalStore()
 const authentication = useAuthentication()
-const { login } = useAuth()
-const currentUser = useAuthUser()
 
 const onLoginClick = async () => {
   isLoading.value = true
-  // await login(email.value, password.value, true)
-  // const { pending, data, error, refresh } = await useBackend<ILoginReturnData>(`${API.authentication.oauth}`,
-  //   {
-  //     driver: 'username',
-  //     username: email.value,
-  //     password: password.value
-  //   },
-  //   EHttpMethods.POST
-  // )
-
-  // if (data.value?.token) {
-  //   console.log('user successful authenticated with token => ' + data.value.token)
-  //   authentication.userAuthenticated({ token: data.value.token })
-  //   return navigateTo('/dashboard')
-  // }
+  const user = await authentication.login(email.value, password.value, true)
+  console.log('login finished' + user)
   setTimeout(() => {
     isLoading.value = false
     navigateTo('/dashboard')
+    console.log('login finished 2' + user)
   }, 2000)
 }
 onMounted(() => {
-  console.log('mounted')
-  console.log(config.public.demouser.username + ' => ' + config.public.demouser.password)
-  console.log(email.value + ' => ' + password.value)
   email.value = config.public.development ? config.public.demouser.username : null
   password.value = config.public.development ? config.public.demouser.password : null
-  console.log(email.value + ' => ' + password.value)
 })
 </script>
 

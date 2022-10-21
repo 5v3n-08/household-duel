@@ -1,6 +1,9 @@
 import _ from 'lodash'
 import { UseFetchOptions } from 'nuxt/dist/app/composables/fetch'
+// eslint-disable-next-line camelcase
+import jwt_decode from 'jwt-decode'
 import { useGlobalStore } from '~~/stores/global'
+import { useAuthentication } from '~~/stores/authentication'
 
 export enum EHttpMethods {
   GET = 'get',
@@ -10,7 +13,7 @@ export enum EHttpMethods {
   PUT = 'put'
 }
 
-export interface ILoginError {
+export interface INestError {
   message: string;
   path: string;
   stack: string;
@@ -25,23 +28,33 @@ export const useBackend = async <ReturnData>(
 ) => {
   const config = useRuntimeConfig()
   const globalStore = useGlobalStore()
+  const authentication = useAuthentication()
 
-  if (!config.apiBaseUrl || (_.isString(config.apiBaseUrl) && config.apiBaseUrl.length <= 0)) {
+  if (!config.public.apiBaseUrl || (_.isString(config.public.apiBaseUrl) && config.public.apiBaseUrl.length <= 0)) {
     throw new Error('Please define a NUXT_PUBLIC_API_BASE_URL in your .env file!')
   }
-  if (!config.apiBasePath || (_.isString(config.apiBasePath) && config.apiBasePath.length <= 0)) {
+  if (!config.public.apiBasePath || (_.isString(config.public.apiBasePath) && config.public.apiBasePath.length <= 0)) {
     throw new Error('Please define a NUXT_PUBLIC_API_BASE_PATH in your .env file!')
   }
 
   let _method = method ?? EHttpMethods.GET
   if (!method && !_.isEmpty(data)) { _method = EHttpMethods.POST }
 
-  return await useFetch<ReturnData, ILoginError>(url, {
+  // Check if accessToken is expired and try to get a new one with refreshToken otherwise, redirect to login page
+  if (authentication.isAuthenticated && authentication.getAccessToken) {
+    let decoded = jwt_decode(authentication.getAccessToken)
+
+    console.log(decoded)
+  }
+
+  return await useFetch<ReturnData, INestError>(url, {
     body: data,
     method: _method,
     baseURL: `${config.public.apiBaseUrl}${config.public.apiBasePath}`,
     headers: {
-      PROJECT: 'OURPROJECTS-CLOUD'
+      PROJECT: 'OURPROJECTS-CLOUD',
+      Authorization: authentication.getAccessToken ? 'Bearer ' + authentication.getAccessToken : undefined,
+      Refresh: authentication.getRefreshToken
     },
     ...{ options },
     async onRequestError ({ request, options, error }) {
@@ -56,7 +69,7 @@ export const useBackend = async <ReturnData>(
     async onResponseError ({ request, response, options }) {
       // Handle the response errors
       // Validation error
-      const data: ILoginError = response._data
+      const data: INestError = response._data
       if (data.statusCode === 400 || data.statusCode === 401) {
         Toast.fire({
           html: data.message.replace(';', '<br />'),
@@ -64,7 +77,7 @@ export const useBackend = async <ReturnData>(
         })
       }
       // globalStore.setError(response._data.message, response._data.statusCode)
-      console.log('[fetch response error]', request, response)
+      console.log('[fetch response error]', request, response._data.message)
       // globalStore.setError(error.message, error.statusCode)
       return response._data
     }

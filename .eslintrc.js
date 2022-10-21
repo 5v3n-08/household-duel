@@ -28,6 +28,7 @@ module.exports = {
     'prefer-const': 'off',
     'require-await': 'off',
     'vue/max-attributes-per-line': 'off',
-    'vue/no-unused-components': 'off'
+    'vue/no-unused-components': 'off',
+    'vue/no-multiple-template-root': 'off'
   }
 }
