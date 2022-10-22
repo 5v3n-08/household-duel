@@ -47,7 +47,7 @@
 
       <!-- 👉 Pages -->
       <div class="layout-page-content">
-        <RouterView />
+        <slot />
       </div>
 
       <!-- 👉 Footer -->
