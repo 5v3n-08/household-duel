@@ -63,7 +63,7 @@
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
     "nuxt-webfontloader": "^1.1.0",
-    "pinia": "^2.0.22",
+    "pinia": "^2.0.23",
     "pinia-orm": "^1.0.4",
     "sweetalert2": "^11.6.1",
     "uuid": "^9.0.0"
