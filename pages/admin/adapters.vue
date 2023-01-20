@@ -60,9 +60,9 @@
 
 <script setup lang="tsx">
 import { Ref } from 'vue'
-import { IAdapter } from './types/adapters'
 import { API } from '~~/helpers/api'
 import RestApi from '~~/services/RestApi'
+import { IAdapter } from '~~/types'
 
 definePageMeta({
   layout: 'admin',
@@ -92,16 +92,16 @@ const { pending: loadingTableData, data: tableData, refresh } = await RestApi.ge
 const editModal = ref(false)
 const itemToEdit: Ref<IAdapter | null> = ref(null)
 
-const onEditClick = (item) => {
+const onEditClick = (item: IAdapter) => {
   editModal.value = true
   itemToEdit.value = item
 }
 
 const onSaveChanges = async () => {
   editModal.value = false
-  const { pending: loadingUpdateData, data, refresh } = await RestApi.patch<IAdapter[]>(API.adapter.update + '/' + itemToEdit.value.id, {
-    name: itemToEdit.value.name,
-    description: itemToEdit.value.description
+  const { pending: loadingUpdateData, data, refresh } = await RestApi.patch<IAdapter[]>(API.adapter.update + '/' + itemToEdit.value?.id, {
+    name: itemToEdit.value?.name,
+    description: itemToEdit.value?.description
   })
 }
 </script>
