@@ -50,11 +50,12 @@
     "stylelint-config-standard": "^29.0.0",
     "stylelint-config-standard-scss": "^5.0.0",
     "vue-gtag-next": "^1.14.0",
+    "vue-i18n": "^9.2.2",
     "vue3-perfect-scrollbar": "^1.6.0",
     "vuetify": "^3.0.0-beta.14"
   },
   "dependencies": {
-    "@nuxtjs/i18n": "^8.0.0-beta.1",
+    "@nuxtjs/moment": "^1.6.1",
     "@pinia-orm/nuxt": "^1.1.1",
     "@pinia/nuxt": "^0.4.3",
     "bcryptjs": "^2.4.3",
