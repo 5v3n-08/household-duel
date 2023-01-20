@@ -1,4 +1,4 @@
-import { defineNuxtConfig } from 'nuxt'
+import { defineNuxtConfig } from 'nuxt/config'
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -23,7 +23,9 @@ export default defineNuxtConfig({
       }
     ],
     '@nuxtjs/tailwindcss',
-    '@vueuse/nuxt',
+    '@vueuse/nuxt'
+  ],
+  buildModules: [
     ['@nuxtjs/moment', {
       defaultLocale: 'de',
       locales: ['de']
