@@ -18,25 +18,23 @@ const props = defineProps({
         v-bind="item.icon"
         class="nav-item-icon"
       />
-      <TransitionGroup name="transition-slide-x">
-        <!-- 👉 Title -->
-        <span
-          key="title"
-          class="nav-item-title"
-        >
-          {{ item.title }}
-        </span>
+      <!-- 👉 Title -->
+      <span
+        key="title"
+        class="nav-item-title"
+      >
+        {{ item.title }}
+      </span>
 
-        <!-- 👉 Badge -->
-        <span
-          v-if="item.badgeContent"
-          key="badge"
-          class="nav-item-badge"
-          :class="item.badgeClass"
-        >
-          {{ item.badgeContent }}
-        </span>
-      </TransitionGroup>
+      <!-- 👉 Badge -->
+      <span
+        v-if="item.badgeContent"
+        key="badge"
+        class="nav-item-badge"
+        :class="item.badgeClass"
+      >
+        {{ item.badgeContent }}
+      </span>
     </NuxtLink>
   </li>
 </template>

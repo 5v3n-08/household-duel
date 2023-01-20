@@ -16,15 +16,18 @@ export default defineNuxtConfig({
       {
         autoImports: [
           // automatically imports `defineStore`
-          'defineStore', // import { defineStore } from 'pinia'
+          // 'defineStore', // import { defineStore } from 'pinia'
           // automatically imports `defineStore` as `definePiniaStore`
           ['defineStore', 'definePiniaStore'] // import { defineStore as definePiniaStore } from 'pinia'
         ]
       }
     ],
-    '@nuxtjs/i18n',
     '@nuxtjs/tailwindcss',
-    '@vueuse/nuxt'
+    '@vueuse/nuxt',
+    ['@nuxtjs/moment', {
+      defaultLocale: 'de',
+      locales: ['de']
+    }]
   ],
   // nuxt configurations
   typescript: {

@@ -1,15 +1,12 @@
 <template>
   <div class="w-full">
-    <label v-if="!labelInInput" class="block text-gray-500 font-bold pl-1 mb-1" for="inline-full-name">
+    <label v-if="!!labelInInput" class="block text-gray-500 font-bold pl-1 mb-1" for="inline-full-name">
       {{ label }}
     </label>
 
     <v-text-field
-      :disabled="disabled"
-      :type="type ?? 'text'"
+      v-bind="props"
       :placeholder="labelInInput ? label : undefined"
-      :loading="loading"
-      :value="modelValue"
       @input="onInput"
     />
     <div v-if="error" class="text-sm text-red-700 mt-1">

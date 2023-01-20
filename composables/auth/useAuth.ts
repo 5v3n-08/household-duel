@@ -3,6 +3,7 @@ import jwt_decode from 'jwt-decode'
 import { useIsAuthenticated, useAuthUser } from './useAuthUser'
 import { API } from '~~/helpers/api'
 import { IUser } from '~~/types'
+import { RestApi } from '~~/services/RestApi'
 
 interface IAuthenticationMeData {
   authUserId?: string;
@@ -61,13 +62,12 @@ export const useAuth2 = () => {
     password: string,
     rememberMe: boolean
   ) => {
-    const { pending, data, error, refresh } = await useBackend<ILoginReturnData>(API.authentication.oauth,
+    const { pending, data, error, refresh } = await RestApi.post<ILoginReturnData>(API.authentication.oauth,
       {
         driver: 'username',
         username: email,
         password
-      },
-      EHttpMethods.POST
+      }
     )
     console.log('route /login data => ' + data.value)
     console.log('route /login error => ' + error.value)
@@ -79,8 +79,7 @@ export const useAuth2 = () => {
     return getUser
   }
 
-  const authenticateUser = async (accessToken: string, refreshToken: string, user: User) => {
-    console.log('authenticated => ' + accessToken)
+  const authenticateUser = async (accessToken: string, refreshToken: string, user: IUser) => {
     isAuthenticated.value = true
     setUser(user)
     setAccessToken(accessToken)
@@ -88,7 +87,7 @@ export const useAuth2 = () => {
   }
 
   const logout = () => {
-    // const { pending, data, error, refresh } = await useBackend<IAuthenticationLogoutData>(API.authentication.logout)
+    // const { pending, data, error, refresh } = await RestApi.get<IAuthenticationLogoutData>(API.authentication.logout)
 
     setUser(null)
     setAccessToken(undefined)
@@ -103,7 +102,7 @@ export const useAuth2 = () => {
     }
     if (!getUser) {
       try {
-        const { pending, data, error, refresh } = await useBackend<IAuthenticationMeData>(API.authentication.me)
+        const { pending, data, error, refresh } = await RestApi.get<IAuthenticationMeData>(API.authentication.me)
 
         console.log('route /me data => ' + data.value)
         console.log('route /me error => ' + error.value)

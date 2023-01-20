@@ -14,9 +14,7 @@
                 <img src="../assets/logo.svg" width="80" height="80">
               </div>
 
-              <transition name="fade" mode="out-in">
-                <router-view />
-              </transition>
+              <slot />
             </v-card-text>
           </base-material-card>
         </v-sheet>

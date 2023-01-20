@@ -8,11 +8,9 @@
       <!-- ℹ️ You can also use img tag or VImg here -->
       <!-- <VImg src="/ourprojects_logo.png" /> -->
 
-      <Transition name="vertical-nav-app-title">
-        <h1 class="font-weight-semibold leading-normal text-xl text-uppercase">
-          {{ title }}
-        </h1>
-      </Transition>
+      <h1 class="font-weight-semibold leading-normal text-xl text-uppercase">
+        {{ title }}
+      </h1>
     </NuxtLink>
   </div>
 
@@ -27,7 +25,7 @@
     />
 
     <!-- 👉 Account specific -->
-    <LayoutsAdminVerticalNavSidenavSectionTitle :item="{ heading: 'Account' }" />
+    <LayoutsAdminVerticalNavSidenavSectionTitle :item="{ heading: $t('sidenav.categories.account') }" />
     <LayoutsAdminVerticalNavSidenavLink
       :item="{
         title: $t('sidenav.accountSettings'),
@@ -44,13 +42,38 @@
     />
 
     <!-- 👉 Apps -->
-    <LayoutsAdminVerticalNavSidenavSectionTitle :item="{ heading: 'Apps' }" />
+    <LayoutsAdminVerticalNavSidenavSectionTitle :item="{ heading: $t('sidenav.categories.apps') }" />
 
     <LayoutsAdminVerticalNavSidenavLink
       :item="{
         title: $t('sidenav.taskDuel'),
         to: '/taskduel',
         icon: { icon: 'mdi-fencing' }
+      }"
+    />
+
+    <!-- 👉 Administration -->
+    <LayoutsAdminVerticalNavSidenavSectionTitle :item="{ heading: $t('sidenav.categories.admin') }" />
+    <LayoutsAdminVerticalNavSidenavLink
+      :item="{
+        title: $t('sidenav.instances'),
+        to: '/admin/instances',
+        icon: { icon: 'mdi-apps' },
+        category: {
+          title: $t('sidenav.categories.admin'),
+          to: ''
+        }
+      }"
+    />
+    <LayoutsAdminVerticalNavSidenavLink
+      :item="{
+        title: $t('sidenav.adapters'),
+        to: '/admin/adapters',
+        icon: { icon: 'mdi-apps' },
+        category: {
+          title: $t('sidenav.categories.admin'),
+          to: ''
+        }
       }"
     />
   </ul>

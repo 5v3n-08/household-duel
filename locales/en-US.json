@@ -20,7 +20,14 @@
   "sidenav": {
     "dashboard": "Dashboard",
     "accountSettings": "Account Settings",
-    "taskDuel": "Task Duel"
+    "taskDuel": "Task Duel",
+    "categories": {
+      "account": "Account",
+      "apps": "Apps",
+      "admin": "Administration"
+    },
+    "instances": "Instances",
+    "adapters": "Adapters"
   },
   "dashboard": {
     "widgets": {

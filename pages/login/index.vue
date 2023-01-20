@@ -73,6 +73,7 @@
 
 <script setup lang="tsx">
 import _ from 'lodash'
+import { useI18n } from 'vue-i18n'
 
 import { validateRequired } from '~~/helpers/validation'
 import { useAuthentication } from '~~/stores/authentication'
@@ -90,12 +91,11 @@ const authentication = useAuthentication()
 const onLoginClick = async () => {
   isLoading.value = true
   const user = await authentication.login(email.value, password.value, true)
-  console.log('login finished' + user)
-  setTimeout(() => {
-    isLoading.value = false
+
+  if (user.id) {
     navigateTo('/dashboard')
-    console.log('login finished 2' + user)
-  }, 2000)
+  }
+  isLoading.value = false
 }
 onMounted(() => {
   email.value = config.public.development ? config.public.demouser.username : null

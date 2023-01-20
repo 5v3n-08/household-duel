@@ -2,10 +2,11 @@
   // https://v3.nuxtjs.org/concepts/typescript
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
+    "experimentalDecorators": true,
     "types": [
       "@nuxt/types",
       "@pinia/nuxt",
-      "@nuxtjs/i18n"
+      "@nuxtjs/moment"
     ]
   }
 }

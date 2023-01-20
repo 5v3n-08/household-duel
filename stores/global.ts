@@ -28,7 +28,6 @@ export const useGlobalStore = defineStore('globalStore', {
       this.counter++
     },
     setError (msg: string, code: number) {
-      console.log('globalStore setError')
       this.error.msg = msg
       this.error.code = code
     }

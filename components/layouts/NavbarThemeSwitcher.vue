@@ -35,9 +35,7 @@ const {
   index: currentThemeIndex
 } = useCycleList(themes.map(t => t.name), { initialValue: vuetifyTheme.global.name.value })
 const changeTheme = () => {
-  console.log('current theme => ' + vuetifyTheme.global.name.value)
   vuetifyTheme.global.name.value = getNextThemeName()
-  console.log('new theme => ' + vuetifyTheme.global.name.value)
 }
 const getThemeIcon = computedWithControl(vuetifyTheme.global.name, () => {
   const nextThemeIndex = currentThemeIndex.value + 1 === themes.length ? 0 : currentThemeIndex.value + 1

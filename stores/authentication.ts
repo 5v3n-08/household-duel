@@ -1,5 +1,6 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { API } from '~~/helpers/api'
+import RestApi from '~~/services/RestApi'
 import { IUser, UserWithoutPassword } from '~~/types'
 
 interface IState {
@@ -14,6 +15,11 @@ interface IAuthenticated {
 
 interface IAuthenticationMeData {
   authUserId?: string;
+  User: IUser[];
+  accessToken: string;
+  refreshToken: string;
+}
+interface IAuthenticationRefreshTokenData {
   User: IUser[];
   accessToken: string;
   refreshToken: string;
@@ -77,32 +83,32 @@ export const useAuthentication = defineStore({
       password: string,
       rememberMe: boolean
     ): Promise<IUser | null> {
-      const { pending, data, error, refresh } = await useBackend<ILoginReturnData>(API.authentication.oauth,
+      const { pending, data: loginData, error, refresh } = await RestApi.post<ILoginReturnData>(API.authentication.oauth,
         {
           driver: 'username',
           username: email,
           password
-        },
-        EHttpMethods.POST
+        }
       )
-      refresh()
-      // console.log('route /login data => ' + data.value)
-      // console.log('route /login error => ' + error.value)
-      // console.log('route /login pending => ' + pending.value)
-      if (data.value?.accessToken) {
-        this.authenticateUser(data.value.accessToken, data.value.refreshToken, data.value.User[0])
-        return data.value.User[0]
+      console.log('route ' + API.authentication.oauth + ' data => ' + loginData.value)
+      console.log('route /login error => ' + error.value)
+      console.log('route /login pending => ' + pending.value)
+      if (loginData.value?.accessToken) {
+        this.authenticateUser(loginData.value.accessToken, loginData.value.refreshToken, loginData.value.User[0])
+        return loginData.value.User[0]
+      } else {
+        return null
       }
     },
     authenticateUser (accessToken: string, refreshToken: string, user: IUser) {
-      console.log('authenticated => ' + accessToken)
+      // console.log('authenticated => ' + accessToken)
       this.isAuthenticated = true
       this.setUser(user)
       this.setAccessToken(accessToken)
       this.setRefreshToken(refreshToken)
     },
     logout () {
-      // const { pending, data, error, refresh } = await useBackend<IAuthenticationLogoutData>(API.authentication.logout)
+      // const { pending, data, error, refresh } = await RestApi.get<IAuthenticationLogoutData>(API.authentication.logout)
       this.setUser(null)
       this.setAccessToken(undefined)
       this.setRefreshToken(undefined)
@@ -115,26 +121,68 @@ export const useAuthentication = defineStore({
       }
       if (!this.getUser) {
         try {
-          const { pending, data, error, refresh } = await useBackend<IAuthenticationMeData>(API.authentication.me)
+          const { pending, data, error, refresh } = await RestApi.get<IAuthenticationMeData>(API.authentication.me)
 
-          console.log('route /me data => ' + data.value)
-          console.log('route /me error => ' + error.value)
-          console.log('route /me pending => ' + pending.value)
+          // console.log('route /me data => ' + data.value)
+          // console.log('route /me error => ' + error.value)
+          // console.log('route /me pending => ' + pending.value)
 
           if (data.value.accessToken && data.value.refreshToken) {
             this.authenticateUser(data.value.accessToken, data.value.refreshToken, data.value.User[0])
             return data.value.User[0] ?? null
           } else {
-            console.log('logout user')
-            this.logout()
-            // ToDo: create /logout view to show that user auto logged out / lockscreen?
-            navigateTo('/login')
+            const { data: refreshTokenData } = await RestApi.get<IAuthenticationRefreshTokenData>(API.authentication.refreshToken)
+            if (refreshTokenData.value.accessToken && refreshTokenData.value.refreshToken) {
+              this.authenticateUser(refreshTokenData.value.accessToken, refreshTokenData.value.refreshToken, refreshTokenData.value.User[0])
+            } else {
+              console.log('logout user')
+              // this.logout()
+              // ToDo: create /logout view to show that user auto logged out / lockscreen?
+              // navigateTo('/login')
+            }
           }
         } catch (error) {
           console.log('logout user => error')
-          this.logout()
+          // this.logout()
           // ToDo: create /logout view to show that user auto logged out / lockscreen?
-          navigateTo('/login')
+          // navigateTo('/login')
+        }
+      }
+
+      return null
+    },
+    async getNewAccessTokenByRefreshToken (): Promise<IUser> | null {
+      if (this.getAccessToken === null) {
+        navigateTo('/login')
+        return
+      }
+      if (!this.getUser) {
+        try {
+          const { pending, data, error, refresh } = await RestApi.get<IAuthenticationMeData>(API.authentication.me)
+
+          // console.log('route /me data => ' + data.value)
+          // console.log('route /me error => ' + error.value)
+          // console.log('route /me pending => ' + pending.value)
+
+          if (data.value.accessToken && data.value.refreshToken) {
+            this.authenticateUser(data.value.accessToken, data.value.refreshToken, data.value.User[0])
+            return data.value.User[0] ?? null
+          } else {
+            const { data: refreshTokenData } = await RestApi.get<IAuthenticationRefreshTokenData>(API.authentication.refreshToken)
+            if (refreshTokenData.value.accessToken && refreshTokenData.value.refreshToken) {
+              this.authenticateUser(refreshTokenData.value.accessToken, refreshTokenData.value.refreshToken, refreshTokenData.value.User[0])
+            } else {
+              console.log('logout user')
+              // this.logout()
+              // ToDo: create /logout view to show that user auto logged out / lockscreen?
+              // navigateTo('/login')
+            }
+          }
+        } catch (error) {
+          console.log('logout user => error')
+          // this.logout()
+          // ToDo: create /logout view to show that user auto logged out / lockscreen?
+          // navigateTo('/login')
         }
       }
 

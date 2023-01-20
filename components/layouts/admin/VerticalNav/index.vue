@@ -1,5 +1,5 @@
 <template>
-  <v-container class="layout-wrapper layout-nav-type-vertical">
+  <VLayout class="layout-wrapper layout-nav-type-vertical">
     <VNavigationDrawer
       v-model="drawer"
       app
@@ -31,7 +31,10 @@
     </VAppBar>
     <VMain class="w-100">
       <div class="pa-6">
-        <slot />
+        <Breadcrumbs :key="router.currentRoute.value.name" />
+        <div class="pa-6">
+          <slot />
+        </div>
       </div>
     </VMain>
     <v-footer
@@ -40,11 +43,13 @@
     >
       <slot name="footer" />
     </v-footer>
-  </v-container>
+  </VLayout>
 </template>
 
 <script lang="ts" setup>
 import { useDisplay } from 'vuetify'
+import Breadcrumbs from '../../Breadcrumbs.vue'
+const router = useRouter()
 
 const { lgAndUp, mdAndDown } = useDisplay()
 const drawer = ref(lgAndUp.value)

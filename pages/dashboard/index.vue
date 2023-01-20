@@ -21,3 +21,19 @@ definePageMeta({
   middleware: 'auth'
 })
 </script>
+
+<style lang="scss">
+.triangle-bg {
+  position: absolute;
+  inline-size: 10.375rem;
+  inset-block-end: 0;
+  inset-inline-end: 0;
+}
+
+.ui-card-icon {
+  position: absolute;
+  inline-size: 4.9375rem;
+  inset-block-end: 2rem;
+  inset-inline-end: 2rem;
+}
+</style>
