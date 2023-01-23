@@ -29,7 +29,7 @@
     "@nuxtjs/stylelint-module": "^4.1.0",
     "@nuxtjs/tailwindcss": "^6.1.0",
     "@types/lodash": "^4.14.186",
-    "@types/uuid": "^8.3.4",
+    "@types/uuid": "^9.0.0",
     "@vueuse/core": "^9.3.1",
     "@vueuse/nuxt": "^9.3.1",
     "cypress": "^10.10.0",
