@@ -1,3 +1,4 @@
+import { resolve } from 'path'
 import { defineNuxtConfig } from 'nuxt/config'
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
@@ -24,20 +25,22 @@ export default defineNuxtConfig({
     ],
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt'
-  ],
-  buildModules: [
-    ['@nuxtjs/moment', {
-      defaultLocale: 'de',
-      locales: ['de']
-    }]
+    // ['@nuxtjs/moment', {
+    //   defaultLocale: 'de',
+    //   locales: ['de']
+    // }]
   ],
   // nuxt configurations
   typescript: {
     shim: false
   },
+  plugins: [
+    '~/plugins/vuetify/index.ts'
+  ],
   runtimeConfig: {
     // The private keys which are only available within server-side
     apiSecret: '123',
+    authenticationSecret: 'defaultGithubSecretForSecurity2023',
     // Keys within public, will be also exposed to the client-side
     public: {
       development: process.env.NODE_ENV !== 'production',
@@ -51,20 +54,6 @@ export default defineNuxtConfig({
       serviceUserToken: ''
     }
   },
-  vite: {
-    define: {
-      'process.env.DEBUG': true
-    }
-  },
-  loadingIndicator: {
-    name: 'rotating-plane',
-    color: 'blue',
-    background: 'red'
-  },
-  loading: {
-    color: 'DodgerBlue',
-    height: '10px'
-  },
   // plugin configs
   // Webfontloader not working at the moment
   // error: serialize is not defined
@@ -73,10 +62,6 @@ export default defineNuxtConfig({
   //     families: ['Inter:100,200,300,400,500,600,700&display=swap'] // Loads Lato font with weights 400 and 700
   //   }
   // },
-  head () {
-    // needed for SEO metadata @nuxtjs/i18n plugin
-    return this.$nuxtI18nHead({ addSeoAttributes: true })
-  },
   i18n: {
     locales: [
       {
@@ -95,5 +80,19 @@ export default defineNuxtConfig({
     },
     lazy: true,
     langDir: 'locales/'
+  },
+  // auth: {
+  //   isEnabled: true,
+  //   origin: 'http://localhost:3000',
+  //   basePath: '/api/auth',
+  //   enableSessionRefreshPeriodically: false,
+  //   enableSessionRefreshOnWindowFocus: true,
+  //   enableGlobalAppMiddleware: true,
+  //   globalMiddlewareOptions: {
+  //     allow404WithoutAuth: true
+  //   }
+  // }
+  alias: {
+    images: resolve(__dirname, './assets/images')
   }
 })
