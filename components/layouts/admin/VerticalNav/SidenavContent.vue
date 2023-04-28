@@ -29,7 +29,7 @@
     <LayoutsAdminVerticalNavSidenavLink
       :item="{
         title: $t('sidenav.accountSettings'),
-        to: '',
+        to: '/dashboard/account',
         icon: { icon: 'mdi-account-cog-outline' }
       }"
     />

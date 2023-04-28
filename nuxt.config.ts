@@ -24,7 +24,8 @@ export default defineNuxtConfig({
       }
     ],
     '@nuxtjs/tailwindcss',
-    '@vueuse/nuxt'
+    '@vueuse/nuxt',
+    '@nuxtjs/supabase'
     // ['@nuxtjs/moment', {
     //   defaultLocale: 'de',
     //   locales: ['de']

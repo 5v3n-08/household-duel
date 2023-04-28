@@ -36,6 +36,8 @@ export interface IAuthenticationLogoutData {
   User: IUser[];
 }
 
+const supabase = useSupabaseClient()
+
 export const useAuthentication = defineStore({
   id: 'authentication',
 
@@ -115,6 +117,7 @@ export const useAuthentication = defineStore({
       this.isAuthenticated = false
     },
     async me (): Promise<IUser> | null {
+      const { data: { user: User } } = await supabase.auth.getUser()
       if (this.getAccessToken === null) {
         navigateTo('/login')
         return
@@ -189,8 +192,9 @@ export const useAuthentication = defineStore({
       return null
     },
     async checkSession () {
+      const user = useSupabaseUser()
       // Try to get session again from accessToken with cookie "accessToken"
-      if (this.isAuthenticated === false) {
+      if (!user.value) {
         await this.me()
       }
     }
