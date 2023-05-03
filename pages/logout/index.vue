@@ -48,20 +48,19 @@
 
 <script setup lang="tsx">
 import { useI18n } from 'vue-i18n'
-import { useAuthentication } from '~~/stores/authentication'
+import { logout } from '~/composables/auth/useAuthentication'
 const { locale } = useI18n()
 definePageMeta({
   layout: 'blank',
   middleware: 'auth'
 })
 const config = useRuntimeConfig()
-const authentication = useAuthentication()
 
 const onLoginClick = async () => {
   navigateTo('/login')
 }
 onMounted(async () => {
-  await authentication.logout()
+  await logout()
 })
 </script>
 

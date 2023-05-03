@@ -4,6 +4,8 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
+    "gen:ts": "npx supabase gen types typescript --local > types/database.types.ts",
+    "update-types": "npx supabase gen types typescript --project-id \"$PROJECT_ID\" > types/supabase.ts",
     "prepare": "husky install",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",

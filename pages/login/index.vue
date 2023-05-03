@@ -17,6 +17,25 @@
                     <p class="mb-4 text-center">
                       {{ $t('login.title') }}
                     </p>
+                    <div class="text-center">
+                      <v-chip class="mb-4 text-center">
+                        {{ $t('login.socialMedia') }}
+                      </v-chip>
+                    </div>
+                    <v-btn
+                      class="ma-2"
+                      color="error"
+                      @click="login('google')"
+                    >
+                      <v-icon
+                        start
+                        icon="mdi-google"
+                      />
+                      Google
+                    </v-btn>
+                    <v-alert v-if="errorMsg" type="error" icon="mdi-lock">
+                      {{ errorMsg }}
+                    </v-alert>
                     <div class="mb-4">
                       <ui-input
                         v-model="email" :disabled="isLoading" :loading="isLoading" class="mb-2" :label="$t('login.username')"
@@ -74,32 +93,47 @@
 <script setup lang="tsx">
 import _ from 'lodash'
 import { useI18n } from 'vue-i18n'
+import { loginOAuth, signInWithEmail } from '~/composables/auth/useAuthentication'
 
 import { validateRequired } from '~~/helpers/validation'
-import { useAuthentication } from '~~/stores/authentication'
 const { locale } = useI18n()
 definePageMeta({
   layout: 'blank',
   middleware: 'guest-only'
 })
 const email = ref('')
+const errorMsg = ref('')
 const password = ref('')
 const isLoading = ref(false)
 const config = useRuntimeConfig()
-const authentication = useAuthentication()
+const client = useSupabaseAuthClient()
 
 const onLoginClick = async () => {
   isLoading.value = true
-  const user = await authentication.login(email.value, password.value, true)
+  const loginData = await signInWithEmail(email.value, password.value)
 
-  if (user.id) {
+  if (loginData.data.user) {
     navigateTo('/dashboard')
+  }
+  if (loginData.error) {
+    errorMsg.value = loginData.error.message
   }
   isLoading.value = false
 }
+const login = async (provider: 'github' | 'google' | 'apple') => {
+  const loginData = await loginOAuth(provider)
+  if (loginData.data) {
+    console.log('redirect to dashboard')
+    navigateTo('/dashboard')
+  }
+  if (loginData.error) {
+    errorMsg.value = loginData.error.message
+  }
+}
+
 onMounted(() => {
-  email.value = config.public.development ? config.public.demouser.username : null
-  password.value = config.public.development ? config.public.demouser.password : null
+  email.value = config.public.development ? config.public.demouser.username : ''
+  password.value = config.public.development ? config.public.demouser.password : ''
 })
 </script>
 
