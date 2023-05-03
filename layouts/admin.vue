@@ -57,14 +57,10 @@
 </template>
 
 <script setup lang="tsx">
-import { useAuthentication } from '~~/stores/authentication'
 const config = useRuntimeConfig()
-const authentication = useAuthentication()
 const title = config.public.projectName ?? 'OurProjects'
 useHead({
   titleTemplate: title => `${title}`,
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
-  charset: 'utf-8',
   meta: [
     { name: 'description', content: 'Automate your life, your home and your special routines' }
   ]

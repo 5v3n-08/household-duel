@@ -8,6 +8,7 @@ export const Toast = Swal.mixin({
   showCloseButton: true
 })
 
+// Example, can be called from anywhere
 // Toast.fire({
 //   icon: 'success',
 //   title: 'Example Toast Message'

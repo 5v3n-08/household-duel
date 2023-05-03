@@ -1,4 +1,4 @@
-import { IInstance } from './instances'
+import { IInstance } from './instance'
 
 interface IAdapterProperties {
   license?: string;

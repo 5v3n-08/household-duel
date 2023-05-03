@@ -4,7 +4,6 @@ import { UseFetchOptions } from 'nuxt/dist/app/composables/fetch'
 import jwt_decode from 'jwt-decode'
 import { useRepo } from 'pinia-orm'
 import { useGlobalStore } from '~~/stores/global'
-import { useAuthentication } from '~~/stores/authentication'
 import User from '~~/models/User'
 import Adapter from '~~/models/Adapter'
 
@@ -59,7 +58,7 @@ async function callApi <ReturnData> (url: string,
   options?: UseFetchOptions<unknown>) {
   const config = useRuntimeConfig()
   const globalStore = useGlobalStore()
-  const authentication = useAuthentication()
+  const user = useSupabaseUser().value
 
   if (!config.public.apiBaseUrl || (_.isString(config.public.apiBaseUrl) && config.public.apiBaseUrl.length <= 0)) {
     throw new Error('Please define a NUXT_PUBLIC_API_BASE_URL in your .env file!')
@@ -72,11 +71,11 @@ async function callApi <ReturnData> (url: string,
   if (!method && !_.isEmpty(data)) { _method = EHttpMethods.POST }
 
   // Check if accessToken is expired and try to get a new one with refreshToken otherwise, redirect to login page
-  if (authentication.isAuthenticated && authentication.getAccessToken) {
-    let decoded = jwt_decode(authentication.getAccessToken)
+  // if (user) {
+  //   let decoded = jwt_decode(authentication.getAccessToken)
 
-    console.log(decoded)
-  }
+  //   console.log(decoded)
+  // }
 
   return await useLazyFetch<ReturnData, INestError>(url, <ReturnData>{
     key: _.uniqueId(), // stop nuxt from caching the request. Otherwise its not calling url when url changed

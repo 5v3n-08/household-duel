@@ -60,9 +60,9 @@
 
 <script setup lang="tsx">
 import { Ref } from 'vue'
-import { IInstance } from './types/instances'
 import { API } from '~~/helpers/api'
 import RestApi from '~~/services/RestApi'
+import { IInstance } from '~~/types'
 
 definePageMeta({
   layout: 'admin',
@@ -88,17 +88,24 @@ const { pending: loadingTableData, data: tableData, refresh } = await RestApi.ge
 const editModal = ref(false)
 const itemToEdit: Ref<IInstance | null> = ref(null)
 
-const onEditClick = (item) => {
+const onEditClick = (item: IInstance) => {
   editModal.value = true
   itemToEdit.value = item
 }
 
 const onSaveChanges = async () => {
   editModal.value = false
-  const { pending: loadingUpdateData, data, refresh } = await RestApi.patch<IInstance[]>(API.instance.update + '/' + itemToEdit.value.id, {
-    name: itemToEdit.value.name,
-    description: itemToEdit.value.description
-  })
+  if (itemToEdit.value) {
+    const { pending: loadingUpdateData, data, refresh } = await RestApi.patch<IInstance[]>(API.instance.update + '/' + itemToEdit.value.id, {
+      name: itemToEdit.value.name,
+      description: itemToEdit.value.description
+    })
+  } else {
+    Toast.fire({
+      icon: 'error',
+      title: 'We have problems selecting the item to edit'
+    })
+  }
 }
 </script>
 

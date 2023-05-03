@@ -33,21 +33,21 @@
           </div>
           <div class="mr-2">
             <NuxtLink
-              v-if="!authentication.isAuthenticated"
+              v-if="!isAuthenticated"
               to="/login"
               class="bg-blue-800 text-white px-3 py-2 rounded-md text-sm font-medium ml-2"
             >
               Login
             </NuxtLink>
             <NuxtLink
-              v-if="authentication.isAuthenticated"
+              v-if="isAuthenticated"
               to="/dashboard"
               class="bg-blue-800 text-white px-3 py-2 rounded-md text-sm font-medium ml-2"
             >
               Dashboard
             </NuxtLink>
             <NuxtLink
-              v-if="authentication.isAuthenticated"
+              v-if="isAuthenticated"
               to="/logout"
               class="bg-blue-800 text-white px-3 py-2 rounded-md text-sm font-medium ml-2"
             >
@@ -67,14 +67,13 @@
 </template>
 
 <script setup lang="tsx">
-import { useAuthentication } from '~~/stores/authentication'
 const config = useRuntimeConfig()
-const authentication = useAuthentication()
+const supabase = useSupabaseAuthClient()
+const authentication = await supabase.auth.getSession()
+const isAuthenticated = authentication.data.session
 const title = config.public.projectName ?? 'OurProjects'
 useHead({
   titleTemplate: title => `${title}`,
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
-  charset: 'utf-8',
   meta: [
     { name: 'description', content: 'Automate your life, your home and your special routines' }
   ],

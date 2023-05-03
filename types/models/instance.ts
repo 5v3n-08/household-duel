@@ -1,4 +1,4 @@
-import { IAdapter } from './adapters'
+import { IAdapter } from './adapter'
 import { IUser } from '~~/types'
 
 interface IAdapterProperties {

@@ -12,8 +12,7 @@
 
 <script lang="ts" setup>
 import trophy from '@/assets/images/misc/trophy.png'
-import { useAuthentication } from '~~/stores/authentication'
 
-const authentication = useAuthentication()
-const username = authentication.getUser?.username ?? 'Unknown User'
+const user = useSupabaseUser()
+const username = user.value?.id ?? 'Unknown User'
 </script>

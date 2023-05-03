@@ -3,6 +3,7 @@
   "login": {
     "button": "Login",
     "title": "Login to your account",
+    "socialMedia": "Social Media logins",
     "username": "Username or Email",
     "password": "Password",
     "noAccount": "Don't have an account?",
@@ -22,6 +23,7 @@
     "accountSettings": "Account Settings",
     "taskDuel": "Task Duel",
     "categories": {
+      "dashboard": "Dashboard",
       "account": "Account",
       "apps": "Apps",
       "admin": "Administration"
