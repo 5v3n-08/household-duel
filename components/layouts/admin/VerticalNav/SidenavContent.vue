@@ -16,7 +16,7 @@
 
   <!-- 👉 Nav items -->
   <ul>
-    <LayoutsAdminVerticalNavSidenavLink
+    <LayoutsAdminVerticalNavSidenavLink2
       :item="{
         title: $t('sidenav.dashboard'),
         to: '/dashboard',
@@ -25,15 +25,15 @@
     />
 
     <!-- 👉 Account specific -->
-    <LayoutsAdminVerticalNavSidenavSectionTitle :item="{ heading: $t('sidenav.categories.account') }" />
-    <LayoutsAdminVerticalNavSidenavLink
+    <LayoutsAdminVerticalNavSidenavSectionTitle2 :item="{ heading: $t('sidenav.categories.account') }" />
+    <LayoutsAdminVerticalNavSidenavLink2
       :item="{
         title: $t('sidenav.accountSettings'),
         to: '/dashboard/account',
         icon: { icon: 'mdi-account-cog-outline' }
       }"
     />
-    <LayoutsAdminVerticalNavSidenavLink
+    <LayoutsAdminVerticalNavSidenavLink2
       :item="{
         title: $t('logout.button'),
         to: '/logout',
@@ -42,9 +42,9 @@
     />
 
     <!-- 👉 Apps -->
-    <LayoutsAdminVerticalNavSidenavSectionTitle :item="{ heading: $t('sidenav.categories.apps') }" />
+    <LayoutsAdminVerticalNavSidenavSectionTitle2 :item="{ heading: $t('sidenav.categories.apps') }" />
 
-    <LayoutsAdminVerticalNavSidenavLink
+    <LayoutsAdminVerticalNavSidenavLink2
       :item="{
         title: $t('sidenav.taskDuel'),
         to: '/taskduel',
@@ -53,8 +53,8 @@
     />
 
     <!-- 👉 Administration -->
-    <LayoutsAdminVerticalNavSidenavSectionTitle :item="{ heading: $t('sidenav.categories.admin') }" />
-    <LayoutsAdminVerticalNavSidenavLink
+    <LayoutsAdminVerticalNavSidenavSectionTitle2 :item="{ heading: $t('sidenav.categories.admin') }" />
+    <LayoutsAdminVerticalNavSidenavLink2
       :item="{
         title: $t('sidenav.instances'),
         to: '/admin/instances',
@@ -65,7 +65,7 @@
         }
       }"
     />
-    <LayoutsAdminVerticalNavSidenavLink
+    <LayoutsAdminVerticalNavSidenavLink2
       :item="{
         title: $t('sidenav.adapters'),
         to: '/admin/adapters',

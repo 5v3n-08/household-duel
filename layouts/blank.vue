@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="v-layout--full-height">
     <slot />
   </div>
 </template>

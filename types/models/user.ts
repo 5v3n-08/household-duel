@@ -1,4 +1,5 @@
-import { Database } from '../database.types'
+import { PostgrestSingleResponse } from '@supabase/postgrest-js'
+import { Database } from '../database'
 
 export interface IUserProperties {
   sidenav: {
@@ -7,7 +8,11 @@ export interface IUserProperties {
   }
 }
 
-export type IUser = Database['public']['Tables']['profiles']['Row']
+export type TUser = Database['public']['Tables']['profiles']['Row'] & {
+  full_name: string | null
+}
+
+// export type CUser =
 // export interface IUser {
 //   id: string;
 //   email: string;
@@ -21,9 +26,13 @@ export type IUser = Database['public']['Tables']['profiles']['Row']
 
 // }
 
-export type UserWithoutPassword = Omit<IUser, 'password'>
+export type UserWithoutPassword = Omit<TUser, 'password'>
 
 const supabase = useSupabaseClient()
-export async function getUsers () {
-  return await supabase.from('profiles').select('id, username, email, full_name, avatar_url, website, updated_at')
+export async function getProfiles (): Promise<PostgrestSingleResponse<TUser[]>> {
+  return await supabase.from('profiles').select('id, title, firstname, lastname, avatarurl, avatar_filename, website, updated_at')
 }
+
+type ProfilesResponse = Awaited<ReturnType<typeof getProfiles>>
+export type ProfilesResponseSuccess = ProfilesResponse['data']
+export type ProfilesResponseError = ProfilesResponse['error']

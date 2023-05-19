@@ -6,7 +6,7 @@
     "types": [
       "@nuxt/types",
       "@pinia/nuxt",
-      "@nuxtjs/moment"
+      "@nuxtjs/i18n"
     ]
   }
 }

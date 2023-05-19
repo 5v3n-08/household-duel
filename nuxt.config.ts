@@ -4,7 +4,7 @@ import { defineNuxtConfig } from 'nuxt/config'
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   ssr: false,
-  css: ['@/assets/styles/main.css', 'vuetify/lib/styles/main.sass', '@/assets/styles/scss/index.scss'],
+  css: ['vuetify/lib/styles/main.sass', '@/assets/nitro/styles/_main.scss', '@/assets/fonts/theiconof.css'],
   build: {
     transpile: ['vuetify']
   },
@@ -17,19 +17,48 @@ export default defineNuxtConfig({
       {
         autoImports: [
           // automatically imports `defineStore`
-          // 'defineStore', // import { defineStore } from 'pinia'
+          'defineStore' // import { defineStore } from 'pinia'
           // automatically imports `defineStore` as `definePiniaStore`
-          ['defineStore', 'definePiniaStore'] // import { defineStore as definePiniaStore } from 'pinia'
+          // ['defineStore', 'definePiniaStore'] // import { defineStore as definePiniaStore } from 'pinia'
         ]
       }
     ],
-    '@nuxtjs/tailwindcss',
+    [
+      '@pinia-orm/nuxt',
+      {
+        autoImports: [
+          // automatically imports `useRepo`
+          'useRepo' // import { useRepo } from 'pinia-orm'
+        ]
+      }
+    ],
     '@vueuse/nuxt',
-    '@nuxtjs/supabase'
-    // ['@nuxtjs/moment', {
-    //   defaultLocale: 'de',
-    //   locales: ['de']
-    // }]
+    '@nuxtjs/supabase',
+    '@nuxtjs/google-fonts',
+    [
+      'dayjs-nuxt',
+      {
+        defaultLocale: 'de',
+        locales: ['de', 'en'],
+        plugins: ['relativeTime', 'utc', 'timezone'],
+        defaultTimezone: 'Europe/Berlin'
+      }
+    ],
+    [
+      'nuxt-lodash', {
+        prefix: 'use',
+        upperAfterPrefix: true
+      }
+    ],
+    '@vite-pwa/nuxt',
+    '@nuxtjs/i18n'
+    // [
+    //   '@nuxtjs/moment',
+    //   {
+    //     defaultLocale: 'de',
+    //     locales: ['de']
+    //   }
+    // ]
   ],
   // nuxt configurations
   typescript: {
@@ -37,6 +66,12 @@ export default defineNuxtConfig({
   },
   plugins: [
     '~/plugins/vuetify/index.ts'
+  ],
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false
+    }
   ],
   runtimeConfig: {
     // The private keys which are only available within server-side
@@ -52,33 +87,31 @@ export default defineNuxtConfig({
         username: '',
         password: ''
       },
-      serviceUserToken: ''
+      serviceUserToken: '',
+      redirectUrl: 'https://ourprojects.de'
     }
   },
-  // plugin configs
-  // Webfontloader not working at the moment
-  // error: serialize is not defined
-  // webfontloader: {
-  //   google: {
-  //     families: ['Inter:100,200,300,400,500,600,700&display=swap'] // Loads Lato font with weights 400 and 700
-  //   }
-  // },
+  googleFonts: {
+    display: 'swap',
+    families: {
+      Roboto: [100, 300, 400, 500, 700, 900],
+      Montserrat: [400, 500, 600, 700]
+    }
+  },
   i18n: {
     locales: [
       {
-        code: 'en',
+        code: 'us',
+        name: 'English',
         file: 'en-US.json'
       },
       {
         code: 'de',
+        name: 'German',
         file: 'de-DE.json'
       }
     ],
-    defaultLocale: 'en',
-    vueI18n: {
-      legacy: false,
-      locale: 'en'
-    },
+    defaultLocale: 'de',
     lazy: true,
     langDir: 'locales/'
   },

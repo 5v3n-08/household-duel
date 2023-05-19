@@ -1,5 +1,5 @@
 <template>
-  <v-breadcrumbs :items="generatedBreadcrumbs">
+  <v-breadcrumbs :items="generatedBreadcrumbs" class="v-theme--dark">
     <template #divider>
       <v-icon icon="mdi-chevron-right" />
     </template>
@@ -9,11 +9,11 @@
   </v-breadcrumbs>
 </template>
 
-<script lang="ts" setup>import { Ref } from 'vue'
-import { useI18n } from 'vue-i18n'
+<script lang="ts" setup>
+import { Ref } from 'vue'
 
 const router = useRouter()
-const i18nMessage = useI18n().t
+const { t: i18nMessage } = useI18n()
 
 const link: Ref<string | boolean> = ref(false)
 const routePaths = router.currentRoute.value.path.substring(1).split('/')
@@ -21,7 +21,7 @@ const routeBefore = ref('/')
 
 const generatedBreadcrumbs = computed(() => {
   const items = ref([{
-    title: 'Dashboard',
+    title: i18nMessage('sidenav.home'),
     disabled: false,
     href: '/dashboard'
   }])

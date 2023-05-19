@@ -2,23 +2,28 @@
   "welcome": "Welcome",
   "login": {
     "button": "Login",
+    "registerButton": "Sign In",
     "title": "Login to your account",
     "socialMedia": "Social Media logins",
-    "username": "Username or Email",
+    "email": "Email",
     "password": "Password",
     "noAccount": "Don't have an account?",
     "forgotPassword": "Forgot password?",
     "description": {
-      "title": "Your home starts here",
-      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      "title": "Organize yourself",
+      "text": "Your journey to self-organization begins here"
     },
-    "backToHome": "Back to home"
+    "backToHome": "Back to home",
+    "welcome": {
+      "title": "Registration successfully"
+    }
   },
   "logout": {
     "title": "Successfully logged out",
     "button" :"Logout"
   },
   "sidenav": {
+    "home": "Home",
     "dashboard": "Dashboard",
     "accountSettings": "Account Settings",
     "taskDuel": "Task Duel",
@@ -37,5 +42,51 @@
         "title": "User Informations"
       }
     }
+  },
+  "buttons": {
+    "save": "Save Changes",
+    "cancel": "Cancel"
+  },
+  "profile": {
+    "joined": "Joined",
+    "basicInfos": "Basic Informations",
+    "firstname": "Firstname",
+    "firstnameRequired": "Insert your firstname",
+    "lastname": "Lastname",
+    "lastnameRequired": "Insert your name",
+    "title": "Title",
+    "emailRequired": "Insert your email address",
+    "emailInvalid": "Insert a valid email address",
+    "password": {
+      "title": "Password",
+      "current": "Current Password",
+      "new": "New Password",
+      "confirm": "Confirm Password",
+      "required": {
+        "title": "Password requirements:",
+        "subTitle": "Ensure that these requirements are met:",
+        "minLength": "Minimum 8 characters long - the more, the better",
+        "minLengthDesc": "Your password needs to be 8 characters long or more",
+        "minLowercase": "At least one lowercase character",
+        "minLowercaseDesc": "Your passwords needs at least one lowercase character",
+        "minUppercase": "At least one uppercase character",
+        "minUppercaseDesc": "Your passwords needs at least one uppercase character",
+        "minNumber": "At least one number",
+        "minNumberDesc": "Your passwords needs at least one number",
+        "minSpecialChar": "At leat one special character",
+        "minSpecialCharDesc": "Your passwords needs at least one special character",
+        "confirmMatch": "New passwords match",
+        "dontConfirmMatch": "New passwords don't match"
+      },
+      "changed": {
+        "success": "Password successfully changed",
+        "failed": "Password change failed",
+        "wrongPassword": "The password you entered was incorrect"
+      }
+    }
+  },
+  "validations": {
+    "required": "This field is required",
+    "minLength": "Field doesn't have enough characters"
   }
 }

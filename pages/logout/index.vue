@@ -47,9 +47,7 @@
 </template>
 
 <script setup lang="tsx">
-import { useI18n } from 'vue-i18n'
 import { logout } from '~/composables/auth/useAuthentication'
-const { locale } = useI18n()
 definePageMeta({
   layout: 'blank',
   middleware: 'auth'

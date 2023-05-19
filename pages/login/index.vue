@@ -1,102 +1,115 @@
 <template>
-  <section class="h-full gradient-form bg-gray-200 md:h-screen">
-    <div class="container py-12 px-6 h-full w-full">
-      <div class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
-        <div class="xl:w-10/12">
-          <div class="block bg-white shadow-lg rounded-lg">
-            <div class="lg:flex lg:flex-wrap g-0">
-              <div class="lg:w-6/12 px-4 md:px-0">
-                <div class="md:p-12 md:mx-6">
-                  <div class="text-center">
-                    <img class="mx-auto w-48" src="/ourprojects_logo.png" alt="logo">
-                    <h4 class="text-xl font-semibold mt-1 mb-12 pb-1">
-                      {{ config.public.projectName }}
-                    </h4>
-                  </div>
-                  <form>
-                    <p class="mb-4 text-center">
-                      {{ $t('login.title') }}
-                    </p>
-                    <div class="text-center">
-                      <v-chip class="mb-4 text-center">
-                        {{ $t('login.socialMedia') }}
-                      </v-chip>
-                    </div>
-                    <v-btn
-                      class="ma-2"
-                      color="error"
-                      @click="login('google')"
-                    >
-                      <v-icon
-                        start
-                        icon="mdi-google"
-                      />
-                      Google
-                    </v-btn>
-                    <v-alert v-if="errorMsg" type="error" icon="mdi-lock">
-                      {{ errorMsg }}
-                    </v-alert>
-                    <div class="mb-4">
-                      <ui-input
-                        v-model="email" :disabled="isLoading" :loading="isLoading" class="mb-2" :label="$t('login.username')"
-                        label-in-input type="email" :rules="[validateRequired]"
-                      />
-                    </div>
-                    <div class="mb-4">
-                      <ui-input
-                        v-model="password" class="mt-2" :label="$t('login.password')" label-in-input
-                        :disabled="isLoading" :loading="isLoading" type="password" :rules="[validateRequired]"
-                      />
-                    </div>
-                    <div class="text-center pt-1 mb-12 pb-1">
-                      <ui-button :disabled="!password || !email" block @click="onLoginClick()">
-                        {{ $t('login.button') }}
-                      </ui-button>
-                      <a class="text-gray-500" href="#">Forgot password?</a>
-                    </div>
-                    <div class="flex items-center justify-between pb-6">
-                      <p class="mb-0 mr-2">
-                        {{ $t('login.noAccount') }}
-                      </p>
-                      <ui-button
-                        type="button" class="text-red-900" data-mdb-ripple="true"
-                        style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)"
-                        data-mdb-ripple-color="light" :disabled="isLoading" @click="navigateTo('/')"
-                      >
-                        {{ $t('login.backToHome') }}
-                      </ui-button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-              <div
-                class="lg:w-6/12 flex items-center lg:rounded-r-lg rounded-b-lg lg:rounded-bl-none"
-                style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)"
-              >
-                <div class="text-white px-4 py-6 md:p-12 md:mx-6">
-                  <h4 class="text-xl font-semibold mb-6">
-                    {{ $t('login.description.title') }}
-                  </h4>
-                  <p class="text-sm">
-                    {{ $t('login.description.text') }}
-                  </p>
-                </div>
-              </div>
-            </div>
+  <v-app>
+    <v-row>
+      <v-col
+        cols="12"
+        lg="6"
+        class="bg-primary-lighten-5 d-flex justify-center align-center"
+      >
+        <div class="text-center">
+          <v-avatar size="320" rounded="0">
+            <img class="mw-320" src="@/assets/images/session/signin.svg">
+          </v-avatar>
+          <div class="text-h4 f-600 mb-2">
+            {{ config.public.projectName }}
+          </div>
+          <div class="text-subtitle-2 text-secondary-darken-1 mb-4">
+            {{ $t('login.description.title') }}
+          </div>
+          <div class="text-sm">
+            {{ $t('login.description.text') }}
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </v-col>
+      <v-col
+        cols="12"
+        lg="6"
+        class="d-flex justify-center align-center bg-gray-lighten-5"
+      >
+        <v-container class="text-center">
+          <v-avatar size="80" class="mb-8">
+            <img class="w-full" src="@/assets/images/ourprojects_logo.png">
+          </v-avatar>
+          <div class="text-h5 f-600 mb-2">
+            {{ $t('login.title') }}
+          </div>
+          <div class="text-18 text-secondary font-weight-medium mb-10">
+            <router-link to="/register" class="text-decoration-none f-600">
+              {{ $t('login.noAccount') }}
+            </router-link>
+          </div>
+          <div class="d-flex justify-center">
+            <v-btn
+              size="large"
+              class="border-secondary px-8 me-3"
+              flat
+              @click="login('google')"
+            >
+              <v-avatar size="30">
+                <img src="@/assets/images/social-media/Google.png" alt="">
+              </v-avatar>
+            </v-btn>
+            <!-- <v-btn size="large" class="border-secondary px-8 me-3" flat>
+            <v-avatar size="30">
+              <img src="@/assets/images/social-media/facebook.svg" alt="">
+            </v-avatar>
+          </v-btn>
+          <v-btn size="large" class="border-secondary px-8 me-3" flat>
+            <v-avatar size="30">
+              <img src="@/assets/images/social-media/twitter.svg" alt="">
+            </v-avatar>
+          </v-btn> -->
+          </div>
+          <div class="d-flex justify-center align-center py-8 mw-320">
+            <v-divider class="flex-1 mx-4 line-color" />
+            <span class="text-secondary">OR</span>
+            <v-divider class="flex-1 mx-4 line-color" />
+          </div>
+
+          <ui-input v-model="email" :disabled="isLoading" :loading="isLoading" class="mb-4 mw-700" :label="$t('login.email')" type="email" />
+          <ui-input v-model="password" variant="outlined" hide-details :disabled="isLoading" :loading="isLoading" class="mb-4 mw-700" :label="$t('login.password')" type="password" />
+
+          <div class="d-flex justify-space-between align-center mw-700 mb-7">
+            <!-- <v-checkbox
+            v-model="checkbox"
+            hide-details
+            color="primary"
+            label="Remember login"
+          /> -->
+            <router-link
+              to="#"
+              class="text-error text-decoration-none font-weight-medium"
+              hide-details
+            >
+              Forgot Password ?
+            </router-link>
+          </div>
+          <div v-if="errorMsg">
+            <v-alert
+              color="error"
+              theme="dark"
+              border="start"
+              prominent
+              class="mw-700 mx-auto"
+            >
+              <i class="tio- text-18 me-2"> error_outlined </i>
+              {{ errorMsg }}
+            </v-alert>
+          </div>
+          <div class="d-flex mw-700">
+            <ui-button :disabled="!password || !email" block color="primary" flat @click="onLoginClick()">
+              {{ $t('login.button') }}
+            </ui-button>
+          </div>
+        </v-container>
+      </v-col>
+    </v-row>
+  </v-app>
 </template>
 
 <script setup lang="tsx">
-import _ from 'lodash'
-import { useI18n } from 'vue-i18n'
 import { loginOAuth, signInWithEmail } from '~/composables/auth/useAuthentication'
 
-import { validateRequired } from '~~/helpers/validation'
-const { locale } = useI18n()
 definePageMeta({
   layout: 'blank',
   middleware: 'guest-only'
@@ -107,6 +120,7 @@ const password = ref('')
 const isLoading = ref(false)
 const config = useRuntimeConfig()
 const client = useSupabaseAuthClient()
+const checkbox = ref(true)
 
 const onLoginClick = async () => {
   isLoading.value = true
@@ -123,10 +137,11 @@ const onLoginClick = async () => {
 const login = async (provider: 'github' | 'google' | 'apple') => {
   const loginData = await loginOAuth(provider)
   if (loginData.data) {
-    console.log('redirect to dashboard')
+    console.log(loginData.data)
     navigateTo('/dashboard')
   }
   if (loginData.error) {
+    console.log(loginData.error)
     errorMsg.value = loginData.error.message
   }
 }
@@ -137,8 +152,20 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
-.ui-card {
-  --v-medium-emphasis-opacity: 1;
+<style lang="scss" scoped>
+.mw-320 {
+  max-width: 320px;
+  // min-width: 100%;
+  margin: 0 auto;
+}
+.mw-700 {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.br-0 {
+  border-radius: 0;
+}
+.w-full {
+  width: 100%;
 }
 </style>

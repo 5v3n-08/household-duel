@@ -2,14 +2,15 @@ import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
-import { fa } from 'vuetify/iconsets/fa'
+// uncomment to use font awesome icons
+// import '@fortawesome/fontawesome-free/css/all.css'
+// import { fa } from 'vuetify/iconsets/fa'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
 import '@mdi/font/css/materialdesignicons.css'
 import defaults from './defaults'
 import theme from './themes'
 
 // Styles
-import '@/assets/styles/scss/libs/vuetify/index.scss'
 export default defineNuxtPlugin((nuxtApp) => {
   const vuetify = createVuetify({
     components,
@@ -19,8 +20,8 @@ export default defineNuxtPlugin((nuxtApp) => {
       defaultSet: 'mdi',
       aliases,
       sets: {
-        mdi,
-        fa
+        mdi
+        // fa
       }
     },
     theme

@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app id="app">
     <v-container id="login-page" fluid fill-height>
       <v-layout align-center justify-center>
         <v-sheet :style="{ 'max-width': '350px' }">

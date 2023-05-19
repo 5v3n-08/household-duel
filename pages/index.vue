@@ -10,6 +10,6 @@
 export default {}
 definePageMeta({
   name: 'LandingPage',
-  layout: 'default'
+  layout: 'landing'
 })
 </script>

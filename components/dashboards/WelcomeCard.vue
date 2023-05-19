@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import trophy from '@/assets/images/misc/trophy.png'
+import trophy from '@/assets/materio/misc/trophy.png'
 
 const user = useSupabaseUser()
 const username = user.value?.id ?? 'Unknown User'

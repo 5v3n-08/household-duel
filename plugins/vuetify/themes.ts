@@ -1,79 +1,44 @@
 const theme = {
-  defaultTheme: 'light',
+  defaultTheme: 'dark',
+  variations: {
+    colors: ['primary', 'secondary', 'info', 'warning', 'error', 'success'],
+    lighten: 5,
+    darken: 5
+  },
   themes: {
     light: {
       dark: false,
-      colors: {
-        primary: '#9155FD',
-        secondary: '#8A8D93',
-        'on-secondary': '#fff',
-        success: '#56CA00',
-        info: '#16B1FF',
-        warning: '#FFB400',
-        error: '#FF4C51',
-        'on-primary': '#FFFFFF',
-        'on-success': '#FFFFFF',
-        'on-warning': '#FFFFFF',
-        background: '#F4F5FA',
-        'on-background': '#3A3541',
-        'on-surface': '#3A3541',
-        'grey-50': '#FAFAFA',
-        'grey-100': '#F5F5F5',
-        'grey-200': '#EEEEEE',
-        'grey-300': '#E0E0E0',
-        'grey-400': '#BDBDBD',
-        'grey-500': '#9E9E9E',
-        'grey-600': '#757575',
-        'grey-700': '#616161',
-        'grey-800': '#424242',
-        'grey-900': '#212121'
-      },
-      variables: {
-        'border-color': '#3A3541',
-        'medium-emphasis-opacity': 0.68,
+      variables: {}, // ✅ this property is required to avoid Vuetify crash
 
-        // Shadows
-        'shadow-key-umbra-opacity': 'rgba(var(--v-theme-on-surface), 0.08)',
-        'shadow-key-penumbra-opacity': 'rgba(var(--v-theme-on-surface), 0.12)',
-        'shadow-key-ambient-opacity': 'rgba(var(--v-theme-on-surface), 0.04)'
+      colors: {
+        primary: '#0A68FF',
+        secondary: '#647283',
+        info: '#8C8DFF',
+        warning: '#DB9E55',
+        error: '#FF316F',
+        success: '#27CE88',
+        background: '#F4F5FA',
+        'on-background': '#647283',
+        'on-background-hover': '#000000',
+        surface: '#FFFFFF'
       }
     },
     dark: {
       dark: true,
-      colors: {
-        primary: '#3f51b5',
-        secondary: '#8A8D93',
-        'on-secondary': '#fff',
-        success: '#56CA00',
-        info: '#16B1FF',
-        warning: '#FFB400',
-        error: '#FF4C51',
-        'on-primary': '#FFFFFF',
-        'on-success': '#FFFFFF',
-        'on-warning': '#FFFFFF',
-        background: '#28243D',
-        'on-background': '#E7E3FC',
-        surface: '#312D4B',
-        'on-surface': '#E7E3FC',
-        'grey-50': '#2A2E42',
-        'grey-100': '#2F3349',
-        'grey-200': '#4A5072',
-        'grey-300': '#5E6692',
-        'grey-400': '#7983BB',
-        'grey-500': '#8692D0',
-        'grey-600': '#AAB3DE',
-        'grey-700': '#B6BEE3',
-        'grey-800': '#CFD3EC',
-        'grey-900': '#E7E9F6'
-      },
-      variables: {
-        'border-color': '#E7E3FC',
-        'medium-emphasis-opacity': 0.68,
+      variables: {}, // ✅ this property is required to avoid Vuetify crash
 
-        // Shadows
-        'shadow-key-umbra-opacity': 'rgba(20, 18, 33, 0.08)',
-        'shadow-key-penumbra-opacity': 'rgba(20, 18, 33, 0.12)',
-        'shadow-key-ambient-opacity': 'rgba(20, 18, 33, 0.04)'
+      colors: {
+        primary: '#0A68FF',
+        secondary: '#647283',
+        info: '#8C8DFF',
+        warning: '#DB9E55',
+        error: '#FF316F',
+        success: '#27CE88',
+        background: '#28243D',
+        'on-background': '#647283',
+        'on-background-hover': '#ffffff',
+        surface: '#28243D',
+        'on-surface': '#f2f9ff'
       }
     }
   }

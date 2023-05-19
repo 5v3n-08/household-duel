@@ -5,9 +5,7 @@
     class="position-relative"
   >
     <VCardText>
-      <code class="block whitespace-pre overflow-x-scroll">
-        {{ user }}
-      </code>
+      <pre>{{ user }}</pre>
     </VCardText>
 
     <!-- Triangle Background -->

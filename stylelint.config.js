@@ -12,7 +12,6 @@ module.exports = {
         ignoreAtRules: [
           'extends',
           'apply',
-          'tailwind',
           'components',
           'utilities',
           'screen'

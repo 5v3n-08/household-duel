@@ -2,23 +2,31 @@
   "welcome": "Willkommen",
   "login": {
     "button": "Login",
+    "registerButton": "Registrieren",
     "title": "Loggen Sie sich in ihren Account ein",
+    "registerTitle": "Registrieren Sie sich in unserem System",
     "socialMedia": "Social Media Logins",
-    "username": "Benutzername oder Email",
+    "email": "Email",
     "password": "Passwort",
-    "noAccount": "Du hast keinen Account?",
+    "noAccount": "Noch keinen Account? Dann hier klicken",
+    "accountExists": "Du hast bereits einen Account?",
     "forgotPassword": "Passwort vergessen?",
     "description": {
-      "title": "Hier beginnt dein zuhause",
-      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      "title": "Organisiere dich selbst",
+      "text": "Hier beginnt deine Reise zur Selbstorganisation"
     },
-    "backToHome": "Startseite"
+    "backToHome": "Startseite",
+    "welcome": {
+      "title": "Registrierung abgeschlossen",
+      "checkMails": "Prüfen Sie ihr E-Mail Postfach und klicken auf den Bestätigungslink um ihren Account zu aktivieren"
+    }
   },
   "logout": {
     "title": "Erfolgreich ausgeloggt",
     "button" :"Ausloggen"
   },
   "sidenav": {
+    "home": "Startseite",
     "dashboard": "Dashboard",
     "accountSettings": "Einstellungen",
     "taskDuel": "Task Duel",
@@ -37,5 +45,51 @@
         "title": "Profil Informationen"
       }
     }
+  },
+  "buttons": {
+    "save": "Speichern",
+    "cancel": "Abbrechen"
+  },
+  "profile": {
+    "joined": "Beigetreten",
+    "basicInfos": "Profil Informationen",
+    "firstname": "Vorname",
+    "firstnameRequired": "Geben Sie einen Vornamen ein",
+    "lastname": "Name",
+    "lastnameRequired": "Geben Sie einen Nachnamen ein",
+    "title": "Title",
+    "emailRequired": "Geben Sie ihre E-Mail Adresse ein",
+    "emailInvalid": "Geben Sie eine gültige E-Mail Adresse ein",
+    "password": {
+      "title": "Passwort",
+      "current": "Aktuelles Passwort",
+      "new": "Neues Passwort",
+      "confirm": "Passwort wiederholen",
+      "required": {
+        "title": "Passwort Voraussetzungen:",
+        "subTitle": "Stelle sicher, dass diese Voraussetzungen erfüllt sind:",
+        "minLength": "Mindestens 8 Zeichen lang - je mehr Zeichen, desto sicherer",
+        "minLengthDesc": "Ihr Passwort muss mindestens 8 Zeichen lang sein",
+        "minLowercase": "Mindestens ein kleiner Buchstabe",
+        "minLowercaseDesc": "Ihr Passwort muss mindestens einen kleinen Buchstaben enthalten",
+        "minUppercase": "Mindestens ein großer Buchstabe",
+        "minUppercaseDesc": "Ihr Passwort muss mindestens einen großen Buchstaben enthalten",
+        "minNumber": "Mindestens eine Zahl",
+        "minNumberDesc": "Ihr Passwort muss mindestens eine Zahl enthalten",
+        "minSpecialChar": "Mindestens ein Sonderzeichen",
+        "minSpecialCharDesc": "Ihr Passwort muss mindestens ein Sonderzeichen enthalten",
+        "confirmMatch": "Die neuen Passwörter stimmen überein",
+        "dontConfirmMatch": "Die Passwörter stimmen nicht überein"
+      },
+      "changed": {
+        "success": "Passwort erfolgreich geändert",
+        "failed": "Passwort konnte nicht geändert werden",
+        "wrongPassword": "Das eingegebene Passwort war falsch"
+      }
+    }
+  },
+  "validations": {
+    "required": "Dieses Feld ist erforderlich",
+    "minLength": "Mindestanzahl Zeichen nicht erfüllt"
   }
 }

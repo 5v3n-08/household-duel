@@ -1,87 +1,45 @@
 <template>
-  <div class="min-h-full">
-    <nav class="bg-gray-800">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
-          <div class="flex items-center">
-            <div class="flex-shrink-0">
-              <img
-                class="h-8 w-8"
-                src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                alt="Workflow"
-              >
-            </div>
-            <div class="hidden md:block">
-              <div class="ml-10 flex items-baseline space-x-4">
-                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                <NuxtLink
-                  to="/"
-                  class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
-                  aria-current="page"
-                >
-                  Home
-                </NuxtLink>
+  <LayoutAdminNitro>
+    <!-- 👉 navbar -->
+    <template #navbar>
+      <Header />
+      <!--
+      <VTextField
+        rounded
+        prepend-inner-icon="mdi-magnify"
+        density="compact"
+        max-width="100px"
+        class="app-bar-search d-none d-sm-block"
+      />
 
-                <NuxtLink
-                  to="/taskduel"
-                  class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Task Duel
-                </NuxtLink>
-              </div>
-            </div>
-          </div>
-          <div class="mr-2">
-            <NuxtLink
-              v-if="!isAuthenticated"
-              to="/login"
-              class="bg-blue-800 text-white px-3 py-2 rounded-md text-sm font-medium ml-2"
-            >
-              Login
-            </NuxtLink>
-            <NuxtLink
-              v-if="isAuthenticated"
-              to="/dashboard"
-              class="bg-blue-800 text-white px-3 py-2 rounded-md text-sm font-medium ml-2"
-            >
-              Dashboard
-            </NuxtLink>
-            <NuxtLink
-              v-if="isAuthenticated"
-              to="/logout"
-              class="bg-blue-800 text-white px-3 py-2 rounded-md text-sm font-medium ml-2"
-            >
-              Logout
-            </NuxtLink>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <main>
-      <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <!-- Content of your page filled here -->
-        <slot />
-      </div>
-    </main>
-  </div>
+      <VSpacer />
+      -->
+    </template>
+
+    <!-- <UserProfile /> -->
+
+    <!-- 👉 Sidenav content -->
+    <template #navigation-drawer-content>
+      <Sidenav />
+    </template>
+
+    <!-- 👉 Pages -->
+    <slot />
+
+    <!-- 👉 Footer -->
+    <template #footer>
+      <Footer />
+    </template>
+  </LayoutAdminNitro>
 </template>
 
 <script setup lang="tsx">
 const config = useRuntimeConfig()
-const supabase = useSupabaseAuthClient()
-const authentication = await supabase.auth.getSession()
-const isAuthenticated = authentication.data.session
 const title = config.public.projectName ?? 'OurProjects'
 useHead({
   titleTemplate: title => `${title}`,
   meta: [
     { name: 'description', content: 'Automate your life, your home and your special routines' }
-  ],
-  bodyAttrs: {
-    class: 'h-full'
-  },
-  htmlAttrs: {
-    class: 'h-full bg-gray-100'
-  }
+  ]
 })
 </script>
