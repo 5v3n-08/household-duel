@@ -53,7 +53,7 @@ onMounted(() => {
     <perfect-scrollbar class="sidebar">
       <!-- 👉 Nav header -->
       <div class="sidebar-header">
-        <img class="ms-2" src="/ourprojects_logo.png" alt="">
+        <img class="ms-2" src="@/assets/images/ourprojects_logo.png" alt="">
       </div>
 
       <ul v-for="(item, index) in items" :key="index" class="nav-links">
@@ -62,7 +62,7 @@ onMounted(() => {
       </ul>
       <div class="bg-secondary-lighten-4 rounded mt-10 text-center">
         <v-avatar size="74" class="sidebar-profile-img">
-          <img class="w-full" src="@/assets/images/faces/avatar.png" alt="">
+          <img class="w-full" src="@/assets/images/ourprojects_logo.png" alt="">
         </v-avatar>
         <div class="text-13 f-600 mt-2">
           Jhon Wick

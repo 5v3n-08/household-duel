@@ -65,7 +65,7 @@ import RestApi from '~~/services/RestApi'
 import { IAdapter } from '~~/types'
 
 definePageMeta({
-  layout: 'admin',
+  layout: 'default',
   middleware: 'auth'
 })
 
@@ -87,23 +87,23 @@ const headers = [
     text: 'Aktionen'
   }
 ]
-const { pending: loadingTableData, data: tableData, refresh } = await RestApi.get<IAdapter[]>(API.adapter.all)
+// const { pending: loadingTableData, data: tableData, refresh } = await RestApi.get<IAdapter[]>(API.adapter.all)
 
-const editModal = ref(false)
-const itemToEdit: Ref<IAdapter | null> = ref(null)
+// const editModal = ref(false)
+// const itemToEdit: Ref<IAdapter | null> = ref(null)
 
-const onEditClick = (item: IAdapter) => {
-  editModal.value = true
-  itemToEdit.value = item
-}
+// const onEditClick = (item: IAdapter) => {
+//   editModal.value = true
+//   itemToEdit.value = item
+// }
 
-const onSaveChanges = async () => {
-  editModal.value = false
-  const { pending: loadingUpdateData, data, refresh } = await RestApi.patch<IAdapter[]>(API.adapter.update + '/' + itemToEdit.value?.id, {
-    name: itemToEdit.value?.name,
-    description: itemToEdit.value?.description
-  })
-}
+// const onSaveChanges = async () => {
+//   editModal.value = false
+//   const { pending: loadingUpdateData, data, refresh } = await RestApi.patch<IAdapter[]>(API.adapter.update + '/' + itemToEdit.value?.id, {
+//     name: itemToEdit.value?.name,
+//     description: itemToEdit.value?.description
+//   })
+// }
 </script>
 
 <script lang="tsx">

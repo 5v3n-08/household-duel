@@ -18,7 +18,13 @@
     "backToHome": "Startseite",
     "welcome": {
       "title": "Registrierung abgeschlossen",
-      "checkMails": "Prüfen Sie ihr E-Mail Postfach und klicken auf den Bestätigungslink um ihren Account zu aktivieren"
+      "checkMails": "Prüfen Sie ihr E-Mail Postfach und klicken auf den Bestätigungslink um ihren Account zu verifizieren"
+    },
+    "callback": {
+      "title": "Login erfolgreich",
+      "redirectTitle": "Wir laden ihr Profil für sie und leiten sie dann weiter",
+      "clickHereToRedirect": "Hier klicken um schneller ins System zu gelangen",
+      "sessionNotFound": "Wir konnten ihr Profil nicht laden. Bitte versuchen sie sich erneut einzuloggen."
     }
   },
   "logout": {

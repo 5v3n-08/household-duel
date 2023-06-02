@@ -49,7 +49,8 @@ export const useUserStore = defineStore('userStore', {
     },
     async saveProfile (user: Profile) {
       const supabase = useSupabaseClient()
-      user.updated_at = new Date()
+      const dayjs = useDayjs()
+      user.updated_at = dayjs().toISOString()
       const updates = {
         ...user
       }
@@ -62,6 +63,7 @@ export const useUserStore = defineStore('userStore', {
       // this.user = user
     },
     async uploadAvatar (event) {
+      console.log(typeof event)
       const supabase = useSupabaseClient()
       const supabaseUser = useSupabaseUser()
       files.value = event.target.files

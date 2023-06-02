@@ -18,8 +18,8 @@
 
 <script lang="ts" setup>
 import { useTheme } from 'vuetify'
-import triangleDark from '@/assets/images/misc/triangle-dark.png'
-import triangleLight from '@/assets/images/misc/triangle-light.png'
+import triangleDark from '@/assets/materio/misc/triangle-dark.png'
+import triangleLight from '@/assets/materio/misc/triangle-light.png'
 const supabase = useSupabaseClient()
 
 const vuetifyTheme = useTheme()

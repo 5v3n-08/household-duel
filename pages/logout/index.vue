@@ -8,7 +8,7 @@
               <div class="lg:w-6/12 px-4 md:px-0">
                 <div class="md:p-12 md:mx-6">
                   <div class="text-center">
-                    <img class="mx-auto w-48" src="ourprojects_logo.png" alt="logo">
+                    <img class="mx-auto w-48" src="@/assets/images/ourprojects_logo.png" alt="logo">
                     <h4 class="text-xl font-semibold mt-1 mb-12 pb-1">
                       {{ config.public.projectName }}
                     </h4>

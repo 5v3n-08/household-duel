@@ -10,10 +10,6 @@
               </div>
             </template>
             <v-card-text>
-              <div class="text-center mb-4">
-                <img src="../assets/logo.svg" width="80" height="80">
-              </div>
-
               <slot />
             </v-card-text>
           </base-material-card>
@@ -22,16 +18,3 @@
     </v-container>
   </v-app>
 </template>
-
-<style scoped>
-#login-page {
-  background-image: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.3),
-      rgba(0, 0, 0, 0.3)
-    ),
-    url(../assets/splash.jpeg);
-  background-position: center;
-  background-size: cover;
-}
-</style>

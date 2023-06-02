@@ -11,9 +11,8 @@ const search = () => {
   isSearch.value = !isSearch.value
 }
 
-const isLoggedIn = ref(true)
-
 const handleSignOut = async () => { await navigateTo('/logout') }
+const handleUrlProfile = async () => { await navigateTo('/account') }
 </script>
 
 <template>
@@ -110,28 +109,29 @@ const handleSignOut = async () => { await navigateTo('/logout') }
               <span
                 class="me-2 text-capitalize text-caption f-600 text-secondary-darken-1"
               >
-                test</span>
+                {{ user?.full_name ?? ' ' }}</span>
               <v-badge
                 bordered
-                location="bottom-right"
+                location="bottom end"
                 color="light-green"
                 dot
                 offset-x="2"
                 offset-y="0"
               >
                 <v-avatar size="26">
-                  <img class="w-full" src="@/assets/images/faces/avatar.png">
+                  <img class="w-full" :src="user?.avatarurl ?? undefined">
                 </v-avatar>
               </v-badge>
             </v-btn>
           </template>
           <v-list class="bg-white">
             <v-list-item>
-              <v-list-item-title>View Profile</v-list-item-title>
+              <v-list-item-title class="mouse-hover" @click="handleUrlProfile">
+                View Profile
+              </v-list-item-title>
             </v-list-item>
             <v-list-item>
               <v-list-item-title
-                v-if="isLoggedIn"
                 class="mouse-hover"
                 @click="handleSignOut"
               >

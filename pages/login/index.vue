@@ -115,8 +115,8 @@ definePageMeta({
   middleware: 'guest-only'
 })
 const email = ref('')
-const errorMsg = ref('')
 const password = ref('')
+const errorMsg = ref('')
 const isLoading = ref(false)
 const config = useRuntimeConfig()
 const client = useSupabaseAuthClient()
@@ -127,7 +127,7 @@ const onLoginClick = async () => {
   const loginData = await signInWithEmail(email.value, password.value)
 
   if (loginData.data.user) {
-    navigateTo('/dashboard')
+    navigateTo('/login/oauth')
   }
   if (loginData.error) {
     errorMsg.value = loginData.error.message
@@ -136,9 +136,10 @@ const onLoginClick = async () => {
 }
 const login = async (provider: 'github' | 'google' | 'apple') => {
   const loginData = await loginOAuth(provider)
+  console.log(loginData)
   if (loginData.data) {
     console.log(loginData.data)
-    navigateTo('/dashboard')
+    // navigateTo('/dashboard')
   }
   if (loginData.error) {
     console.log(loginData.error)
@@ -151,21 +152,3 @@ onMounted(() => {
   password.value = config.public.development ? config.public.demouser.password : ''
 })
 </script>
-
-<style lang="scss" scoped>
-.mw-320 {
-  max-width: 320px;
-  // min-width: 100%;
-  margin: 0 auto;
-}
-.mw-700 {
-  max-width: 700px;
-  margin: 0 auto;
-}
-.br-0 {
-  border-radius: 0;
-}
-.w-full {
-  width: 100%;
-}
-</style>

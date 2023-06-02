@@ -145,6 +145,7 @@
         </base-card>
       </v-col>
     </v-row>
+    {{ user }}
   </ui-account>
 </template>
 

@@ -5,9 +5,11 @@ import { defineNuxtConfig } from 'nuxt/config'
 export default defineNuxtConfig({
   ssr: false,
   css: ['vuetify/lib/styles/main.sass', '@/assets/nitro/styles/_main.scss', '@/assets/fonts/theiconof.css'],
+
   build: {
     transpile: ['vuetify']
   },
+
   modules: [
     // Webfontloader not working at the moment
     // error: serialize is not defined
@@ -52,6 +54,7 @@ export default defineNuxtConfig({
     ],
     '@vite-pwa/nuxt',
     '@nuxtjs/i18n'
+    // '@nuxt/devtools',
     // [
     //   '@nuxtjs/moment',
     //   {
@@ -60,19 +63,23 @@ export default defineNuxtConfig({
     //   }
     // ]
   ],
+
   // nuxt configurations
   typescript: {
     shim: false
   },
+
   plugins: [
     '~/plugins/vuetify/index.ts'
   ],
+
   components: [
     {
       path: '~/components',
       pathPrefix: false
     }
   ],
+
   runtimeConfig: {
     // The private keys which are only available within server-side
     apiSecret: '123',
@@ -91,6 +98,7 @@ export default defineNuxtConfig({
       redirectUrl: 'https://ourprojects.de'
     }
   },
+
   googleFonts: {
     display: 'swap',
     families: {
@@ -98,6 +106,7 @@ export default defineNuxtConfig({
       Montserrat: [400, 500, 600, 700]
     }
   },
+
   i18n: {
     locales: [
       {
@@ -115,6 +124,7 @@ export default defineNuxtConfig({
     lazy: true,
     langDir: 'locales/'
   },
+
   // auth: {
   //   isEnabled: true,
   //   origin: 'http://localhost:3000',
@@ -128,5 +138,9 @@ export default defineNuxtConfig({
   // }
   alias: {
     images: resolve(__dirname, './assets/images')
+  },
+
+  devtools: {
+    enabled: true
   }
 })

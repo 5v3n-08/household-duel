@@ -20,12 +20,12 @@ export default class Profile extends Model {
   @Str('') declare lastname: string | null
   @Str('') declare avatar_filename: string | null
   @Str('') declare avatarurl: string | null
-  @Str('') declare created_at: Date | null
-  @Str('') declare updated_at: Date | null
+  @Str('') declare created_at: string | null
+  @Str('') declare updated_at: string | null
   @Str('') declare website: string | null
 
   get full_name () {
-    return `${this.firstname} ${this.lastname}`
+    return `${this.firstname ?? ''} ${this.lastname ?? ''}`
   }
 }
 

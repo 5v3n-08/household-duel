@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 
-type TInputTypes = 'text' | 'password' | 'email';
+type TInputTypes = 'text' | 'password' | 'email' | 'date';
 interface IEmits {
   (event: 'update:modelValue', value: string): void;
 }

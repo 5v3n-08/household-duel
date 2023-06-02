@@ -43,7 +43,7 @@ export const loginOAuth = async (provider: 'github' | 'google' | 'apple'): Promi
   return await supabase.auth.signInWithOAuth({
     provider,
     options: {
-      redirectTo: config.public.redirectUrl + '/dashboard'
+      redirectTo: config.public.redirectUrl + '/login/oauth'
     }
   })
 }

@@ -4,10 +4,12 @@
     "button": "Login",
     "registerButton": "Sign In",
     "title": "Login to your account",
+    "registerTitle": "Register in our system",
     "socialMedia": "Social Media logins",
     "email": "Email",
     "password": "Password",
     "noAccount": "Don't have an account?",
+    "accountExists": "Already have an account?",
     "forgotPassword": "Forgot password?",
     "description": {
       "title": "Organize yourself",
@@ -15,7 +17,14 @@
     },
     "backToHome": "Back to home",
     "welcome": {
-      "title": "Registration successfully"
+      "title": "Registration successfully",
+      "checkMails": "Check your mails and click on the link to verify your mail"
+    },
+    "callback": {
+      "title": "Login successful",
+      "redirectTitle": "We are loading your profile and forward you",
+      "clickHereToRedirect": "Click here to forward you faster",
+      "sessionNotFound": "We can't load your profile. Try to login again."
     }
   },
   "logout": {
