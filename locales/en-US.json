@@ -43,7 +43,9 @@
       "admin": "Administration"
     },
     "instances": "Instances",
-    "adapters": "Adapters"
+    "adapters": "Adapters",
+    "password": "Password",
+    "deleteaccount": "Delete Account"
   },
   "dashboard": {
     "widgets": {
@@ -53,8 +55,12 @@
     }
   },
   "buttons": {
+    "delete": "Delete",
     "save": "Save Changes",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "timeout": "Wait some time before saving again",
+    "timeoutSeconds": "Wait {seconds} seconds before trying again",
+    "actionSuccess": "Action successful"
   },
   "profile": {
     "joined": "Joined",
@@ -92,6 +98,11 @@
         "failed": "Password change failed",
         "wrongPassword": "The password you entered was incorrect"
       }
+    },
+    "delete": {
+      "title": "Delete Account",
+      "subTitle": "When you delete your account, you lose access to Front account services, and we permanently delete your personal data.You can cancel the deletion for 14 days.",
+      "confirm": "Confirm, that i want to delete my account"
     }
   },
   "validations": {

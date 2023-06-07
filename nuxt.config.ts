@@ -108,15 +108,18 @@ export default defineNuxtConfig({
   },
 
   i18n: {
+    types: 'composition',
     locales: [
       {
         code: 'us',
         name: 'English',
+        iso: 'en-US',
         file: 'en-US.json'
       },
       {
         code: 'de',
         name: 'German',
+        iso: 'de-DE',
         file: 'de-DE.json'
       }
     ],

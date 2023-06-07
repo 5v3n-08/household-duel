@@ -1,7 +1,6 @@
 // Instance Model
 import { Model } from 'pinia-orm'
 import { Attr, BelongsTo, Bool, Str, Uid, Num } from 'pinia-orm/dist/decorators'
-import User from './User'
 import Adapter from './Adapter'
 
 export default class Post extends Model {

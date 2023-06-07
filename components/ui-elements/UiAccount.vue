@@ -60,61 +60,12 @@ if (useSize(hasEmailIdentity.value) > 0) {
     link: '/account/password'
   })
 }
-accountList.value.push({
-  title: 'Preferences',
-  icon: 'settings_outlined',
-  link: '/accounts/preferences'
-},
-{
-  title: 'Recent Devices',
-  icon: 'devices_apple',
-  link: '/accounts/recent-devices'
-},
-{
-  title: 'Notifications',
-  icon: 'notifications_outlined',
-  link: '/accounts/notifications'
-},
-{
-  title: 'Two-Step verification',
-  icon: 'fingerprint',
-  link: '/accounts/two-step-verification'
-},
-{
-  title: 'Connected Account',
-  icon: 'link',
-  link: '/accounts/connected-account'
-},
-{
-  title: 'Social Account',
-  icon: 'instagram',
-  link: '/accounts/social-account'
-},
-{
-  title: 'Billing',
-  icon: 'dollar_outlined',
-  link: '/accounts/billing'
-},
-{
-  title: 'Statements',
-  icon: 'file_outlined',
-  link: '/accounts/statements'
-},
-{
-  title: 'Referrals',
-  icon: 'premium_outlined',
-  link: '/accounts/referrals'
-},
-{
-  title: 'API Keys',
-  icon: 'key',
-  link: '/accounts/api-keys'
-},
-{
-  title: 'Delete Your Account',
-  icon: 'delete_outlined',
-  link: '/accounts/delete-account'
-})
+accountList.value.push(
+  {
+    title: t('profile.delete.title'),
+    icon: 'delete_outlined',
+    link: '/account/deleteaccount'
+  })
 </script>
 
 <style lang="scss" scoped>

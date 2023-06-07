@@ -98,13 +98,8 @@
         </base-card>
       </v-col>
       <v-col cols="12">
-        <base-card>
-          <v-card-title
-            class="pa-0 mb-4 border-bottom text-body-2 font-weight-medium"
-          >
-            {{ $t('profile.basicInfos') }}
-          </v-card-title>
-          <form @submit="onSubmit">
+        <base-card :card-title="$t('profile.basicInfos')">
+          <form class="p-card" @submit="onSubmit">
             <v-row>
               <v-col cols="12" md="6">
                 <ui-input
@@ -164,6 +159,13 @@ const loading = ref(true)
 const uploading = ref(false)
 const dayjs = useDayjs()
 const { handleSubmit } = useForm()
+const { t } = useI18n()
+
+// Timer to check how long last saved
+const userUpdatedBefore = ref(0)
+const updateProfileSavedSeconds = () => { userUpdatedBefore.value = dayjs().diff(dayjs(user.value?.updated_at), 'seconds') }
+const updateBeforeSecondsInterval = setInterval(updateProfileSavedSeconds, 1000)
+onBeforeUnmount(() => { clearInterval(updateBeforeSecondsInterval) })
 
 async function refreshProfile () {
   loading.value = true
@@ -178,10 +180,22 @@ const onSubmit = handleSubmit((values) => {
   console.log(values) // { email: 'email@gmail.com' }
 })
 async function updateProfile () {
+  loading.value = true
+  if (userUpdatedBefore.value < 10) {
+    // cancel updating profile, if changed before lower then 10 seconds
+    Toast.fire({
+      icon: 'error',
+      title: t('buttons.timeoutSeconds', { seconds: (10 - userUpdatedBefore.value) })
+    })
+    return
+  }
   try {
-    loading.value = true
     if (user.value) {
       await userStore.saveProfile(user.value)
+      Toast.fire({
+        icon: 'success',
+        title: t('buttons.actionSuccess')
+      })
     }
   } catch (error) {
     alert(error.message)

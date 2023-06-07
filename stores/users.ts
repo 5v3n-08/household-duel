@@ -1,6 +1,7 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
 import { useRepo } from 'pinia-orm'
 import Profile from '~/models/Profile'
+import { ProfileResponse, getProfiles, ProfilesResponse, getProfile } from '~/types'
 
 interface IState {
   usersRaw: Profile[];
@@ -19,33 +20,21 @@ export const useUserStore = defineStore('userStore', {
   actions: {
     async refreshProfile (userId: string): Promise<Profile | null> {
       const supabase = useSupabaseClient()
-      let { data } = await supabase
-        .from('profiles')
-        .select('id, title, website, avatar_filename, avatarurl, firstname, lastname, created_at, updated_at')
-        .eq('id', userId)
-        .single()
 
-      if (data) {
-        return profileRepo.save(data)
+      const account: ProfileResponse = await getProfile(userId)
+
+      if (account.data) {
+        return profileRepo.save(account.data)
       }
       return null
     },
-    async getAvatarUrl (user: Profile): Promise<string | null> {
+    getAvatarUrl (user: Profile): string | null {
       const supabase = useSupabaseClient()
       if (!user.avatar_filename) {
-        if (user.avatarurl) {
-          return user.avatarurl
-        }
         return null
       }
-      try {
-        const { data, error } = await supabase.storage.from('avatars').download(user.avatar_filename)
-        if (error) { throw error }
-        return URL.createObjectURL(data)
-      } catch (error) {
-        console.error('Error downloading image: ', error.message)
-        return null
-      }
+      const { data } = supabase.storage.from('avatars').getPublicUrl(user.avatar_filename)
+      return data.publicUrl
     },
     async saveProfile (user: Profile) {
       const supabase = useSupabaseClient()
@@ -78,14 +67,14 @@ export const useUserStore = defineStore('userStore', {
         const filePath = `${fileName}`
 
         let { data, error: uploadError } = await supabase.storage.from('avatars').upload(filePath, file)
-
         if (uploadError) { throw uploadError }
+        console.log(data)
 
         if (supabaseUser.value?.id) {
           const user = profileRepo.find(supabaseUser.value.id)
           if (user) {
             user.avatar_filename = filePath
-            user.avatarurl = URL.createObjectURL(file)
+            user.avatarurl = this.getAvatarUrl(user)
             await this.saveProfile(user)
           }
         }
@@ -93,19 +82,14 @@ export const useUserStore = defineStore('userStore', {
         alert(error.message)
       }
     },
-    createNewUser (profile: Profile) {
-      if (!profile) { return }
-      profileRepo.save(profile)
-    },
     async initilizeProfiles () {
       const supabase = useSupabaseClient()
-      const users: Profile[] = []
-      let { data } = await supabase
-        .from('profiles')
-        .select('id, title, website, avatar_filename, avatarurl, firstname, lastname, created_at, updated_at')
 
-      if (data) {
-        data.forEach(async (item, index) => {
+      const accounts: ProfilesResponse = await getProfiles()
+
+      if (accounts.data) {
+        accounts.data.forEach(async (item, index) => {
+          item.avatarurl = this.getAvatarUrl(item)
           profileRepo.save(new Profile(item))
         })
       }

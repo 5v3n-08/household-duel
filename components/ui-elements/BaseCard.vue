@@ -3,9 +3,9 @@
   <v-card class="card">
     <div v-show="props.cardTitle" class="card-header">
       <i class="tio- text-18">{{ props.icon }}</i>
-      <div class="card-title">
+      <v-card-title class="pa-0 me-4 text-subtitle-2 f-600">
         {{ props.cardTitle }}
-      </div>
+      </v-card-title>
     </div>
 
     <slot />

@@ -1,13 +1,17 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 
+import { storeToRefs } from 'pinia'
 import { navigations } from '../../../../data/navigation'
+import { useUserStore } from '~/stores/users'
 
 // eslint-disable-next-line semi
 const items = ref(navigations);
 const isMenuActive = ref(0)
 const config = useRuntimeConfig()
 const title = config.public.projectName ?? 'OurProjects'
+const userStore = useUserStore()
+const { getCurrentProfile: user } = storeToRefs(userStore)
 
 const dropdownToggle = (index) => {
   console.log('parent received dropdownToggle ' + index.target)
@@ -61,16 +65,17 @@ onMounted(() => {
         <SidenavLink v-else v-bind="item" :index="index" :active="isMenuActive === index" @ondropdownclicked="dropdownToggle" />
       </ul>
       <div class="bg-secondary-lighten-4 rounded mt-10 text-center">
-        <v-avatar size="74" class="sidebar-profile-img">
-          <img class="w-full" src="@/assets/images/ourprojects_logo.png" alt="">
+        <v-avatar v-if="user?.avatarurl" size="74" class="sidebar-profile-img">
+          <img class="w-full" :src="user.avatarurl" alt="">
         </v-avatar>
-        <div class="text-13 f-600 mt-2">
-          Jhon Wick
+        <div v-if="user?.full_name" class="text-13 f-600 mt-2">
+          {{ user.full_name }}
         </div>
         <div
+          v-if="user?.title"
           class="text-13 font-weight-medium text-secondary-darken-1 pb-4 mb-4"
         >
-          Admin
+          {{ user.title }}
         </div>
       </div>
     </perfect-scrollbar>
@@ -131,7 +136,6 @@ $transition: all 0.2s ease-in;
 }
 
 .group-name {
-  color: rgba(27, 44, 62, 0.87);
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;

@@ -43,7 +43,9 @@
       "admin": "Administration"
     },
     "instances": "Instanzen",
-    "adapters": "Adapter"
+    "adapters": "Adapter",
+    "password": "Passwort",
+    "deleteaccount": "Account löschen"
   },
   "dashboard": {
     "widgets": {
@@ -53,8 +55,12 @@
     }
   },
   "buttons": {
+    "delete": "Löschen",
     "save": "Speichern",
-    "cancel": "Abbrechen"
+    "cancel": "Abbrechen",
+    "timeout": "Warten Sie einige Zeit, bevor sie erneut speichern",
+    "timeoutSeconds": "Warten Sie {seconds} Sekunden, bevor sie es erneut versuchen",
+    "actionSuccess": "Aktion erfolgreich"
   },
   "profile": {
     "joined": "Beigetreten",
@@ -92,6 +98,11 @@
         "failed": "Passwort konnte nicht geändert werden",
         "wrongPassword": "Das eingegebene Passwort war falsch"
       }
+    },
+    "delete": {
+      "title": "Account löschen",
+      "subTitle": "Wenn du deinen Account löschst, verlierst du den Zugang zum System und all deine Daten werden gelöscht. Den Löschvorgang kannst du abbrechen, indem du dich innerhalb von 14 Tagen wieder ins System einloggst, anderenfalls werden all deine Daten vollständig gelöscht und können weder wiederhergestellt noch heruntergeladen werden.",
+      "confirm": "Ich bestätige die Löschung meines Accounts"
     }
   },
   "validations": {
