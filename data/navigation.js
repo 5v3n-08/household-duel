@@ -4,11 +4,11 @@ export const navigations = [
     name: 'Dashboard',
     description: 'test',
     type: 'dropDown',
-    icon: 'dashboard_outlined',
+    icon: 'mdi-home',
     link: '/dashboard',
     sub: [
       {
-        icon: 'i-Clock-3',
+        icon: 'mdi-widgets-outline',
         name: 'Widgets',
         link: '/dashboard/widgets',
         type: 'link'
@@ -19,7 +19,8 @@ export const navigations = [
   {
     id: 2,
     name: 'Settings',
-    icon: 'account_square_outlined',
+    description: 'User Settings',
+    icon: 'mdi-account-cog-outline',
     link: '/account'
   },
   {
@@ -31,10 +32,10 @@ export const navigations = [
     name: 'Apps',
     description: '',
     type: 'dropDown',
-    icon: 'website',
+    icon: 'mdi-web',
     sub: [
       {
-        icon: 'i-Clock-4',
+        icon: 'mdi-family-tree',
         name: 'Housework',
         link: '/apps/housework',
         type: 'link'

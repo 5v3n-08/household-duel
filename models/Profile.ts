@@ -1,6 +1,7 @@
 // User Model
 import { Model } from 'pinia-orm'
-import { Str, Uid } from 'pinia-orm/dist/decorators'
+import { Str, Uid, Bool } from 'pinia-orm/dist/decorators'
+import type { Database } from '~/types/database'
 export default class Profile extends Model {
   static entity = 'profiles'
   static primaryKey = 'id'
@@ -23,6 +24,7 @@ export default class Profile extends Model {
   @Str('') declare created_at: string | null
   @Str('') declare updated_at: string | null
   @Str('') declare website: string | null
+  @Bool(false) declare sidenav_collapsed: boolean | null
 
   get full_name () {
     return `${this.firstname ?? ''} ${this.lastname ?? ''}`

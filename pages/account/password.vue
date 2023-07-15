@@ -92,9 +92,9 @@
 import { useForm, useField } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import * as zod from 'zod'
+import { supabase } from 'composables/useSupabaseClient'
 import { regexMinOneUppercase, regexSpecialCharacters, regexMinOneLowercase, regexMinOneNumber } from '~/helpers/validation'
 const { t } = useI18n()
-const supabase = useSupabaseClient()
 
 definePageMeta({
   middleware: 'auth'

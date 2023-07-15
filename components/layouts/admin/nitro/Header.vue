@@ -13,6 +13,17 @@ const search = () => {
 
 const handleSignOut = async () => { await navigateTo('/logout') }
 const handleUrlProfile = async () => { await navigateTo('/account') }
+
+async function collapseNavigation () {
+  try {
+    if (user.value) {
+      user.value.sidenav_collapsed = !user.value.sidenav_collapsed
+      await userStore.saveProfile(user.value)
+    }
+  } catch (error) {
+  }
+}
+
 </script>
 
 <template>
@@ -46,8 +57,14 @@ const handleUrlProfile = async () => { await navigateTo('/account') }
       </div>
     </v-container>
     <v-container v-else class="d-flex justify-space-between">
-      <i class="tio- text-primary h2 header-btn-toggle"> menu_left </i>
-
+      <VIcon
+        v-if="user?.sidenav_collapsed"
+        icon="mdi-arrow-collapse-right"
+        size="small"
+        class="text-primary h2 mt-2"
+        @click.prevent="collapseNavigation"
+      />
+      {{ user?.sidenav_collapsed }}
       <div class="d-flex align-center">
         <v-btn
           flat

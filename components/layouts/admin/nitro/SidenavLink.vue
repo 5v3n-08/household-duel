@@ -1,7 +1,5 @@
 <script lang="ts" setup>
 import type { RouteLocationRaw } from 'vue-router'
-import { RouterLink, useLink } from 'vue-router'
-import { Link } from '~/.nuxt/components'
 
 export type TSubLink = { id?: string | number; name: string; icon?: string; link: string | RouteLocationRaw };
 interface IProps {
@@ -23,12 +21,11 @@ const props = defineProps<IProps>()
 
 const emit = defineEmits(['ondropdownclicked'])
 const dropdownToggle = (element: any) => {
-  console.log('dropdownToogle ' + element)
   emit('ondropdownclicked', element)
 }
 const route = useRoute()
 const currentRoute = computed(() => route.path)
-const currentRouteFirstPath = currentRoute.value.substring(1).split('/')[0]
+// const currentRouteFirstPath = currentRoute.value.substring(1).split('/')[0]
 </script>
 <template>
   <li

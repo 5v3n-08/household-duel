@@ -101,6 +101,8 @@
               {{ $t('login.button') }}
             </ui-button>
           </div>
+          test supabase
+          {{ supabase }}
         </v-container>
       </v-col>
     </v-row>
@@ -121,16 +123,21 @@ const isLoading = ref(false)
 const config = useRuntimeConfig()
 const client = useSupabaseAuthClient()
 const checkbox = ref(true)
+const supabase = useSupabaseClient()
 
 const onLoginClick = async () => {
   isLoading.value = true
-  const loginData = await signInWithEmail(email.value, password.value)
+  const { data: user, error } = await signInWithEmail(email.value, password.value)
+  // const { data: user, error } = await supabase.auth.signInWithPassword({
+  //   email: 'example@email.com',
+  //   password: 'example-password'
+  // })
 
-  if (loginData.data.user) {
+  if (user) {
     navigateTo('/login/oauth')
   }
-  if (loginData.error) {
-    errorMsg.value = loginData.error.message
+  if (error) {
+    errorMsg.value = error.message
   }
   isLoading.value = false
 }

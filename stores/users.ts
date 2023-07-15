@@ -1,5 +1,6 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
 import { useRepo } from 'pinia-orm'
+import { Database } from '../types/database'
 import Profile from '~/models/Profile'
 import { ProfileResponse, getProfiles, ProfilesResponse, getProfile } from '~/types'
 
@@ -19,7 +20,7 @@ export const useUserStore = defineStore('userStore', {
   },
   actions: {
     async refreshProfile (userId: string): Promise<Profile | null> {
-      const supabase = useSupabaseClient()
+      const supabase = useSupabaseClient<Database>()
 
       const account: ProfileResponse = await getProfile(userId)
 
@@ -29,7 +30,7 @@ export const useUserStore = defineStore('userStore', {
       return null
     },
     getAvatarUrl (user: Profile): string | null {
-      const supabase = useSupabaseClient()
+      const supabase = useSupabaseClient<Database>()
       if (!user.avatar_filename) {
         return null
       }
@@ -37,23 +38,21 @@ export const useUserStore = defineStore('userStore', {
       return data.publicUrl
     },
     async saveProfile (user: Profile) {
-      const supabase = useSupabaseClient()
+      const supabase = useSupabaseClient<Database>()
       const dayjs = useDayjs()
       user.updated_at = dayjs().toISOString()
       const updates = {
         ...user
       }
-
+      console.log('saving to database')
+      console.log(updates)
       let { error } = await supabase.from('profiles').upsert(updates)
       profileRepo.save(updates)
       if (error) { throw error }
     },
-    updateCurrentUser (user: Profile) {
-      // this.user = user
-    },
     async uploadAvatar (event) {
       console.log(typeof event)
-      const supabase = useSupabaseClient()
+      const supabase = useSupabaseClient<Database>()
       const supabaseUser = useSupabaseUser()
       files.value = event.target.files
       try {
@@ -83,7 +82,7 @@ export const useUserStore = defineStore('userStore', {
       }
     },
     async initilizeProfiles () {
-      const supabase = useSupabaseClient()
+      const supabase = useSupabaseClient<Database>()
 
       const accounts: ProfilesResponse = await getProfiles()
 

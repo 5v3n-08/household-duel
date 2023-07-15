@@ -73,12 +73,10 @@ export default defineNuxtConfig({
     '~/plugins/vuetify/index.ts'
   ],
 
-  components: [
-    {
-      path: '~/components',
-      pathPrefix: false
-    }
-  ],
+  components: {
+    global: true,
+    dirs: ['~/components']
+  },
 
   runtimeConfig: {
     // The private keys which are only available within server-side
@@ -108,7 +106,6 @@ export default defineNuxtConfig({
   },
 
   i18n: {
-    types: 'composition',
     locales: [
       {
         code: 'us',

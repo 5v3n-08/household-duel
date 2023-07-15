@@ -45,7 +45,8 @@
     "instances": "Instanzen",
     "adapters": "Adapter",
     "password": "Passwort",
-    "deleteaccount": "Account löschen"
+    "deleteaccount": "Account löschen",
+    "housework": "Hausarbeit"
   },
   "dashboard": {
     "widgets": {
@@ -103,6 +104,9 @@
       "title": "Account löschen",
       "subTitle": "Wenn du deinen Account löschst, verlierst du den Zugang zum System und all deine Daten werden gelöscht. Den Löschvorgang kannst du abbrechen, indem du dich innerhalb von 14 Tagen wieder ins System einloggst, anderenfalls werden all deine Daten vollständig gelöscht und können weder wiederhergestellt noch heruntergeladen werden.",
       "confirm": "Ich bestätige die Löschung meines Accounts"
+    },
+    "household": {
+      "title": "Haushalt"
     }
   },
   "validations": {

@@ -1,6 +1,6 @@
 <template>
   <VApp>
-    <div class="app-admin-wrap-layout">
+    <div class="app-admin-wrap-layout" :class="isSidenavCollapsed ? 'sidebar-close' : undefined">
       <Spinner />
       <slot name="navbar" />
       <slot name="navigation-drawer-content" />
@@ -19,5 +19,11 @@
 </template>
 
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia'
+import { useUserStore } from '~/stores/users'
+
 const router = useRouter()
+const userStore = useUserStore()
+const { getCurrentProfile: user } = storeToRefs(userStore)
+const isSidenavCollapsed = computed(() => user.value?.sidenav_collapsed ?? true)
 </script>

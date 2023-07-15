@@ -1,10 +1,12 @@
 import { User } from '@supabase/supabase-js'
 import type { AuthResponse, OAuthResponse } from '@supabase/gotrue-js/dist/module/lib/types.d.ts'
 import { AuthError } from '@supabase/gotrue-js/dist/module/lib/errors'
-const supabase = useSupabaseClient()
+// const supabase = useSupabaseClient()
+// const supabase = useSupabase()
 const config = useRuntimeConfig()
 
 export const signInWithGoogle = async () => {
+  const supabase = useSupabaseClient()
   return await supabase.auth.signInWithOAuth({
     provider: 'google'
   })
@@ -13,6 +15,7 @@ export const signInWithEmail = async (
   email: string,
   password: string
 ): Promise<AuthResponse> => {
+  const supabase = useSupabaseClient()
   return await supabase.auth.signInWithPassword({
     email,
     password
@@ -24,6 +27,7 @@ export const registerWithEmail = async (
   firstname?: string,
   lastname?: string
 ): Promise<AuthResponse> => {
+  const supabase = useSupabaseClient()
   return await supabase.auth.signUp(
     {
       email,
@@ -40,6 +44,7 @@ export const registerWithEmail = async (
 }
 
 export const loginOAuth = async (provider: 'github' | 'google' | 'apple'): Promise<OAuthResponse> => {
+  const supabase = useSupabaseClient()
   return await supabase.auth.signInWithOAuth({
     provider,
     options: {
@@ -49,6 +54,7 @@ export const loginOAuth = async (provider: 'github' | 'google' | 'apple'): Promi
 }
 
 export const registerOAuth = async (provider: 'github' | 'google' | 'apple'): Promise<OAuthResponse> => {
+  const supabase = useSupabaseClient()
   return await supabase.auth.signInWithOAuth({
     provider,
     options: {
@@ -60,6 +66,7 @@ export const registerOAuth = async (provider: 'github' | 'google' | 'apple'): Pr
 export const logout = async (): Promise<{
   error: AuthError | null;
 }> => {
+  const supabase = useSupabaseClient()
   return await supabase.auth.signOut()
 }
 

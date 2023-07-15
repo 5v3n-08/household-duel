@@ -29,8 +29,8 @@ export type TUser = Database['public']['Tables']['profiles']['Row'] & {
 
 export type UserWithoutPassword = Omit<TUser, 'password'>
 
-const supabase = useSupabaseClient()
 export async function getProfiles (): Promise<PostgrestSingleResponse<Profile[]>> {
+  const supabase = useSupabaseClient()
   return await supabase.from('profiles').select()
 }
 
@@ -39,6 +39,7 @@ export type ProfilesResponse = Awaited<ReturnType<typeof getProfiles>>
 // export type ProfilesResponseError = ProfilesResponse['error']
 
 export async function getProfile (userId: string): Promise<PostgrestSingleResponse<Profile>> {
+  const supabase = useSupabaseClient()
   return await supabase.from('profiles').select().eq('id', userId).single()
 }
 

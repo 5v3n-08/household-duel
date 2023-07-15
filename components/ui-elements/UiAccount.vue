@@ -60,12 +60,16 @@ if (useSize(hasEmailIdentity.value) > 0) {
     link: '/account/password'
   })
 }
-accountList.value.push(
-  {
-    title: t('profile.delete.title'),
-    icon: 'delete_outlined',
-    link: '/account/deleteaccount'
-  })
+accountList.value.push({
+  title: t('profile.household.title'),
+  icon: 'group_equal',
+  link: '/account/household'
+})
+accountList.value.push({
+  title: t('profile.delete.title'),
+  icon: 'delete_outlined',
+  link: '/account/deleteaccount'
+})
 </script>
 
 <style lang="scss" scoped>

@@ -45,7 +45,8 @@
     "instances": "Instances",
     "adapters": "Adapters",
     "password": "Password",
-    "deleteaccount": "Delete Account"
+    "deleteaccount": "Delete Account",
+    "housework": "Housework"
   },
   "dashboard": {
     "widgets": {
@@ -103,6 +104,9 @@
       "title": "Delete Account",
       "subTitle": "When you delete your account, you lose access to Front account services, and we permanently delete your personal data.You can cancel the deletion for 14 days.",
       "confirm": "Confirm, that i want to delete my account"
+    },
+    "household": {
+      "title": "Household"
     }
   },
   "validations": {

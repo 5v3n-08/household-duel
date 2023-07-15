@@ -2,7 +2,7 @@
   <ui-account>
     <v-row v-if="user">
       <v-col cols="12">
-        <base-card class="pa-0">
+        <base-card class="pa-0 mb-5">
           <div class="position-relative bg-header-cover d-flex justify-end">
             <img
               class="w-full position-absolute bg-cover-photo"
@@ -45,7 +45,13 @@
               class="d-flex justify-center text-center text-secondary-lighten-1"
             >
               <div class="d-flex align-center">
-                <i class="text-20 me-2 tio-">bratislava</i>
+                <VIcon
+                  icon="mdi-account"
+                  size="small"
+                />
+                <fa class="text-20 me-2 tio-">
+                  user-group
+                </fa>
                 <div class="text-body-2 f-600">
                   {{ user.title }}
                 </div>
@@ -98,7 +104,7 @@
         </base-card>
       </v-col>
       <v-col cols="12">
-        <base-card :card-title="$t('profile.basicInfos')">
+        <base-card class="pa-0" :card-title="$t('profile.basicInfos')">
           <form class="p-card" @submit="onSubmit">
             <v-row>
               <v-col cols="12" md="6">
