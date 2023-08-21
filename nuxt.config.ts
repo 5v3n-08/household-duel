@@ -52,7 +52,7 @@ export default defineNuxtConfig({
         upperAfterPrefix: true
       }
     ],
-    '@vite-pwa/nuxt',
+    // '@vite-pwa/nuxt',
     '@nuxtjs/i18n'
     // '@nuxt/devtools',
     // [
@@ -63,7 +63,6 @@ export default defineNuxtConfig({
     //   }
     // ]
   ],
-
   // nuxt configurations
   typescript: {
     shim: false
@@ -73,10 +72,12 @@ export default defineNuxtConfig({
     '~/plugins/vuetify/index.ts'
   ],
 
-  components: {
-    global: true,
-    dirs: ['~/components']
-  },
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false
+    }
+  ],
 
   runtimeConfig: {
     // The private keys which are only available within server-side
@@ -106,23 +107,24 @@ export default defineNuxtConfig({
   },
 
   i18n: {
-    locales: [
-      {
-        code: 'us',
-        name: 'English',
-        iso: 'en-US',
-        file: 'en-US.json'
-      },
-      {
-        code: 'de',
-        name: 'German',
-        iso: 'de-DE',
-        file: 'de-DE.json'
-      }
-    ],
-    defaultLocale: 'de',
-    lazy: true,
-    langDir: 'locales/'
+    vueI18n: './i18n.config.ts'
+    // locales: [
+    //   {
+    //     code: 'us',
+    //     name: 'English',
+    //     iso: 'en-US',
+    //     file: 'en-US.json'
+    //   },
+    //   {
+    //     code: 'de',
+    //     name: 'German',
+    //     iso: 'de-DE',
+    //     file: 'de-DE.json'
+    //   }
+    // ],
+    // defaultLocale: 'de',
+    // lazy: true,
+    // langDir: 'locales/'
   },
 
   // auth: {

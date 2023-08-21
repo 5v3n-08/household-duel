@@ -235,10 +235,10 @@ const onSubmit = handleSubmit(async (values) => {
   }
   isLoading.value = false
 
-  const { data: currentPasswordCheck, error: currentPasswordError } = await supabase.rpc('verify_user_password', { password: values.currentPassword })
+  const { data: currentPasswordCheck, error: currentPasswordError } = await supabase.rpc('verify_user_password', { password: values.password })
 
   if (currentPasswordCheck) {
-    const { data: passwordChangedSuccess, error: passwordChangeFailed } = await supabase.auth.updateUser({ password: values.newPassword })
+    const { data: passwordChangedSuccess, error: passwordChangeFailed } = await supabase.auth.updateUser({ password: values.password })
     if (passwordChangedSuccess) {
       Toast.fire({
         icon: 'success',
@@ -262,7 +262,7 @@ const onSubmit = handleSubmit(async (values) => {
 
 const isLoading = ref(false)
 const config = useRuntimeConfig()
-const client = useSupabaseAuthClient()
+const client = useSupabaseClient()
 const checkbox = ref(true)
 
 const onLoginClick = async () => {

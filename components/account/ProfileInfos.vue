@@ -43,8 +43,8 @@
 
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
+import { useUserStore } from 'stores/users'
 import { useForm } from 'vee-validate'
-import { useUserStore } from '../../stores/users'
 
 const userStore = useUserStore()
 const { users: usersFromStore, getCurrentProfile: user } = storeToRefs(userStore)

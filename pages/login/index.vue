@@ -121,7 +121,7 @@ const password = ref('')
 const errorMsg = ref('')
 const isLoading = ref(false)
 const config = useRuntimeConfig()
-const client = useSupabaseAuthClient()
+// const client = useSupabaseAuthClient()
 const checkbox = ref(true)
 const supabase = useSupabaseClient()
 
@@ -146,7 +146,7 @@ const login = async (provider: 'github' | 'google' | 'apple') => {
   console.log(loginData)
   if (loginData.data) {
     console.log(loginData.data)
-    // navigateTo('/dashboard')
+    navigateTo('/dashboard')
   }
   if (loginData.error) {
     console.log(loginData.error)
