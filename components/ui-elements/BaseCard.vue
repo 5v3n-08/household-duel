@@ -3,7 +3,7 @@
   <v-card class="card">
     <div v-show="props.cardTitle" class="card-header">
       <i class="tio- text-18">{{ props.icon }}</i>
-      <v-card-title class="pa-0 me-4 text-subtitle-2 f-600">
+      <v-card-title class="text-body-2 font-weight-medium">
         {{ props.cardTitle }}
       </v-card-title>
     </div>

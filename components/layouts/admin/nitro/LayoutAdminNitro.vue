@@ -6,13 +6,15 @@
       <slot name="navigation-drawer-content" />
 
       <VMain class="main-content-wrap">
-        <v-container>
-          <base-card class="mb-5">
-            <Breadcrumbs :key="$route.fullPath" class="pa-0" />
-          </base-card>
-          <slot />
-          <slot name="footer" />
-        </v-container>
+        <perfect-scrollbar class="py-3">
+          <v-container>
+            <base-card class="mb-5">
+              <Breadcrumbs :key="$route.fullPath" class="pa-0" />
+            </base-card>
+            <slot />
+            <slot name="footer" />
+          </v-container>
+        </perfect-scrollbar>
       </VMain>
     </div>
   </VApp>
@@ -22,7 +24,6 @@
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '~/stores/users'
 
-const router = useRouter()
 const userStore = useUserStore()
 const { getCurrentProfile: user } = storeToRefs(userStore)
 const isSidenavCollapsed = computed(() => user.value?.sidenav_collapsed ?? true)

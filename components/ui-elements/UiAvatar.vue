@@ -21,6 +21,7 @@ interface IProps {
   src?: string;
 }
 const props = defineProps<IProps>()
+const uploading = ref(false)
 
 const downloadImage = async () => {
   try {

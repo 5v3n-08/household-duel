@@ -1,8 +1,11 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
 import { useRepo } from 'pinia-orm'
 import { Database } from '../types/database'
+import Household from '~/models/Household'
+import Address from '~/models/Address'
 import Profile from '~/models/Profile'
-import { ProfileResponse, getProfiles, ProfilesResponse, getProfile } from '~/types'
+import { ProfileResponse, getProfiles, ProfilesResponse, getProfile, HouseholdsResponse, refreshHouseholds } from '~/types'
+import HouseholdMember from '~/models/HouseholdMember'
 
 interface IState {
   usersRaw: Profile[];
@@ -10,6 +13,7 @@ interface IState {
 
 const files = ref()
 const profileRepo = useRepo(Profile)
+const householdRepo = useRepo(Household)
 
 export const useUserStore = defineStore('userStore', {
 
@@ -20,8 +24,6 @@ export const useUserStore = defineStore('userStore', {
   },
   actions: {
     async refreshProfile (userId: string): Promise<Profile | null> {
-      const supabase = useSupabaseClient<Database>()
-
       const account: ProfileResponse = await getProfile(userId)
 
       if (account.data) {
@@ -82,8 +84,6 @@ export const useUserStore = defineStore('userStore', {
       }
     },
     async initilizeProfiles () {
-      const supabase = useSupabaseClient<Database>()
-
       const accounts: ProfilesResponse = await getProfiles()
 
       if (accounts.data) {
@@ -92,6 +92,15 @@ export const useUserStore = defineStore('userStore', {
           profileRepo.save(new Profile(item))
         })
       }
+    },
+    async getNewHouseholds (userId: string): Promise<Household[] | null> {
+      const households: HouseholdsResponse = await refreshHouseholds()
+
+      if (households.data) {
+        householdRepo.save(households.data)
+        return householdRepo.all()
+      }
+      return null
     }
   },
 
@@ -117,6 +126,17 @@ export const useUserStore = defineStore('userStore', {
     },
     users: () => {
       return useRepo(Profile).orderBy('updated_at').get()
+    },
+    getHouseholds: () => {
+      return householdRepo.all()
+    },
+    emptyAddress: () => {
+      return useRepo(Address).make()
+    },
+    emptyHousehold: () => {
+      const household = useRepo(Household).make()
+      household.address = useRepo(Address).make()
+      return household
     }
   }
 })

@@ -1,6 +1,7 @@
 import { PostgrestSingleResponse } from '@supabase/postgrest-js'
 import { Database } from '../database'
 import Profile from '~/models/Profile'
+import Household from '~/models/Household'
 
 export interface IUserProperties {
   sidenav: {
@@ -46,3 +47,9 @@ export async function getProfile (userId: string): Promise<PostgrestSingleRespon
 export type ProfileResponse = Awaited<ReturnType<typeof getProfile>>
 // export type ProfileResponseSuccess = ProfileResponse['data']
 // export type ProfileResponseError = ProfileResponse['error']
+
+export async function refreshHouseholds (): Promise<PostgrestSingleResponse<Household[]>> {
+  const supabase = useSupabaseClient<Database>()
+  return await supabase.from('household').select()
+}
+export type HouseholdsResponse = Awaited<ReturnType<typeof refreshHouseholds>>

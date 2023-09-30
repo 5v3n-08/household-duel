@@ -1,5 +1,7 @@
 {
   "name": "OurProjects",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "vue"
 }

@@ -159,22 +159,6 @@
               </v-col>
             </v-row>
           </form>
-
-          <div class="d-flex justify-space-between align-center mw-700 mb-7">
-            <!-- <v-checkbox
-            v-model="checkbox"
-            hide-details
-            color="primary"
-            label="Remember login"
-          /> -->
-            <router-link
-              to="#"
-              class="text-error text-decoration-none font-weight-medium"
-              hide-details
-            >
-              Forgot Password ?
-            </router-link>
-          </div>
         </v-container>
       </v-col>
     </v-row>

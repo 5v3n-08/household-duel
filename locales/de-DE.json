@@ -40,7 +40,9 @@
       "dashboard": "Dashboard",
       "account": "Account",
       "apps": "Apps",
-      "admin": "Administration"
+      "admin": "Administration",
+      "household": "Haushalt",
+      "password": "Passwort"
     },
     "instances": "Instanzen",
     "adapters": "Adapter",
@@ -61,7 +63,9 @@
     "cancel": "Abbrechen",
     "timeout": "Warten Sie einige Zeit, bevor sie erneut speichern",
     "timeoutSeconds": "Warten Sie {seconds} Sekunden, bevor sie es erneut versuchen",
-    "actionSuccess": "Aktion erfolgreich"
+    "actionSuccess": "Aktion erfolgreich",
+    "create": "Erstellen",
+    "add": "Hinzufügen"
   },
   "profile": {
     "joined": "Beigetreten",
@@ -106,11 +110,25 @@
       "confirm": "Ich bestätige die Löschung meines Accounts"
     },
     "household": {
-      "title": "Haushalt"
+      "title": "Haushalt",
+      "create": "Haushalt erstellen",
+      "createDesc": "Erstelle einen neuen Haushalt um diesen zu nutzen",
+      "labels": {
+        "name" : "Name des Haushalts / Familiename"
+      }
     }
   },
   "validations": {
     "required": "Dieses Feld ist erforderlich",
     "minLength": "Mindestanzahl Zeichen nicht erfüllt"
+  },
+  "forms": {
+    "labels" : {
+      "country": "Land",
+      "division": "Region / Bundesland",
+      "postcode": "Postleitzahl",
+      "city": "Start",
+      "street": "Straße"
+    }
   }
 }

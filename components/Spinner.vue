@@ -1,13 +1,3 @@
-<script setup>
-import { onMounted, onUnmounted } from 'vue'
-
-onMounted(() => {
-  const loader = document.querySelector('.spinner')
-  loader.style.display = 'flex'
-  setInterval(() => loader.classList.add('disappear'), 500)
-})
-</script>
-
 <template>
   <div class="spinner">
     <div class="lds-ellipsis">
@@ -18,6 +8,17 @@ onMounted(() => {
     </div>
   </div>
 </template>
+
+<script setup>
+import { onMounted, onUnmounted } from 'vue'
+
+onMounted(() => {
+  const loader = document.querySelector('.spinner')
+  loader.style.display = 'flex'
+  setInterval(() => loader.classList.add('disappear'), 500)
+})
+</script>
+
 <style lang="scss" scoped>
 .disappear {
   animation: vanish 1s forwards;

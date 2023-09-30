@@ -40,7 +40,9 @@
       "dashboard": "Dashboard",
       "account": "Account",
       "apps": "Apps",
-      "admin": "Administration"
+      "admin": "Administration",
+      "household": "Household",
+      "password": "Password"
     },
     "instances": "Instances",
     "adapters": "Adapters",
@@ -61,7 +63,9 @@
     "cancel": "Cancel",
     "timeout": "Wait some time before saving again",
     "timeoutSeconds": "Wait {seconds} seconds before trying again",
-    "actionSuccess": "Action successful"
+    "actionSuccess": "Action successful",
+    "create": "Create",
+    "add": "Add"
   },
   "profile": {
     "joined": "Joined",
@@ -106,11 +110,25 @@
       "confirm": "Confirm, that i want to delete my account"
     },
     "household": {
-      "title": "Household"
+      "title": "Household",
+      "create": "Create new household",
+      "createDesc": "Create a new household to start using it",
+      "labels": {
+        "name" : "Name of household eg. family name"
+      }
     }
   },
   "validations": {
     "required": "This field is required",
     "minLength": "Field doesn't have enough characters"
+  },
+  "forms": {
+    "labels" : {
+      "country": "Country",
+      "division": "Division",
+      "postcode": "Postcode",
+      "city": "City",
+      "street": "Street"
+    }
   }
 }

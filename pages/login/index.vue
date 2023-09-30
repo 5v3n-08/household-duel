@@ -101,8 +101,6 @@
               {{ $t('login.button') }}
             </ui-button>
           </div>
-          test supabase
-          {{ supabase }}
         </v-container>
       </v-col>
     </v-row>

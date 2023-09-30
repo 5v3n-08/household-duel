@@ -1,7 +1,7 @@
 // User Model
 import { Model } from 'pinia-orm'
 import { Str, Uid, HasMany, Bool } from 'pinia-orm/dist/decorators'
-export default class Household extends Model {
+export default class HouseholdMember extends Model {
   static entity = 'household_members'
 
   @Uid() declare household_id: string

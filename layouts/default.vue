@@ -24,7 +24,7 @@
     </template>
 
     <!-- 👉 Pages -->
-    <slot />
+    <slot scrollable />
 
     <!-- 👉 Footer -->
     <template #footer>

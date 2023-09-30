@@ -4,7 +4,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   console.log(data.session)
   if (data.session) {
     console.log('redirect to /dashboard')
-    return abortNavigation('test')
     return navigateTo('/dashboard')
   }
 })

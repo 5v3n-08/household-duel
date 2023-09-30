@@ -7,7 +7,7 @@ export default defineNuxtConfig({
   css: ['vuetify/lib/styles/main.sass', '@/assets/nitro/styles/_main.scss', '@/assets/fonts/theiconof.css'],
 
   build: {
-    transpile: ['vuetify']
+    transpile: ['vuetify', '@fawmi/vue-google-maps']
   },
 
   modules: [
@@ -54,6 +54,7 @@ export default defineNuxtConfig({
     ],
     // '@vite-pwa/nuxt',
     '@nuxtjs/i18n'
+    // '@nuxtjs/ionic'
     // '@nuxt/devtools',
     // [
     //   '@nuxtjs/moment',
@@ -94,7 +95,8 @@ export default defineNuxtConfig({
         password: ''
       },
       serviceUserToken: '',
-      redirectUrl: 'https://ourprojects.de'
+      redirectUrl: 'https://ourprojects.de',
+      GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY
     }
   },
 
@@ -143,6 +145,17 @@ export default defineNuxtConfig({
   },
 
   devtools: {
-    enabled: true
+    enabled: true,
+
+    timeline: {
+      enabled: true
+    }
+  },
+  supabase: {
+    redirectOptions: {
+      login: '/login',
+      callback: '/confirm',
+      exclude: ['/', '/register', '/logout', '/login/*']
+    }
   }
 })

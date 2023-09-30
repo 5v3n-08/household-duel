@@ -49,9 +49,6 @@
                   icon="mdi-account"
                   size="small"
                 />
-                <fa class="text-20 me-2 tio-">
-                  user-group
-                </fa>
                 <div class="text-body-2 f-600">
                   {{ user.title }}
                 </div>

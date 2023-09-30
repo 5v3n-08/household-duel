@@ -12,7 +12,7 @@ import { useUserStore } from '~/stores/users'
 
 interface IProps {
   title: string;
-  hideDivider: boolean
+  hideDivider?: boolean
 }
 const props = defineProps<IProps>()
 

@@ -11,6 +11,7 @@
       md="4"
     >
       <UserInfos />
+      <UserInfos />
     </VCol>
   </VRow>
 </template>
